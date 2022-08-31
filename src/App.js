@@ -3,6 +3,7 @@ import {createContext, useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
+import HomePage from "./Pages/HomePage/HomePage";
 
 export const AppContext = createContext();
 
@@ -17,6 +18,7 @@ function App() {
             <Routes>
               <Route path="/" element={<> <LoginPage /> </>} />
               <Route path="/register" element={<> <RegisterPage /> </>} />
+              <Route path="/home" element={<> <HomePage /> </>} />
             </Routes>
           </BrowserRouter>
         </div>
