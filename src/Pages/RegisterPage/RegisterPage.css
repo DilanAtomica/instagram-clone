@@ -1,0 +1,68 @@
+.registerPage {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FAFAFA;
+}
+
+.registerContainer {
+    border: 1px solid lightgrey;
+    background-color: white;
+    width: 15rem;
+    padding: 2rem 2.5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerContainer > img {
+    object-fit: contain;
+    height: 3rem;
+    width: auto;
+    margin-bottom: 2rem;
+}
+
+
+.registerContainer > form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.registerContainer > form > input {
+    background-color: #FAFAFA;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    padding: 0.65rem 0 0.65rem 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.registerContainer > form > button {
+    padding: 0.5rem 0;
+    width: calc(100% + 0.6rem);
+    background-color: #3897F0;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+}
+
+.registerPage > p {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    background-color: white;
+    width: 15rem;
+    padding: 1.5rem 2.5rem 1.5rem 2rem;
+    border: 1px solid lightgrey;
+}
+
+.registerPage > p > span {
+    color: #33A6EB;
+    font-weight: 700;
+    cursor: pointer;
+}

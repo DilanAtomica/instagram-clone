@@ -2,6 +2,7 @@ import './App.css';
 import {createContext, useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
+import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 
 export const AppContext = createContext();
 
@@ -15,6 +16,7 @@ function App() {
             <BrowserRouter>
             <Routes>
               <Route path="/" element={<> <LoginPage /> </>} />
+              <Route path="/register" element={<> <RegisterPage /> </>} />
             </Routes>
           </BrowserRouter>
         </div>
