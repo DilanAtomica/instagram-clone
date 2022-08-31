@@ -1,6 +1,7 @@
 import './App.css';
 import {createContext, useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LoginPage from "./Pages/LoginPage/LoginPage";
 
 export const AppContext = createContext();
 
@@ -9,11 +10,11 @@ function App() {
 
 
   return (
-      <AppContext.Provider value={}>
+      <AppContext.Provider value={{}}>
         <div className="App">
             <BrowserRouter>
             <Routes>
-              <Route path="/login" element={<> </>} />
+              <Route path="/" element={<> <LoginPage /> </>} />
             </Routes>
           </BrowserRouter>
         </div>
