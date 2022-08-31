@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import "./RegisterPage.css";
 import Logo from "../../Images/logo.png";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,6 +8,7 @@ import {collection, addDoc} from "firebase/firestore";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import {db, auth} from "../../utils/firebase";
 import {useNavigate} from "react-router-dom";
+import {AppContext} from "../../App";
 
 const schema = yup.object().shape( {
     username: yup.string().required("Username is required"),
@@ -24,6 +25,11 @@ function RegisterPage(props) {
 
     const navigate = useNavigate();
     const usersCollection = collection(db, "users")
+    const {user} = useContext(AppContext);
+
+    useEffect(() => {
+        user !== null && navigate("/home");
+    });
 
     const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: yupResolver(schema),

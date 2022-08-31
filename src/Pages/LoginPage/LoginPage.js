@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import "./LoginPage.css";
 import Logo from "../../Images/logo.png";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,6 +7,7 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../../utils/firebase";
+import {AppContext} from "../../App";
 
 const schema = yup.object().shape( {
     email: yup.string().email().required("Email is required"),
@@ -16,7 +17,13 @@ const schema = yup.object().shape( {
 function LoginPage(props) {
 
     const navigate = useNavigate();
-    const {login, handleSubmit, formState: {errors}} = useForm({
+    const {user} = useContext(AppContext);
+
+    useEffect(() => {
+        user !== null && navigate("/home");
+    });
+
+    const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: yupResolver(schema),
     });
 
@@ -34,9 +41,9 @@ function LoginPage(props) {
             <div className="loginContainer">
                 <img alt="logo" src={Logo} />
                 <form onSubmit={handleSubmit(submitForm)}>
-                    <input {...login("email")} type="email" placeholder="Email" />
+                    <input {...register("email")} type="email" placeholder="Email" />
                     <p>{errors.email?.message}</p>
-                    <input {...login("password")} type="password" placeholder="Password" />
+                    <input {...register("password")} type="password" placeholder="Password" />
                     <p>{errors.password?.message}</p>
                     <button type="submit">Log in</button>
                 </form>
