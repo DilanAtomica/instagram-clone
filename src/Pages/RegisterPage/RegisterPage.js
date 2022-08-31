@@ -4,6 +4,9 @@ import Logo from "../../Images/logo.png";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useForm} from "react-hook-form";
+import {collection, addDoc} from "firebase/firestore";
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import {db, auth} from "../../utils/firebase";
 
 const schema = yup.object().shape( {
     username: yup.string().required("Username is required"),
@@ -15,12 +18,19 @@ const schema = yup.object().shape( {
 
 function RegisterPage(props) {
 
+    const usersCollection = collection(db, "users")
+
     const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: yupResolver(schema),
     });
 
-    const submitForm = (data) => {
-
+    const submitForm = async(data) => {
+        try {
+            await createUserWithEmailAndPassword(auth, data.email, data.password);
+            await addDoc(usersCollection, {username: data.username, email: data.email, imageUrl: ""})
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
