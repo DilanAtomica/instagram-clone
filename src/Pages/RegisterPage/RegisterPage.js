@@ -7,17 +7,22 @@ import {useForm} from "react-hook-form";
 import {collection, addDoc} from "firebase/firestore";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import {db, auth} from "../../utils/firebase";
+import {useNavigate} from "react-router-dom";
 
 const schema = yup.object().shape( {
     username: yup.string().required("Username is required"),
     email: yup.string().email().required("Email is required"),
-    password: yup.string().required("Password is required").min(6).max(54),
+    password: yup.string().required("Password is required").min(6).max(54)
+    .matches(/[a-z]+/, "One lowercase character")
+    .matches(/[A-Z]+/, "One uppercase character")
+    .matches(/\d+/, "One number"),
     confirmPassword: yup.string().required("Confirm password is required").
     oneOf([yup.ref("password")], "Password must and should match"),
 }).required();
 
 function RegisterPage(props) {
 
+    const navigate = useNavigate();
     const usersCollection = collection(db, "users")
 
     const {register, handleSubmit, formState: {errors}} = useForm({
@@ -27,7 +32,8 @@ function RegisterPage(props) {
     const submitForm = async(data) => {
         try {
             await createUserWithEmailAndPassword(auth, data.email, data.password);
-            await addDoc(usersCollection, {username: data.username, email: data.email, imageUrl: ""})
+            await addDoc(usersCollection, {username: data.username, email: data.email, imageUrl: ""});
+            navigate("/home");
         } catch (error) {
             console.log(error);
         }
