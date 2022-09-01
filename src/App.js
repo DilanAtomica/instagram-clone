@@ -6,6 +6,7 @@ import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import {collection, getDocs} from "firebase/firestore";
 import {db, auth} from "./utils/firebase";
+import NavBar from "./Components/NavBar/NavBar";
 
 export const AppContext = createContext();
 
@@ -54,7 +55,7 @@ function App() {
             <Routes>
               <Route path="/" element={<> <LoginPage /> </>} />
               <Route path="/register" element={<> <RegisterPage /> </>} />
-              <Route path="/home" element={<> <HomePage /> </>} />
+              <Route path="/home" element={<> <NavBar /> <HomePage /> </>} />
             </Routes>
           </BrowserRouter>
         </div>
