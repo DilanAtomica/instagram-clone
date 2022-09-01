@@ -3,13 +3,12 @@ import "./NavBar.css";
 import Logo from "../../Images/logo.png";
 import {FiSearch} from "react-icons/fi";
 import {TiDelete} from "react-icons/ti";
-import {AiFillHome} from "react-icons/ai";
-import {AiOutlineHome} from "react-icons/ai";
+import {AiFillHome, AiOutlineHome, AiFillCamera, AiOutlineCamera} from "react-icons/ai";
 import {FaUserCircle} from "react-icons/fa";
 import {FiSend} from "react-icons/fi";
 import {BiUserCircle} from "react-icons/bi";
-import {AiOutlinePlusCircle} from "react-icons/ai";
 import {FiSettings} from "react-icons/fi";
+import {BsSuitHeart, BsSuitHeartFill} from "react-icons/bs";
 
 function NavBar(props) {
 
@@ -41,9 +40,10 @@ function NavBar(props) {
                      onClick={(e) => e.currentTarget.previousElementSibling.previousElementSibling.blur()} />}
                 </div>
                 <ul className="navigationLinks">
-                    <li><AiFillHome /></li>
-                    <li><AiOutlinePlusCircle /></li>
+                    <li><AiOutlineHome /></li>
                     <li><FiSend /></li>
+                    <li><BsSuitHeart /></li>
+                    <li><AiOutlineCamera /></li>
                     <li>
                         <FaUserCircle onClick={handleAvatarClick} />
                         {isAvatarClicked && <div style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownArrow"></div>}
