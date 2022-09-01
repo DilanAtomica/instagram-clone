@@ -3,6 +3,8 @@ header {
     height: 4rem;
     border-bottom: 1px solid lightgrey;
     position: fixed;
+    top: 0;
+    z-index: 10;
 }
 
 nav {

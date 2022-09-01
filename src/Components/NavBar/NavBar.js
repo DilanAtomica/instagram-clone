@@ -8,7 +8,7 @@ import {FaUserCircle} from "react-icons/fa";
 import {FiSend} from "react-icons/fi";
 import {BiUserCircle} from "react-icons/bi";
 import {FiSettings} from "react-icons/fi";
-import {BsSuitHeart, BsSuitHeartFill} from "react-icons/bs";
+import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {AppContext} from "../../App";
 import {signOut} from "firebase/auth";
 import {auth} from "../../utils/firebase";
@@ -54,7 +54,7 @@ function NavBar(props) {
                 <ul className="navigationLinks">
                     <li><AiOutlineHome /></li>
                     <li><FiSend /></li>
-                    <li><BsSuitHeart /></li>
+                    <li><HiOutlineHeart /></li>
                     <li><AiOutlineCamera /></li>
                     <li>
                         <FaUserCircle onClick={handleAvatarClick} />
