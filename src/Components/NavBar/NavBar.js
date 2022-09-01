@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./NavBar.css";
 import Logo from "../../Images/logo.png";
 import {FiSearch} from "react-icons/fi";
@@ -9,11 +9,18 @@ import {FiSend} from "react-icons/fi";
 import {BiUserCircle} from "react-icons/bi";
 import {FiSettings} from "react-icons/fi";
 import {BsSuitHeart, BsSuitHeartFill} from "react-icons/bs";
+import {AppContext} from "../../App";
+import {signOut} from "firebase/auth";
+import {auth} from "../../utils/firebase";
+import {useNavigate} from "react-router-dom";
 
 function NavBar(props) {
 
     const [inputFocused, setInputFocused] = useState(false);
     const [isAvatarClicked, setIsAvatarClicked] = useState(false);
+
+    const {setUser} = useContext(AppContext);
+    const navigate = useNavigate();
 
     const handleAvatarClick = (e) => {
         setIsAvatarClicked(true);
@@ -24,7 +31,12 @@ function NavBar(props) {
                 document.removeEventListener("mousedown", (unClickAvatar));
             }
         }
+    }
 
+    const logout = async() => {
+        await signOut(auth);
+        setUser(null);
+        navigate("/");
     }
 
     return (
@@ -50,7 +62,7 @@ function NavBar(props) {
                         {isAvatarClicked && <ul style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownBox">
                             <li><BiUserCircle className="avatarDropDownIcon" /> Profile</li>
                             <li><FiSettings className="avatarDropDownIcon" /> Settings</li>
-                            <li>Log out</li>
+                            <li onClick={logout}>Log out</li>
                         </ul>}
                     </li>
                 </ul>

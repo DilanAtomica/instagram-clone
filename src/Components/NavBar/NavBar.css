@@ -18,10 +18,11 @@ nav > img {
     object-fit: contain;
     width: auto;
     height: 2rem;
+    cursor: pointer;
 }
 
 .searchField {
-    width: 12.5rem;
+    width: 14rem;
     position: relative;
     padding-right: 1.75rem;
     border-radius: 10px;
@@ -60,7 +61,7 @@ nav > img {
 
 .navigationLinks {
     display: flex;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 }
 
 .navigationLinks > li {

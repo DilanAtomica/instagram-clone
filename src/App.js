@@ -1,6 +1,6 @@
 import './App.css';
 import {createContext, useEffect, useState} from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
@@ -38,7 +38,6 @@ function App() {
                 getUser();
             } else {
                 setUser(null);
-                setUsername(null);
             }
         }, );
 
