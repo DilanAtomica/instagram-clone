@@ -33,6 +33,11 @@ function NavBar(props) {
         }
     }
 
+    const navigateProfile = () => {
+        setIsAvatarClicked(false);
+        navigate("/profile");
+    }
+
     const logout = async() => {
         await signOut(auth);
         setUser(null);
@@ -52,7 +57,7 @@ function NavBar(props) {
                      onClick={(e) => e.currentTarget.previousElementSibling.previousElementSibling.blur()} />}
                 </div>
                 <ul className="navigationLinks">
-                    <li><AiOutlineHome /></li>
+                    <li onClick={() => navigate("/home")}><AiOutlineHome /></li>
                     <li><FiSend /></li>
                     <li><HiOutlineHeart /></li>
                     <li onClick={() => setShowPostModal(true)}><AiOutlineCamera /></li>
@@ -60,7 +65,7 @@ function NavBar(props) {
                         <FaUserCircle onClick={handleAvatarClick} />
                         {isAvatarClicked && <div style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownArrow"></div>}
                         {isAvatarClicked && <ul style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownBox">
-                            <li><BiUserCircle className="avatarDropDownIcon" /> Profile</li>
+                            <li onClick={navigateProfile}><BiUserCircle className="avatarDropDownIcon" /> Profile</li>
                             <li><FiSettings className="avatarDropDownIcon" /> Settings</li>
                             <li onClick={logout}>Log out</li>
                         </ul>}

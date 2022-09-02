@@ -1,12 +1,13 @@
 import './App.css';
 import {createContext, useEffect, useState} from "react";
-import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import {collection, getDocs} from "firebase/firestore";
 import {db, auth} from "./utils/firebase";
 import NavBar from "./Components/NavBar/NavBar";
+import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 
 export const AppContext = createContext();
 
@@ -63,6 +64,7 @@ function App() {
               <Route path="/" element={<> <LoginPage /> </>} />
               <Route path="/register" element={<> <RegisterPage /> </>} />
               <Route path="/home" element={<> <NavBar /> <HomePage /> </>} />
+              <Route path="/profile" element={<> <NavBar /> <ProfilePage /> </>} />
             </Routes>
           </BrowserRouter>
         </div>

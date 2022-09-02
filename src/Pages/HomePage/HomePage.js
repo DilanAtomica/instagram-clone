@@ -96,7 +96,7 @@ function HomePage(props) {
             <div onClick={hidePostModal} className="darkBackground">
                 <form onSubmit={createPost} className="postingModalContainer">
                     <div className="postingModalHeader">
-                        <TiDeleteOutline id="exitPostModalIcon" onClick={hidePostModal} style={{fontSize: "1.75rem"}} />
+                        <TiDeleteOutline id="exitPostModalIcon" onClick={hidePostModal} />
                         <h2>Create a new post</h2>
                         <button type="submit">Share</button>
                     </div>
