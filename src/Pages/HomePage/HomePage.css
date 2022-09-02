@@ -66,6 +66,8 @@
     padding-top: 0.5rem;
     padding-left: 0.75rem;
     background-color: white;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
 }
 
 .homePagePostActionButtons {
@@ -113,4 +115,33 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
+
+.homePagePostComment {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.homePagePostComment > input {
+    padding: 0.75rem 0.5rem 0.5rem;
+    border: none;
+    outline: none;
+    flex: 1;
+}
+
+.homePagePostComment > button {
+    font-size: 14px;
+    color: #0095f6;
+    font-weight: 700;
+    background: none;
+    border: none;
+    padding: 0.75rem 0.5rem 0.5rem;
+    cursor: pointer;
+}
+
+
 

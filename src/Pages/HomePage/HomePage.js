@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./HomePage.css";
 import {BiUserCircle} from "react-icons/bi";
 import {FiMoreHorizontal} from "react-icons/fi";
 import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
+import {VscSmiley} from "react-icons/vsc";
 
 function HomePage(props) {
     return (
@@ -33,6 +34,12 @@ function HomePage(props) {
                             <p className="homePagePostTitle"><span>Kurt</span> Var på byen lol</p>
                             <a className="homePagePostComments" href="">Show all 5 comments</a>
                             <p className="homePagePostDate">JULY 24</p>
+                        </div>
+
+                        <div className="homePagePostComment">
+                            <VscSmiley style={{fontSize: "2rem", paddingLeft: "0.5rem", paddingTop: "0.5rem"}} />
+                            <input type="text" placeholder="Write a comment..."/>
+                            <button type="button">Publish</button>
                         </div>
 
                     </div>
