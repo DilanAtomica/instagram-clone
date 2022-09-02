@@ -44,8 +44,24 @@ function HomePage(props) {
 
                     </div>
                 </div>
-                <div className="homePageSuggestions">
-
+                <div className="homePageSuggestionsContainer">
+                    <div className="suggestionsAvatar">
+                            <BiUserCircle style={{fontSize: "5rem"}} />
+                            <p>Anton</p>
+                    </div>
+                    <div className="suggestions">
+                        <div className="suggestionsHeader">
+                            <p>Suggestions for you</p>
+                            <a href="">See all</a>
+                        </div>
+                        <div className="suggestion">
+                            <div className="suggestion-right">
+                                <BiUserCircle style={{fontSize: "2rem"}} />
+                                <p>Ole</p>
+                            </div>
+                            <button type="button">Follow</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
