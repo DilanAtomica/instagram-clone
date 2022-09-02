@@ -5,6 +5,7 @@ import {FiMoreHorizontal} from "react-icons/fi";
 import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
+import {TiDeleteOutline} from "react-icons/ti";
 
 function HomePage(props) {
     return (
@@ -64,6 +65,29 @@ function HomePage(props) {
                     </div>
                 </div>
             </div>
+            <div className="darkBackground">
+                <div className="postingModalContainer">
+                    <div className="postingModalHeader">
+                        <TiDeleteOutline style={{fontSize: "1.75rem"}} />
+                        <h2>Create a new post</h2>
+                        <button type="button">Del</button>
+                    </div>
+                    <div className="postingModalContent">
+                        <div className="postingModalContent-left">
+                            <img src="https://previews.123rf.com/images/kurhan/kurhan1103/kurhan110300100/9050894-happy-man.jpg" />
+                        </div>
+                        <div className="postingModalContent-right">
+                            <div className="postingModalProfile">
+                                <BiUserCircle style={{fontSize: "1.5rem"}} />
+                                <p>Frillo</p>
+                            </div>
+                            <textarea rows="10" placeholder="Write a subtitle..." />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     );
 }

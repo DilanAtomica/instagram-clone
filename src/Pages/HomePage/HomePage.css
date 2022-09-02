@@ -3,6 +3,7 @@
     width: 100%;
     height: calc(100vh - 4rem);
     margin-top: 4rem;
+    position: relative;
 }
 
 .homePageContainer {
@@ -205,6 +206,106 @@
     background: none;
     border: none;
     cursor: pointer;
+}
+
+.darkBackground {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.postingModalContainer {
+    height: 77.5vh;
+    width: 67.5vw;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.postingModalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid lightgrey;
+}
+
+.postingModalHeader > h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #262626;
+}
+
+.postingModalHeader > button {
+    font-size: 14px;
+    color: #0095f6;
+    font-weight: 700;
+    background: none;
+    border: none;
+    padding: 0.75rem 0.5rem 0.5rem;
+    cursor: pointer;
+}
+
+.postingModalContent {
+    width: 100%;
+    flex: 1;
+    display: flex;
+}
+
+.postingModalContent-left {
+    background-color: #FAFAFA;
+    height: 100%;
+    width: 68%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 10px;
+}
+
+.postingModalContent-left > img {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+}
+
+.postingModalContent-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem;
+    background-color: white;
+    border-left: 1px solid lightgrey;
+    border-bottom-right-radius: 10px;
+}
+
+.postingModalProfile {
+    display: flex;
+    align-items: center;
+}
+
+.postingModalProfile > p {
+    font-size: 16px;
+    font-weight: 700;
+    color: #262626;
+    margin-left: 0.5rem;
+
+}
+
+.postingModalContent-right > textarea {
+    outline: none;
+    border: none;
+    margin-top: 1rem;
+    resize: none;
+    border-bottom: 1px solid lightgrey;
 }
 
 
