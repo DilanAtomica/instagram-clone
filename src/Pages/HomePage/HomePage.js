@@ -14,10 +14,10 @@ import {AppContext} from "../../App";
 
 function HomePage(props) {
 
-    const {setUser, userID} = useContext(AppContext);
+    const {setUser, userID, showPostModal} = useContext(AppContext);
+
 
     const [imageInput, setImageInput] = useState("");
-
     const [textInput, setTextInput] = useState(null);
 
     const handleImageChange = async(e) => {
@@ -92,18 +92,23 @@ function HomePage(props) {
                     </div>
                 </div>
             </div>
+            {showPostModal &&
             <div className="darkBackground">
                 <form onSubmit={createPost} className="postingModalContainer">
                     <div className="postingModalHeader">
                         <TiDeleteOutline style={{fontSize: "1.75rem"}} />
                         <h2>Create a new post</h2>
-                        <button type="submit">Del</button>
+                        <button type="submit">Share</button>
                     </div>
                     <div className="postingModalContent">
                         <div className="postingModalContent-left">
-                            {imageInput.length > 1 &&
-                                <img src={imageInput} />}
-                            <input onChange={handleImageChange} className="profile-imageInput" type="file" />
+                            {imageInput.length > 1 ? <img src={imageInput} /> :
+                                <label id="imageInputLabel" htmlFor="imageInput">
+                                    Upload image
+                                    <input id="imageInput" onChange={handleImageChange} className="profile-imageInput" type="file" />
+                                </label>
+                            }
+
                         </div>
                         <div className="postingModalContent-right">
                             <div className="postingModalProfile">
@@ -114,7 +119,7 @@ function HomePage(props) {
                         </div>
                     </div>
                 </form>
-            </div>
+            </div>}
 
 
         </div>

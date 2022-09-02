@@ -17,6 +17,8 @@ function App() {
     const [userID, setUserID] = useState(null);
     const [userAvatar, setUserAvatar] = useState(null);
 
+    const [showPostModal, setShowPostModal] = useState(false);
+
     const usersCollection = collection(db, "users")
 
     useEffect(() => {
@@ -48,7 +50,7 @@ function App() {
 
 
     return (
-      <AppContext.Provider value={{user, setUser, username, setUsername, userID, userAvatar, setUserAvatar}}>
+      <AppContext.Provider value={{user, setUser, username, setUsername, userID, userAvatar, setUserAvatar, showPostModal, setShowPostModal}}>
         <div className="App">
             <BrowserRouter>
             <Routes>
