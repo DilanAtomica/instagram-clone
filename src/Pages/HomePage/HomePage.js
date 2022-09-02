@@ -6,8 +6,23 @@ import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {TiDeleteOutline} from "react-icons/ti";
+import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
+import {storage} from "../../utils/firebase";
+import {v4} from "uuid";
 
 function HomePage(props) {
+
+    const [imageInput, setImageInput] = useState("");
+
+    const [postTitle, setPostTitle] = useState(null);
+
+    const handleImageChange = async(e) => {
+        const imageRef = ref(storage, `images/${e.target.files[0].name + v4()}`);
+        await uploadBytes(imageRef, e.target.files[0]);
+        const url = await getDownloadURL(imageRef);
+        setImageInput(url);
+    }
+
     return (
         <div className="homePage">
             <div className="homePageContainer">
@@ -74,14 +89,16 @@ function HomePage(props) {
                     </div>
                     <div className="postingModalContent">
                         <div className="postingModalContent-left">
-                            <img src="https://previews.123rf.com/images/kurhan/kurhan1103/kurhan110300100/9050894-happy-man.jpg" />
+                            {imageInput &&
+                                <img src={imageInput} />}
+                            <input onChange={handleImageChange} className="profile-imageInput" type="file" />
                         </div>
                         <div className="postingModalContent-right">
                             <div className="postingModalProfile">
                                 <BiUserCircle style={{fontSize: "1.5rem"}} />
                                 <p>Frillo</p>
                             </div>
-                            <textarea rows="10" placeholder="Write a subtitle..." />
+                            <textarea onChange={(e) => setPostTitle(e.target.value)} rows="10" placeholder="Write a subtitle..." />
                         </div>
                     </div>
                 </div>
