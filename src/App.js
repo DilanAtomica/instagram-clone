@@ -48,9 +48,15 @@ function App() {
         }
     }, []);
 
+    const hidePostModal = (e) => {
+        if(e.target.className === "darkBackground") setShowPostModal(false);
+        if(e.target.id === "exitPostModalIcon") setShowPostModal(false);
+    }
+
 
     return (
-      <AppContext.Provider value={{user, setUser, username, setUsername, userID, userAvatar, setUserAvatar, showPostModal, setShowPostModal}}>
+      <AppContext.Provider value={{user, setUser, username, setUsername, userID,
+          userAvatar, setUserAvatar, showPostModal, setShowPostModal, hidePostModal}}>
         <div className="App">
             <BrowserRouter>
             <Routes>

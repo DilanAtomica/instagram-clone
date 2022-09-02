@@ -19,7 +19,7 @@ function NavBar(props) {
     const [inputFocused, setInputFocused] = useState(false);
     const [isAvatarClicked, setIsAvatarClicked] = useState(false);
 
-    const {setUser, setShowPostModal} = useContext(AppContext);
+    const {setUser, setShowPostModal, hidePostModal} = useContext(AppContext);
     const navigate = useNavigate();
 
     const handleAvatarClick = (e) => {

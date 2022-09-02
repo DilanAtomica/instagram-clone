@@ -14,7 +14,7 @@ import {AppContext} from "../../App";
 
 function HomePage(props) {
 
-    const {setUser, userID, showPostModal} = useContext(AppContext);
+    const {setUser, userID, showPostModal, setShowPostModal, hidePostModal} = useContext(AppContext);
 
 
     const [imageInput, setImageInput] = useState("");
@@ -93,10 +93,10 @@ function HomePage(props) {
                 </div>
             </div>
             {showPostModal &&
-            <div className="darkBackground">
+            <div onClick={hidePostModal} className="darkBackground">
                 <form onSubmit={createPost} className="postingModalContainer">
                     <div className="postingModalHeader">
-                        <TiDeleteOutline style={{fontSize: "1.75rem"}} />
+                        <TiDeleteOutline id="exitPostModalIcon" onClick={hidePostModal} style={{fontSize: "1.75rem"}} />
                         <h2>Create a new post</h2>
                         <button type="submit">Share</button>
                     </div>
@@ -115,7 +115,8 @@ function HomePage(props) {
                                 <BiUserCircle style={{fontSize: "1.5rem"}} />
                                 <p>Frillo</p>
                             </div>
-                            <textarea onChange={(e) => setTextInput(e.target.value)} rows="10" placeholder="Write a subtitle..." />
+                            <textarea onChange={(e) => setTextInput(e.target.value)}
+                                      rows="10" placeholder="Write a subtitle..." />
                         </div>
                     </div>
                 </form>
