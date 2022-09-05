@@ -14,7 +14,7 @@ import {AppContext} from "../../App";
 
 function HomePage(props) {
 
-    const {setUser, userID, showPostModal, setShowPostModal, hidePostModal} = useContext(AppContext);
+    const {userID, showPostModal, hidePostModal} = useContext(AppContext);
 
 
     const [imageInput, setImageInput] = useState("");

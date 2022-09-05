@@ -1,0 +1,123 @@
+.profilePage {
+    background-color: #FAFAFA;
+    width: 100%;
+    height: calc(100vh - 4rem);
+    margin-top: 4rem;
+    position: relative;
+}
+
+.profilePageInfoContainer {
+    width: 60rem;
+    margin: auto;
+    display: flex;
+    padding-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.profilePageInfoContainer > img {
+    object-fit: cover;
+    height: 10rem;
+    width: 10rem;
+    border-radius: 100px;
+    margin-right: 5rem;
+    margin-left: 5rem;
+}
+
+.profilePageInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.profilePageInfoTop {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.profilePageInfoTop > h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-right: 1rem;
+}
+
+.profilePageInfoTop > button {
+    background-color: #FBFAFB;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 1px solid lightgrey;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profilePageInfoMiddle {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.profilePageInfoMiddle > p {
+    font-size: 1rem;
+    margin-right: 2rem;
+}
+
+.profilePageInfoMiddle > p > span {
+    font-weight: 700;
+}
+
+.profilePageDescription {
+
+}
+
+.profilePagePostsContainer {
+    width: 60rem;
+    margin: auto;
+    border-top: 1px solid lightgrey;
+    display: flex;
+    flex-direction: column;
+}
+
+.profilePageCategories {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.profilePageCategories > button {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 1rem;
+    background: none;
+    transform: translateY(-1px);
+    padding-top: 0.5rem;
+    margin-right: 4rem;
+    color: #8e8e8e;
+    cursor: pointer;
+}
+
+.profilePageButtonActive {
+    border-top: 1px solid black !important;
+    color: #262626 !important;
+}
+
+.profilePageCategories > button > #gridIcon {
+    margin-right: 0.5rem;
+}
+
+.profilePagePosts {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.profilePagePosts > img {
+    object-fit: cover;
+    width: 18rem;
+    height: 18rem;
+    margin: 0 1.5rem 1.5rem 0;
+    cursor: pointer;
+}
+
+.profilePagePosts > img:hover {
+    filter: brightness(80%);
+}
