@@ -42,7 +42,7 @@
 .profilePageInfoTop > button {
     background-color: #FBFAFB;
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 500;
     border: 1px solid lightgrey;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -60,7 +60,7 @@
 }
 
 .profilePageInfoMiddle > p > span {
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .profilePageDescription {

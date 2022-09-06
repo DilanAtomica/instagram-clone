@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import "./ProfilePage.css";
 import {BsGrid3X3} from "react-icons/bs";
 import {HiOutlineHeart} from "react-icons/hi";
+import PostModalContainer from "./PostModalContainer";
 
 function ProfilePage(props) {
 
@@ -11,7 +12,7 @@ function ProfilePage(props) {
     return (
         <div className="profilePage">
             <div className="profilePageInfoContainer">
-                <img src="https://p3.no/filmpolitiet/wp-content/thumbs/?src=https://p3.no/filmpolitiet/wp-content/uploads/2015/06/Studio_Ghibli_Logo.jpg&w=190" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Hayao_Miyazaki_cropped_1_Hayao_Miyazaki_201211.jpg" />
                 <div className="profilePageInfo">
                     <div className="profilePageInfoTop">
                         <h1>coolguy1</h1>
@@ -40,6 +41,7 @@ function ProfilePage(props) {
 
                 </div>
             </div>
+            <PostModalContainer />
         </div>
     );
 }

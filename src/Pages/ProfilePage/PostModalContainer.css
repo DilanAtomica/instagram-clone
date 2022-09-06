@@ -1,0 +1,144 @@
+.postModalContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.postModal {
+    width: max-content;
+    height: 90vh;
+    margin: auto;
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.postModalLeft {
+    height: 100%;
+    background-color: black;
+    width: max-content;
+    display: flex;
+    align-items: center;
+}
+
+.postModalLeft > img {
+    object-fit: contain;
+    height: 92.5%;
+    width: auto;
+    max-width: 50rem;
+}
+
+.postModalRight {
+    height: 100%;
+    background-color: white;
+    width: 30rem;
+}
+
+.postModalRightHeader {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.postModalRightHeader > img {
+    object-fit: cover;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 999px;
+    margin: 0 0.75rem 0 1rem;
+    cursor: pointer;
+}
+
+.postModalRightHeader > h1 {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #262626;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.postModalRightHeader > span {
+    margin-right: 0.5rem;
+}
+
+.postModalRightHeader > button {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0095f6;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.postModalCommentsContainer {
+    padding: 1rem 0 0 1rem;
+    max-height: 33rem;
+    overflow-x: scroll !important;
+    border-bottom: 1px solid lightgrey;
+}
+
+.postModalCommentsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.postModalComment {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.postModalComment > img {
+    object-fit: cover;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    margin-right: 1rem;
+}
+
+.postModalComment-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.postModalComment-right > p {
+    font-size: 0.85rem;
+    color: #262626;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    margin-top: 0.20rem;
+    margin-bottom: 0.5rem;
+}
+
+.postModalComment-right > p > span {
+    font-weight: 600;
+}
+
+.postModalCommentDate {
+    display: flex;
+}
+
+.postModalCommentDate > p {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+    margin-right: 0.5rem;
+}
+
+.postModalCommentDate > button {
+    background: none;
+    border: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #8e8e8e;
+    cursor: pointer;
+}
