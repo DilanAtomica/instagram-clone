@@ -9,6 +9,7 @@ import {db, auth} from "./utils/firebase";
 import NavBar from "./Components/NavBar/NavBar";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import PostingModalContainer from "./Components/PostingModalContainer/PostingModalContainer";
+import PostModalContainer from "./Components/PostModalContainer/PostModalContainer";
 
 export const AppContext = createContext();
 
@@ -20,6 +21,21 @@ function App() {
     const [userAvatar, setUserAvatar] = useState(null);
 
     const [showPostingModal, setShowPostingModal] = useState(false);
+
+    const [postModal, setPostModal] = useState(null);
+
+    const showPostModal = (image, text, timestamp, postID) => {
+        setPostModal({
+            image: image,
+            text: text,
+            timestamp: timestamp,
+            postID: postID
+        })
+    }
+
+    const hidePostModal = (e) => {
+        if(e.target.id === "postModalContainer") setPostModal(null);
+    }
 
     const usersCollection = collection(db, "users")
 
@@ -58,8 +74,9 @@ function App() {
 
     return (
       <AppContext.Provider value={{user, setUser, username, setUsername, userID,
-          userAvatar, setUserAvatar, showPostingModal, setShowPostingModal, hidePostingModal}}>
+          userAvatar, setUserAvatar, showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal}}>
         <div className="App">
+            {postModal && <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp} postID={postModal.postID} />}
             {showPostingModal && <PostingModalContainer />}
             <BrowserRouter>
             <Routes>

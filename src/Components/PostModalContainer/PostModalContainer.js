@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import "./PostModalContainer.css";
 import {HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
+import {AppContext} from "../../App";
 
-function PostModalContainer(props) {
+function PostModalContainer({image, text, timestamp, postID}) {
+
+    const {hidePostModal} = useContext(AppContext);
+
+    const handleOnClick = (e) => {
+        hidePostModal(e);
+    }
 
     return (
-        <div className="postModalContainer" id="postModalContainer">
+        <div onClick={handleOnClick} className="postModalContainer" id="postModalContainer">
         <div className="postModal">
             <div className="postModalLeft">
-                <img src="https://media.vogue.fr/photos/5dc59b122c63420008da9dab/2:3/w_2560%2Cc_limit/010_A7A13245_284.jpg" />
+                <img src={image} />
             </div>
             <div className="postModalRight">
                 <div className="postModalRightHeader">
@@ -23,7 +30,7 @@ function PostModalContainer(props) {
                     <div className="postModalComment">
                         <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
                         <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
+                            <p><span>someGuy</span> {text}</p>
                             <div className="postModalCommentDate">
                                 <p>1 week</p>
                                 <button type="button">Reply</button>

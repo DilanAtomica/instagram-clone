@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import "./ProfilePagePost.css";
+import {AppContext} from "../../App";
 
-function ProfilePagePost({image, text, timestamp}) {
+function ProfilePagePost({image, text, timestamp, postID}) {
+
+    const {showPostModal} = useContext(AppContext);
+
+    const handleOnClick = () => {
+        showPostModal(image, text, timestamp, postID);
+    }
+
     return (
-        <img src={image}  alt={text}/>
+        <img onClick={handleOnClick} src={image}  alt={text}/>
     );
 }
 

@@ -56,7 +56,7 @@ function ProfilePage(props) {
                 </div>
                 <div className="profilePagePosts">
                     {posts.map(post => (
-                        <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} id={post.id} />
+                        <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} postID={post.id} />
                     ))}
                 </div>
             </div>
