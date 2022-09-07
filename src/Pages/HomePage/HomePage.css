@@ -119,6 +119,7 @@
     padding-bottom: 0.5rem;
     background-color: white;
     border: 1px solid lightgrey;
+    border-top: 1px solid rgba(239,239,239);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }

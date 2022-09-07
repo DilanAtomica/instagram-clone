@@ -1,5 +1,8 @@
 import React from 'react';
 import "./PostModalContainer.css";
+import {HiOutlineHeart} from "react-icons/hi";
+import {FaRegComment} from "react-icons/fa";
+import {VscSmiley} from "react-icons/vsc";
 
 function PostModalContainer(props) {
     return (
@@ -119,6 +122,17 @@ function PostModalContainer(props) {
                     </div>
 
                 </div>
+                <div className="postModalActions">
+                    <HiOutlineHeart id="heartIcon" />
+                    <FaRegComment />
+                </div>
+                <p id="likesCounter">10,654 likes</p>
+                <p id="postDate">POSTED 7 DAYS AGO</p>
+                <form className="postModalInputContainer">
+                    <VscSmiley id="smileyIcon" />
+                    <input type="text" placeholder="Write a comment..." />
+                    <button type="submit">Publish</button>
+                </form>
             </div>
         </div>
         </div>
