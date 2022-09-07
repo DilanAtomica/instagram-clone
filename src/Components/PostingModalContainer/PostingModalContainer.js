@@ -11,7 +11,7 @@ import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 
 function PostingModalContainer(props) {
 
-    const {userID, hidePostingModal} = useContext(AppContext);
+    const {hidePostingModal, userInfo} = useContext(AppContext);
 
     const [imageInput, setImageInput] = useState("");
     const [textInput, setTextInput] = useState(null);
@@ -25,8 +25,13 @@ function PostingModalContainer(props) {
 
     const createPost = async(e) => {
         e.preventDefault()
-        const postsCollection = collection(db, "users", userID, "posts");
-        await addDoc(postsCollection, {text: textInput, image: imageInput, timestamp: serverTimestamp()});
+        const postsCollection = collection(db, "users", userInfo.userID, "posts");
+        await addDoc(postsCollection, {
+            text: textInput,
+            image: imageInput,
+            timestamp: serverTimestamp(),
+            publisherID: userInfo.userID,
+        });
         setImageInput("");
         setTextInput("");
     }

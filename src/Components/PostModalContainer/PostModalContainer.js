@@ -5,7 +5,7 @@ import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {AppContext} from "../../App";
 
-function PostModalContainer({image, text, timestamp, postID}) {
+function PostModalContainer({image, text, timestamp, postID, publisherID}) {
 
     const {hidePostModal} = useContext(AppContext);
 
@@ -22,7 +22,7 @@ function PostModalContainer({image, text, timestamp, postID}) {
             <div className="postModalRight">
                 <div className="postModalRightHeader">
                     <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                    <h1>someGuy</h1>
+                    <h1>some guy</h1>
                     <span>•</span>
                     <button type="button">Follow</button>
                 </div>

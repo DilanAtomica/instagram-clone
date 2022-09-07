@@ -10,7 +10,7 @@ import ProfilePagePost from "../../Components/ProfilePage/ProfilePagePost";
 
 function ProfilePage(props) {
 
-    const {userID} = useContext(AppContext);
+    const {userInfo} = useContext(AppContext);
 
     const [postsButton, setPostsButton] = useState(true);
     const [favoritesButton , setFavoritesButton] = useState(false);
@@ -19,13 +19,13 @@ function ProfilePage(props) {
 
 
    useEffect(() => {
-       if(userID === null) return
+       if(userInfo === null) return
         getPosts();
         console.log("hey");
-    }, [userID]);
+    }, [userInfo]);
 
     const getPosts = async () => {
-        const postsCollection = collection(db, "users", userID, "posts");
+        const postsCollection = collection(db, "users", userInfo.userID, "posts");
         const data = await getDocs(postsCollection);
         setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
     };
@@ -56,7 +56,9 @@ function ProfilePage(props) {
                 </div>
                 <div className="profilePagePosts">
                     {posts.map(post => (
-                        <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} postID={post.id} />
+                        <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} postID={post.id}
+                                         publisherID={post.publisherID}
+                        />
                     ))}
                 </div>
             </div>

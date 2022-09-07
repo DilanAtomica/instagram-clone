@@ -16,20 +16,20 @@ export const AppContext = createContext();
 function App() {
 
     const [user, setUser] = useState(null);
-    const [username, setUsername] = useState(null);
-    const [userID, setUserID] = useState(null);
-    const [userAvatar, setUserAvatar] = useState(null);
+
+    const [userInfo, setUserInfo] = useState(null);
 
     const [showPostingModal, setShowPostingModal] = useState(false);
 
     const [postModal, setPostModal] = useState(null);
 
-    const showPostModal = (image, text, timestamp, postID) => {
+    const showPostModal = (image, text, timestamp, postID, publisherID) => {
         setPostModal({
             image: image,
             text: text,
             timestamp: timestamp,
-            postID: postID
+            postID: postID,
+            publisherID: publisherID,
         })
     }
 
@@ -48,9 +48,11 @@ function App() {
                     const result = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
                     result.forEach(account => {
                         if(account.email === authUser.email) {
-                            setUsername(account.username);
-                            setUserID(account.id);
-                            setUserAvatar(account.imageUrl);
+                            setUserInfo({
+                                username: account.username,
+                                userID: account.id,
+                                setUserAvatar: account.imageUrl,
+                            });
                         }
                     })
 
@@ -73,10 +75,14 @@ function App() {
 
 
     return (
-      <AppContext.Provider value={{user, setUser, username, setUsername, userID,
-          userAvatar, setUserAvatar, showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal}}>
+      <AppContext.Provider value={{user, setUser, userInfo,
+          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal}}>
         <div className="App">
-            {postModal && <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp} postID={postModal.postID} />}
+            {postModal &&
+                <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}
+                                    postID={postModal.postID} publisherID={postModal.publisherID}
+
+            />}
             {showPostingModal && <PostingModalContainer />}
             <BrowserRouter>
             <Routes>
