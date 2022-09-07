@@ -36,7 +36,7 @@ function PostingModalContainer(props) {
     }
 
     return (
-        <div onClick={handleOnClick} className="postingModalContainer">
+        <div onClick={handleOnClick} className="postingModalContainer" id="postingModalContainer">
             <form onSubmit={createPost} className="postingModal">
                 <div className="postingModalHeader">
                     <TiDeleteOutline id="exitPostModalIcon" onClick={hidePostModal} />

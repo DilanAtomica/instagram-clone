@@ -51,7 +51,7 @@ function App() {
     }, []);
 
     const hidePostModal = (e) => {
-        if(e.target.className === "postingModalContainer") setShowPostModal(false);
+        if(e.target.id === "postingModalContainer") setShowPostModal(false);
         if(e.target.id === "exitPostModalIcon") setShowPostModal(false);
     }
 

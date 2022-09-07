@@ -1,12 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import "./ProfilePage.css";
 import {BsGrid3X3} from "react-icons/bs";
 import {HiOutlineHeart} from "react-icons/hi";
+import {collection, getDocs} from "firebase/firestore";
+import {db} from "../../utils/firebase";
+import {AppContext} from "../../App";
+import ProfilePagePost from "../../Components/ProfilePage/ProfilePagePost";
+
 
 function ProfilePage(props) {
 
+    const {userID} = useContext(AppContext);
+
     const [postsButton, setPostsButton] = useState(true);
     const [favoritesButton , setFavoritesButton] = useState(false);
+
+    const [posts, setPosts] = useState([]);
+
+
+   useEffect(() => {
+       if(userID === null) return
+        getPosts();
+        console.log("hey");
+    }, [userID]);
+
+    const getPosts = async () => {
+        const postsCollection = collection(db, "users", userID, "posts");
+        const data = await getDocs(postsCollection);
+        setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+    };
 
     return (
         <div className="profilePage">
@@ -27,17 +49,15 @@ function ProfilePage(props) {
             </div>
             <div className="profilePagePostsContainer">
                 <div className="profilePageCategories">
-                    <button className={postsButton && "profilePageButtonActive"} type="button"><BsGrid3X3 id="gridIcon" /> Posts</button>
-                    <button className={favoritesButton && "profilePageButtonActive"} type="button"><HiOutlineHeart id="gridIcon" /> Favorites</button>
+                    <button style={{borderTop: postsButton && "1px solid black", color: postsButton && "#262626"}}
+                            type="button"><BsGrid3X3 id="gridIcon" /> Posts</button>
+                    <button style={{borderTop: favoritesButton && "1px solid black", color: favoritesButton && "#262626"}}
+                            type="button"><HiOutlineHeart id="gridIcon" /> Favorites</button>
                 </div>
                 <div className="profilePagePosts">
-                    <img src="https://i1.sndcdn.com/artworks-000127213193-ox27bh-t500x500.jpg" />
-                    <img src="https://i.pinimg.com/474x/ad/b6/c1/adb6c1b4978119a74628fbd22a738c67.jpg" />
-                    <img src="https://i.pinimg.com/564x/87/4b/15/874b15650e325a0633dfeeacad430c59.jpg" />
-                    <img src="https://i.pinimg.com/474x/a7/ec/e5/a7ece5817469145d25be8feca71056f8.jpg" />
-                    <img src="https://i.pinimg.com/564x/40/0b/6e/400b6e47c96494ed306fef0766bfbaff.jpg" />
-                    <img src="https://i.pinimg.com/564x/3b/36/17/3b3617674cda4a822038b7772cb81140.jpg" />
-
+                    {posts.map(post => (
+                        <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} id={post.id} />
+                    ))}
                 </div>
             </div>
 

@@ -7,7 +7,7 @@ import {VscSmiley} from "react-icons/vsc";
 function PostModalContainer(props) {
 
     return (
-        <div className="postModalContainer">
+        <div className="postModalContainer" id="postModalContainer">
         <div className="postModal">
             <div className="postModalLeft">
                 <img src="https://media.vogue.fr/photos/5dc59b122c63420008da9dab/2:3/w_2560%2Cc_limit/010_A7A13245_284.jpg" />
