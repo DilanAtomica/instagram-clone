@@ -23,21 +23,32 @@ function App() {
 
     const [postModal, setPostModal] = useState(null);
 
-    const showPostModal = (image, text, timestamp, postID, publisherID) => {
-        setPostModal({
-            image: image,
-            text: text,
-            timestamp: timestamp,
-            postID: postID,
-            publisherID: publisherID,
-        })
+    const usersCollection = collection(db, "users");
+
+    const showPostModal = async(image, text, timestamp, postID, publisherID) => {
+
+        const data = await getDocs(usersCollection);
+        const result = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
+
+        for(let i = 0; i < result.length; i++) {
+            if(result[i].id === publisherID) {
+                setPostModal({
+                    image: image,
+                    text: text,
+                    timestamp: timestamp,
+                    postID: postID,
+                    publisherID: publisherID,
+                    publisherName:  result[i].username,
+                    publisherAvatar: result[i].avatar,
+                });
+            }
+        }
+
     }
 
     const hidePostModal = (e) => {
         if(e.target.id === "postModalContainer") setPostModal(null);
     }
-
-    const usersCollection = collection(db, "users")
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged( (authUser) => {
@@ -80,7 +91,8 @@ function App() {
         <div className="App">
             {postModal &&
                 <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}
-                                    postID={postModal.postID} publisherID={postModal.publisherID}
+                                    postID={postModal.postID} publisherID={postModal.publisherID} publisherName={postModal.publisherName}
+                                    publisherAvatar={postModal.publisherAvatar}
 
             />}
             {showPostingModal && <PostingModalContainer />}

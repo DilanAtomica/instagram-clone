@@ -38,7 +38,7 @@ function RegisterPage(props) {
     const submitForm = async(data) => {
         try {
             await createUserWithEmailAndPassword(auth, data.email, data.password);
-            await addDoc(usersCollection, {username: data.username, email: data.email, imageUrl: ""});
+            await addDoc(usersCollection, {username: data.username, email: data.email, avatar: ""});
             navigate("/home");
         } catch (error) {
             console.log(error);
