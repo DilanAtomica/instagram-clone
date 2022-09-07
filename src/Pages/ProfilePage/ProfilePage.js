@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import "./ProfilePage.css";
 import {BsGrid3X3} from "react-icons/bs";
 import {HiOutlineHeart} from "react-icons/hi";
-import PostModalContainer from "./PostModalContainer";
 
 function ProfilePage(props) {
 
@@ -41,7 +40,7 @@ function ProfilePage(props) {
 
                 </div>
             </div>
-            <PostModalContainer />
+
         </div>
     );
 }

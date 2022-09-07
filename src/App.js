@@ -8,6 +8,7 @@ import {collection, getDocs} from "firebase/firestore";
 import {db, auth} from "./utils/firebase";
 import NavBar from "./Components/NavBar/NavBar";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
+import PostingModalContainer from "./Components/PostingModalContainer/PostingModalContainer";
 
 export const AppContext = createContext();
 
@@ -50,7 +51,7 @@ function App() {
     }, []);
 
     const hidePostModal = (e) => {
-        if(e.target.className === "darkBackground") setShowPostModal(false);
+        if(e.target.className === "postingModalContainer") setShowPostModal(false);
         if(e.target.id === "exitPostModalIcon") setShowPostModal(false);
     }
 
@@ -59,6 +60,7 @@ function App() {
       <AppContext.Provider value={{user, setUser, username, setUsername, userID,
           userAvatar, setUserAvatar, showPostModal, setShowPostModal, hidePostModal}}>
         <div className="App">
+            {showPostModal && <PostingModalContainer />}
             <BrowserRouter>
             <Routes>
               <Route path="/" element={<> <LoginPage /> </>} />

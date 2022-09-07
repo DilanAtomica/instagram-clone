@@ -1,40 +1,12 @@
-import React, {useState, useContext} from 'react';
+import React from 'react';
 import "./HomePage.css";
 import {BiUserCircle} from "react-icons/bi";
 import {FiMoreHorizontal} from "react-icons/fi";
 import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
-import {TiDeleteOutline} from "react-icons/ti";
-import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
-import {collection, getDocs, addDoc, serverTimestamp} from "firebase/firestore";
-import {storage, db} from "../../utils/firebase";
-import {v4} from "uuid";
-import {AppContext} from "../../App";
 
 function HomePage(props) {
-
-    const {userID, showPostModal, hidePostModal} = useContext(AppContext);
-
-
-    const [imageInput, setImageInput] = useState("");
-    const [textInput, setTextInput] = useState(null);
-
-    const handleImageChange = async(e) => {
-        const imageRef = ref(storage, `images/${e.target.files[0].name + v4()}`);
-        await uploadBytes(imageRef, e.target.files[0]);
-        const url = await getDownloadURL(imageRef);
-        setImageInput(url);
-    }
-
-    const createPost = async(e) => {
-        e.preventDefault()
-        const postsCollection = collection(db, "users", userID, "posts");
-        await addDoc(postsCollection, {text: textInput, image: imageInput, timestamp: serverTimestamp()});
-        setImageInput("");
-        setTextInput("");
-    }
-
     return (
         <div className="homePage">
             <div className="homePageContainer">
@@ -92,36 +64,6 @@ function HomePage(props) {
                     </div>
                 </div>
             </div>
-            {showPostModal &&
-            <div onClick={hidePostModal} className="darkBackground">
-                <form onSubmit={createPost} className="postingModalContainer">
-                    <div className="postingModalHeader">
-                        <TiDeleteOutline id="exitPostModalIcon" onClick={hidePostModal} />
-                        <h2>Create a new post</h2>
-                        <button type="submit">Share</button>
-                    </div>
-                    <div className="postingModalContent">
-                        <div className="postingModalContent-left">
-                            {imageInput.length > 1 ? <img src={imageInput} /> :
-                                <label id="imageInputLabel" htmlFor="imageInput">
-                                    Upload image
-                                    <input id="imageInput" onChange={handleImageChange} className="profile-imageInput" type="file" />
-                                </label>
-                            }
-
-                        </div>
-                        <div className="postingModalContent-right">
-                            <div className="postingModalProfile">
-                                <BiUserCircle style={{fontSize: "1.5rem"}} />
-                                <p>Frillo</p>
-                            </div>
-                            <textarea onChange={(e) => setTextInput(e.target.value)}
-                                      rows="10" placeholder="Write a subtitle..." />
-                        </div>
-                    </div>
-                </form>
-            </div>}
-
 
         </div>
     );

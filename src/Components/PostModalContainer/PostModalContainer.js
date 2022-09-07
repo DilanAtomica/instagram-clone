@@ -5,6 +5,7 @@ import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 
 function PostModalContainer(props) {
+
     return (
         <div className="postModalContainer">
         <div className="postModal">
