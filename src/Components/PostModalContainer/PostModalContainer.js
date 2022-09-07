@@ -1,16 +1,24 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import "./PostModalContainer.css";
 import {HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {AppContext} from "../../App";
 
-function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar}) {
+function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments}) {
 
     const {hidePostModal} = useContext(AppContext);
 
+    const [inputValue, setInputValue] = useState("");
+
     const handleOnClick = (e) => {
         hidePostModal(e);
+    }
+
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        commentPost(publisherID, postID, inputValue);
+        setInputValue("");
     }
 
     return (
@@ -38,96 +46,19 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                         </div>
                     </div>
 
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
+                    {comments.map(comment => (
+                        <div key={comment.id} className="postModalComment">
+                            <img src={comment.commenterAvatar} />
+                            <div className="postModalComment-right">
+                                <p><span>{comment.commenterName}</span> {comment.comment}</p>
+                                <div className="postModalCommentDate">
+                                    <p>1 week</p>
+                                    <button type="button">Reply</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
-                        <div className="postModalComment-right">
-                            <p><span>someGuy</span> Had a great time!</p>
-                            <div className="postModalCommentDate">
-                                <p>1 week</p>
-                                <button type="button">Reply</button>
-                            </div>
-                        </div>
-                    </div>
+                    ))}
+
 
                 </div>
                 <div className="postModalActions">
@@ -136,9 +67,9 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                 </div>
                 <p id="likesCounter">10,654 likes</p>
                 <p id="postDate">POSTED 7 DAYS AGO</p>
-                <form className="postModalInputContainer">
+                <form onSubmit={handleOnSubmit} className="postModalInputContainer">
                     <VscSmiley id="smileyIcon" />
-                    <input type="text" placeholder="Write a comment..." />
+                    <input onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Write a comment..." />
                     <button type="submit">Publish</button>
                 </form>
             </div>

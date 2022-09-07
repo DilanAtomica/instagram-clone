@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
-import {collection, getDocs} from "firebase/firestore";
+import {addDoc, collection, getDocs, serverTimestamp} from "firebase/firestore";
 import {db, auth} from "./utils/firebase";
 import NavBar from "./Components/NavBar/NavBar";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
@@ -26,12 +26,16 @@ function App() {
     const usersCollection = collection(db, "users");
 
     const showPostModal = async(image, text, timestamp, postID, publisherID) => {
-
         const data = await getDocs(usersCollection);
         const result = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
 
         for(let i = 0; i < result.length; i++) {
             if(result[i].id === publisherID) {
+
+                const commentsCollection = collection(db, "users", publisherID, "posts", postID, "comments");
+                const commentsData = await getDocs(commentsCollection);
+                const commentsResults = commentsData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+
                 setPostModal({
                     image: image,
                     text: text,
@@ -40,14 +44,27 @@ function App() {
                     publisherID: publisherID,
                     publisherName:  result[i].username,
                     publisherAvatar: result[i].avatar,
+                    comments: commentsResults,
                 });
             }
         }
+
 
     }
 
     const hidePostModal = (e) => {
         if(e.target.id === "postModalContainer") setPostModal(null);
+    }
+
+    const commentPost = async(publisherID, postID, comment) => {
+        const commentCollection = collection(db, "users", publisherID, "posts", postID, "comments");
+        await addDoc(commentCollection, {
+            commenterName: userInfo.username,
+            commenterID: userInfo.userID,
+            commenterAvatar: userInfo.avatar,
+            comment: comment,
+            timestamp: serverTimestamp(),
+        });
     }
 
     useEffect(() => {
@@ -62,7 +79,7 @@ function App() {
                             setUserInfo({
                                 username: account.username,
                                 userID: account.id,
-                                setUserAvatar: account.imageUrl,
+                                avatar: account.avatar,
                             });
                         }
                     })
@@ -92,7 +109,7 @@ function App() {
             {postModal &&
                 <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}
                                     postID={postModal.postID} publisherID={postModal.publisherID} publisherName={postModal.publisherName}
-                                    publisherAvatar={postModal.publisherAvatar}
+                                    publisherAvatar={postModal.publisherAvatar} comments={postModal.comments} commentPost={commentPost}
 
             />}
             {showPostingModal && <PostingModalContainer />}
