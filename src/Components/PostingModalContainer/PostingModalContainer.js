@@ -11,7 +11,7 @@ import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 
 function PostingModalContainer(props) {
 
-    const {userID, hidePostModal} = useContext(AppContext);
+    const {userID, hidePostingModal} = useContext(AppContext);
 
     const [imageInput, setImageInput] = useState("");
     const [textInput, setTextInput] = useState(null);
@@ -32,14 +32,14 @@ function PostingModalContainer(props) {
     }
 
     const handleOnClick = (e) => {
-        hidePostModal(e);
+        hidePostingModal(e);
     }
 
     return (
         <div onClick={handleOnClick} className="postingModalContainer" id="postingModalContainer">
             <form onSubmit={createPost} className="postingModal">
                 <div className="postingModalHeader">
-                    <TiDeleteOutline id="exitPostModalIcon" onClick={hidePostModal} />
+                    <TiDeleteOutline id="exitPostModalIcon" onClick={hidePostingModal} />
                     <h2>Create a new post</h2>
                     <button type="submit">Share</button>
                 </div>

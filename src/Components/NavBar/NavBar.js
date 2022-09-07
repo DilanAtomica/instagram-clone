@@ -19,7 +19,7 @@ function NavBar(props) {
     const [inputFocused, setInputFocused] = useState(false);
     const [isAvatarClicked, setIsAvatarClicked] = useState(false);
 
-    const {setUser, setShowPostModal, hidePostModal} = useContext(AppContext);
+    const {setUser, setShowPostingModal} = useContext(AppContext);
     const navigate = useNavigate();
 
     const handleAvatarClick = (e) => {
@@ -60,7 +60,7 @@ function NavBar(props) {
                     <li onClick={() => navigate("/home")}><AiOutlineHome /></li>
                     <li><FiSend /></li>
                     <li><HiOutlineHeart /></li>
-                    <li onClick={() => setShowPostModal(true)}><AiOutlineCamera /></li>
+                    <li onClick={() => setShowPostingModal(true)}><AiOutlineCamera /></li>
                     <li>
                         <FaUserCircle onClick={handleAvatarClick} />
                         {isAvatarClicked && <div style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownArrow"></div>}

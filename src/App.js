@@ -19,7 +19,7 @@ function App() {
     const [userID, setUserID] = useState(null);
     const [userAvatar, setUserAvatar] = useState(null);
 
-    const [showPostModal, setShowPostModal] = useState(false);
+    const [showPostingModal, setShowPostingModal] = useState(false);
 
     const usersCollection = collection(db, "users")
 
@@ -50,17 +50,17 @@ function App() {
         }
     }, []);
 
-    const hidePostModal = (e) => {
-        if(e.target.id === "postingModalContainer") setShowPostModal(false);
-        if(e.target.id === "exitPostModalIcon") setShowPostModal(false);
+    const hidePostingModal = (e) => {
+        if(e.target.id === "postingModalContainer") setShowPostingModal(false);
+        if(e.target.id === "exitPostModalIcon") setShowPostingModal(false);
     }
 
 
     return (
       <AppContext.Provider value={{user, setUser, username, setUsername, userID,
-          userAvatar, setUserAvatar, showPostModal, setShowPostModal, hidePostModal}}>
+          userAvatar, setUserAvatar, showPostingModal, setShowPostingModal, hidePostingModal}}>
         <div className="App">
-            {showPostModal && <PostingModalContainer />}
+            {showPostingModal && <PostingModalContainer />}
             <BrowserRouter>
             <Routes>
               <Route path="/" element={<> <LoginPage /> </>} />
