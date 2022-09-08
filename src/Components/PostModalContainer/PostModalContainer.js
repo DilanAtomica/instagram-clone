@@ -1,18 +1,26 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import "./PostModalContainer.css";
 import {HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {AppContext} from "../../App";
+import PostModalComment from "./PostModalComment";
 
 function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments}) {
 
     const {hidePostModal} = useContext(AppContext);
 
+    const commentInput = useRef(null);
+
     const [inputValue, setInputValue] = useState("");
 
     const handleOnClick = (e) => {
         hidePostModal(e);
+    }
+
+    const focusInput = () => {
+        console.log(commentInput)
+        commentInput.current.focus();
     }
 
     const handleOnSubmit = (e) => {
@@ -47,29 +55,21 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                     </div>
 
                     {comments.map(comment => (
-                        <div key={comment.id} className="postModalComment">
-                            <img src={comment.commenterAvatar} />
-                            <div className="postModalComment-right">
-                                <p><span>{comment.commenterName}</span> {comment.comment}</p>
-                                <div className="postModalCommentDate">
-                                    <p>1 week</p>
-                                    <button type="button">Reply</button>
-                                </div>
-                            </div>
-                        </div>
+                        <PostModalComment key={comment.id} commenterAvatar={comment.commenterAvatar} commenterName={comment.commenterName}
+                                          commentID={comment.id} commenterID={comment.commenterID} comment={comment.comment}/>
                     ))}
 
 
                 </div>
                 <div className="postModalActions">
                     <HiOutlineHeart id="heartIcon" />
-                    <FaRegComment />
+                    <FaRegComment id="commentIcon" onClick={focusInput} />
                 </div>
                 <p id="likesCounter">10,654 likes</p>
                 <p id="postDate">POSTED 7 DAYS AGO</p>
                 <form onSubmit={handleOnSubmit} className="postModalInputContainer">
                     <VscSmiley id="smileyIcon" />
-                    <input onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Write a comment..." />
+                    <input ref={commentInput} onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Write a comment..." />
                     <button type="submit">Publish</button>
                 </form>
             </div>
