@@ -67,6 +67,18 @@ function App() {
         });
     }
 
+    const replyToComment = async(publisherID, postID, commentID, reply) => {
+        const repliesCollection = collection(db, "users", publisherID, "posts", postID, "comments", commentID, "replies");
+        await addDoc(repliesCollection, {
+            replierName: userInfo.username,
+            replierID: userInfo.userID,
+            replierAvatar: userInfo.avatar,
+            reply: reply,
+            timestamp: serverTimestamp(),
+        });
+    }
+
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged( (authUser) => {
             if(authUser) {
@@ -110,6 +122,7 @@ function App() {
                 <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}
                                     postID={postModal.postID} publisherID={postModal.publisherID} publisherName={postModal.publisherName}
                                     publisherAvatar={postModal.publisherAvatar} comments={postModal.comments} commentPost={commentPost}
+                                    replyToComment={replyToComment}
 
             />}
             {showPostingModal && <PostingModalContainer />}

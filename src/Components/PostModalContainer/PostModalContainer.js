@@ -6,7 +6,7 @@ import {VscSmiley} from "react-icons/vsc";
 import {AppContext} from "../../App";
 import PostModalComment from "./PostModalComment";
 
-function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments}) {
+function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments, replyToComment}) {
 
     const {hidePostModal} = useContext(AppContext);
 
@@ -56,7 +56,9 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
 
                     {comments.map(comment => (
                         <PostModalComment key={comment.id} commenterAvatar={comment.commenterAvatar} commenterName={comment.commenterName}
-                                          commentID={comment.id} commenterID={comment.commenterID} comment={comment.comment}/>
+                                          commentID={comment.id} commenterID={comment.commenterID} comment={comment.comment}
+                                          publisherID={publisherID} postID={postID} replyToComment={replyToComment}
+                        />
                     ))}
 
 

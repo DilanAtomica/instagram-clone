@@ -1,0 +1,32 @@
+
+.postModalReply {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.postModalReply > img {
+    object-fit: cover;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    margin-right: 1rem;
+}
+
+.postModalReplyText {
+    font-size: 0.85rem;
+    color: #262626;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    margin-top: 0.20rem;
+    margin-bottom: 0.5rem;
+}
+
+.postModalReplyText > span {
+    font-weight: 600;
+}
+
+.postModalReply-date {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+    margin-right: 0.5rem;
+}
