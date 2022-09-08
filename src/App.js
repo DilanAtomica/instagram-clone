@@ -19,6 +19,8 @@ function App() {
 
     const [userInfo, setUserInfo] = useState(null);
 
+    const [userSuggestions, setUserSuggestions] = useState(null);
+
     const [showPostingModal, setShowPostingModal] = useState(false);
 
     const [postModal, setPostModal] = useState(null);
@@ -56,6 +58,20 @@ function App() {
         if(e.target.id === "postModalContainer") setPostModal(null);
     }
 
+    const getUserSuggestions = async() => {
+        const usersCollection = collection(db, "users");
+        const usersData = await getDocs(usersCollection);
+        let result = usersData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+      //  result = result.filter(user => user.id !== userInfo.userID);
+        setUserSuggestions(result);
+    }
+
+    const followUser = async(userID) => {
+        const followedUsers = collection(db, "users", userInfo.userID, "following");
+        await addDoc(followedUsers, {userID});
+
+    }
+
     const commentPost = async(publisherID, postID, comment) => {
         const commentCollection = collection(db, "users", publisherID, "posts", postID, "comments");
         await addDoc(commentCollection, {
@@ -76,28 +92,30 @@ function App() {
             reply: reply,
             timestamp: serverTimestamp(),
         });
-    }
+    };
+
+    const getUser = async (authUser) => {
+        const data = await getDocs(usersCollection);
+        const result = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        result.forEach(account => {
+            if(account.email === authUser.email) {
+                setUserInfo({
+                    username: account.username,
+                    userID: account.id,
+                    avatar: account.avatar,
+                });
+            }
+        });
+
+    };
 
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged( (authUser) => {
             if(authUser) {
                 setUser(authUser);
-                const getUser = async () => {
-                    const data = await getDocs(usersCollection);
-                    const result = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
-                    result.forEach(account => {
-                        if(account.email === authUser.email) {
-                            setUserInfo({
-                                username: account.username,
-                                userID: account.id,
-                                avatar: account.avatar,
-                            });
-                        }
-                    })
-
-                };
-                getUser();
+                getUser(authUser);
+                getUserSuggestions();
             } else {
                 setUser(null);
             }
@@ -115,7 +133,7 @@ function App() {
 
 
     return (
-      <AppContext.Provider value={{user, setUser, userInfo,
+      <AppContext.Provider value={{user, setUser, userInfo, userSuggestions, followUser,
           showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal}}>
         <div className="App">
             {postModal &&

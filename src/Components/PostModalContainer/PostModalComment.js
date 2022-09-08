@@ -18,6 +18,9 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
     const handleOnSubmit = (e) => {
         e.preventDefault();
         replyToComment(publisherID, postID, commentID, inputValue);
+        getReplies();
+        setInputValue("");
+        setShowInputReply(false);
     };
 
     const getReplies = async() => {
@@ -43,7 +46,7 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
                 </div>
                 <form onSubmit={handleOnSubmit} style={{display: showInputReply && "flex"}} className="postModalCommentInputReply">
                     <VscSmiley id="smileyIcon" />
-                    <input onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Reply to comment..." />
+                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Reply to comment..." />
                     <button type="submit">Publish</button>
                 </form>
                 {replies?.map(reply => (

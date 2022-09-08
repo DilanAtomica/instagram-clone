@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import "./HomePage.css";
 import {BiUserCircle} from "react-icons/bi";
 import {FiMoreHorizontal} from "react-icons/fi";
 import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
+import {AppContext} from "../../App";
 
 function HomePage(props) {
+
+    const {userSuggestions, followUser} = useContext(AppContext);
+
     return (
         <div className="homePage">
             <div className="homePageContainer">
@@ -54,13 +58,15 @@ function HomePage(props) {
                             <p>Suggestions for you</p>
                             <a href="">See all</a>
                         </div>
-                        <div className="suggestion">
-                            <div className="suggestion-right">
-                                <BiUserCircle style={{fontSize: "2rem"}} />
-                                <p>Ole</p>
+                        {userSuggestions?.map(user => (
+                            <div key={user.id} className="suggestion">
+                                <div className="suggestion-right">
+                                    <BiUserCircle style={{fontSize: "2rem"}} />
+                                    <p>{user.username}</p>
+                                </div>
+                                <button onClick={() => followUser(user.id)} type="button">Follow</button>
                             </div>
-                            <button type="button">Follow</button>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
