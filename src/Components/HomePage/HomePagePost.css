@@ -1,0 +1,124 @@
+
+.homePagePost {
+    display: flex;
+    flex-direction: column;
+}
+
+.homePagePostHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: white;
+    border-top: 1px solid lightgrey;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+}
+
+.homePagePostHeader-left {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.homePagePostHeader-left > span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+}
+
+.homePagePostHeader-right {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.homePagePost > img {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+}
+
+.homePagePostFooter {
+    padding-top: 0.5rem;
+    padding-left: 0.75rem;
+    background-color: white;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+}
+
+.homePagePostActionButtons {
+    display: flex;
+    align-items: center;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.homePagePostLikes {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.homePagePostLikes > p {
+    font-size: 14px;
+    margin-left: 0.25rem;
+}
+
+.homePagePostLikes > p > span {
+    font-weight: 700;
+}
+
+.homePagePostTitle {
+    font-size: 14px;
+    margin-bottom: 0.25rem;
+}
+
+.homePagePostTitle > span {
+    font-weight: 700;
+}
+
+.homePagePostComments {
+    color: #8e8e8e;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.homePagePostDate {
+    color: #8e8e8e;
+    font-size: 10px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.homePagePostComment {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-top: 1px solid rgba(239,239,239);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.homePagePostComment > input {
+    padding: 0.75rem 0.5rem 0.5rem;
+    border: none;
+    outline: none;
+    flex: 1;
+}
+
+.homePagePostComment > button {
+    font-size: 14px;
+    color: #0095f6;
+    font-weight: 700;
+    background: none;
+    border: none;
+    padding: 0.75rem 0.5rem 0.5rem;
+    cursor: pointer;
+}

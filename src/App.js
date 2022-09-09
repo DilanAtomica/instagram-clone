@@ -100,7 +100,6 @@ function App() {
             }
             if(!matched) suggestionList.push(userResult[i]);
         }
-
         setUserSuggestions(suggestionList);
     }
 
