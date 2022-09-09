@@ -27,6 +27,29 @@ function App() {
 
     const usersCollection = collection(db, "users");
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged( (authUser) => {
+            if(authUser) {
+                setUser(authUser);
+                getUser(authUser);
+
+            } else {
+                setUser(null);
+            }
+        }, );
+
+        return () => {
+            unsubscribe();
+        }
+    }, []);
+
+    useEffect(() => {
+        if(!userInfo) return
+        getUserSuggestions();
+        console.log("STOP")
+
+    }, [userInfo]);
+
     const showPostModal = async(image, text, timestamp, postID, publisherID) => {
         const data = await getDocs(usersCollection);
         const result = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
@@ -61,9 +84,24 @@ function App() {
     const getUserSuggestions = async() => {
         const usersCollection = collection(db, "users");
         const usersData = await getDocs(usersCollection);
-        let result = usersData.docs.map((doc) => ({...doc.data(), id: doc.id}));
-      //  result = result.filter(user => user.id !== userInfo.userID);
-        setUserSuggestions(result);
+        let userResult = usersData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        userResult = userResult.filter(user => user.id !== userInfo.userID);
+
+        const followingCollection = collection(db, "users", userInfo.userID, "following");
+        const followingData = await getDocs(followingCollection)
+        let followingResult = followingData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+
+        let suggestionList = [];
+
+        for(let i = 0; i < userResult.length; i++) {
+            let matched = false;
+            for(let j = 0; j < followingResult.length; j++) {
+                if(userResult[i].id === followingResult[j].userID) matched = true;
+            }
+            if(!matched) suggestionList.push(userResult[i]);
+        }
+
+        setUserSuggestions(suggestionList);
     }
 
     const followUser = async(userID) => {
@@ -108,23 +146,6 @@ function App() {
         });
 
     };
-
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged( (authUser) => {
-            if(authUser) {
-                setUser(authUser);
-                getUser(authUser);
-                getUserSuggestions();
-            } else {
-                setUser(null);
-            }
-        }, );
-
-        return () => {
-            unsubscribe();
-        }
-    }, []);
 
     const hidePostingModal = (e) => {
         if(e.target.id === "postingModalContainer") setShowPostingModal(false);
