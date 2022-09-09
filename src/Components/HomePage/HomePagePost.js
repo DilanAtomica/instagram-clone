@@ -6,7 +6,7 @@ import {HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 
-function HomePagePost(props) {
+function HomePagePost({image, text}) {
     return (
         <div className="homePagePost">
             <div className="homePagePostHeader">
@@ -17,7 +17,7 @@ function HomePagePost(props) {
                     <FiMoreHorizontal />
                 </div>
             </div>
-            <img src="https://cdn.oneesports.gg/cdn-data/2021/06/JujutsuKaisenPhantomParade_GojoSatoru-min.jpeg"/>
+            <img src={image}/>
 
             <div className="homePagePostFooter">
                 <div className="homePagePostActionButtons">
@@ -28,7 +28,7 @@ function HomePagePost(props) {
                     <BiUserCircle />
                     <p>Liked by <span>Thomas</span> and <span>47 others</span></p>
                 </div>
-                <p className="homePagePostTitle"><span>Kurt</span> Var på byen lol</p>
+                <p className="homePagePostTitle"><span>Kurt</span> {text}</p>
                 <a className="homePagePostComments" href="">Show all 5 comments</a>
                 <p className="homePagePostDate">JULY 24</p>
             </div>
