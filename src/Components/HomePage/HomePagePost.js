@@ -6,12 +6,12 @@ import {HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 
-function HomePagePost({image, text}) {
+function HomePagePost({image, text, username, avatar}) {
     return (
         <div className="homePagePost">
             <div className="homePagePostHeader">
                 <div className="homePagePostHeader-left">
-                    <BiUserCircle /> <span className="homePagePostHeader-name">Kurt</span>
+                    <img src={avatar} /> <span className="homePagePostHeader-name">{username}</span>
                 </div>
                 <div className="homePagePostHeader-right">
                     <FiMoreHorizontal />

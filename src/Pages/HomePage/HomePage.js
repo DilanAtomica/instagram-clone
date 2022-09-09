@@ -36,10 +36,16 @@ function HomePage(props) {
             const postsData = await getDocs(postsCollection);
             let postsResult = postsData.docs.map((doc) => ({...doc.data(), id: doc.id}));
 
-            posts.push({userAvatar: userInfoResult.avatar, username: userInfoResult.username, userPosts: postsResult});
-            console.log(posts);
+             postsResult = postsResult.map(post => ({
+                data: post,
+                avatar: userInfoResult.avatar,
+                username: userInfoResult.username,
+            }));
+
+            posts.push(postsResult);
         }
-        setFollowingPosts(posts[0].userPosts);
+        console.log(posts);
+        setFollowingPosts(posts[0]);
     }
 
     return (
@@ -47,7 +53,9 @@ function HomePage(props) {
             <div className="homePageContainer">
                 <div className="homePagePosts">
                     {followingPosts?.map(post => (
-                        <HomePagePost key={post.id} image={post.image} text={post.text} />
+                        <HomePagePost key={post.data.id} image={post.data.image} text={post.data.text}
+                                      username={post.username} avatar={post.avatar}
+                        />
                     ))}
                 </div>
                 <div className="homePageSuggestionsContainer">
