@@ -26,8 +26,6 @@ function HomePage(props) {
         let posts = [];
 
         for(let i = 0; i < followingResult.length; i++) {
-            console.log(followingResult[i].userID);
-
             const userInfoCollection = doc(db, "users", followingResult[i].userID);
             const userInfoData = await getDoc(userInfoCollection);
             const userInfoResult = userInfoData.data();
@@ -44,7 +42,6 @@ function HomePage(props) {
 
             posts.push(postsResult);
         }
-        console.log(posts);
         setFollowingPosts(posts[0]);
     }
 
@@ -60,8 +57,8 @@ function HomePage(props) {
                 </div>
                 <div className="homePageSuggestionsContainer">
                     <div className="suggestionsAvatar">
-                            <BiUserCircle style={{fontSize: "5rem"}} />
-                            <p>Anton</p>
+                            <img alt={userInfo?.username} src={userInfo?.avatar} />
+                            <p>{userInfo?.username}</p>
                     </div>
                     <div className="suggestions">
                         <div className="suggestionsHeader">

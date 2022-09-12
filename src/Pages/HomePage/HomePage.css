@@ -28,6 +28,13 @@
     align-items: center;
 }
 
+.suggestionsAvatar > img {
+    width: 3.75rem;
+    height: 3.75rem;
+    object-fit: cover;
+    border-radius: 999px;
+}
+
 .suggestionsAvatar > p {
     font-size: 14px;
     font-weight: 700;
