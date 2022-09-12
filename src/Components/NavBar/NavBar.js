@@ -19,7 +19,7 @@ function NavBar(props) {
     const [inputFocused, setInputFocused] = useState(false);
     const [isAvatarClicked, setIsAvatarClicked] = useState(false);
 
-    const {setUser, setShowPostingModal} = useContext(AppContext);
+    const {setUser, setShowPostingModal, userInfo} = useContext(AppContext);
     const navigate = useNavigate();
 
     const handleAvatarClick = (e) => {
@@ -35,7 +35,7 @@ function NavBar(props) {
 
     const navigateProfile = () => {
         setIsAvatarClicked(false);
-        navigate("/profile");
+        navigate("/profile/" + userInfo?.userID);
     }
 
     const logout = async() => {

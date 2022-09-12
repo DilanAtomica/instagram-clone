@@ -176,7 +176,7 @@ function App() {
               <Route path="/" element={<> <LoginPage /> </>} />
               <Route path="/register" element={<> <RegisterPage /> </>} />
               <Route path="/home" element={<> <NavBar /> <HomePage /> </>} />
-              <Route path="/profile" element={<> <NavBar /> <ProfilePage /> </>} />
+              <Route path="/profile/:userID" element={<> <NavBar /> <ProfilePage /> </>} />
             </Routes>
           </BrowserRouter>
         </div>

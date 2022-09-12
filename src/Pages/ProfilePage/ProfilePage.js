@@ -2,38 +2,49 @@ import React, {useState, useEffect, useContext} from 'react';
 import "./ProfilePage.css";
 import {BsGrid3X3} from "react-icons/bs";
 import {HiOutlineHeart} from "react-icons/hi";
-import {collection, getDocs} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import {AppContext} from "../../App";
 import ProfilePagePost from "../../Components/ProfilePage/ProfilePagePost";
+import {useParams} from "react-router-dom";
 
 
 function ProfilePage(props) {
 
     const {userInfo} = useContext(AppContext);
+    let { userID } = useParams();
 
     const [postsButton, setPostsButton] = useState(true);
     const [favoritesButton , setFavoritesButton] = useState(false);
 
     const [posts, setPosts] = useState([]);
     const [followingCount, setFollowingCount] = useState(null);
+    const [profileInfo, setProfileInfo] = useState(null);
 
 
    useEffect(() => {
-       if(userInfo === null) return
-        getPosts();
-        getFollowingCount();
+       if(userID === null) return
+        getProfileInfo();
+        getPosts(userID);
+        getFollowingCount(userID);
         console.log("hey");
-    }, [userInfo]);
+    }, [userID]);
 
-    const getPosts = async () => {
-        const postsCollection = collection(db, "users", userInfo.userID, "posts");
+   const getProfileInfo = async () => {
+       const userDoc = doc(db, "users", userID);
+       const userData = await getDoc(userDoc);
+       const userResult = userData.data();
+       setProfileInfo(userResult);
+   }
+
+    const getPosts = async (userID) => {
+        const postsCollection = collection(db, "users", userID, "posts");
         const data = await getDocs(postsCollection);
         setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
     };
 
-    const getFollowingCount = async() => {
-        const followingCountCollection = collection(db, "users", userInfo.userID, "following");
+    const getFollowingCount = async(userID) => {
+        const followingCountCollection = collection(db, "users", userID, "following");
         const data = await getDocs(followingCountCollection);
         setFollowingCount(data.docs.map((doc) => ({...doc.data(), id: doc.id})).length)
     }
@@ -41,18 +52,18 @@ function ProfilePage(props) {
     return (
         <div className="profilePage">
             <div className="profilePageInfoContainer">
-                <img src={userInfo?.avatar} />
+                <img src={profileInfo?.avatar} />
                 <div className="profilePageInfo">
                     <div className="profilePageInfoTop">
-                        <h1>{userInfo?.username}</h1>
+                        <h1>{profileInfo?.username}</h1>
                         <button type="button">Edit Profile</button>
                     </div>
                     <div className="profilePageInfoMiddle">
                         <p><span>{posts?.length}</span> Posts</p>
-                        <p><span>{userInfo?.followerCount || 0}</span> Followers</p>
+                        <p><span>{profileInfo?.followerCount || 0}</span> Followers</p>
                         <p><span>{followingCount}</span> Following</p>
                     </div>
-                    <p className="profilePageDescription">{userInfo?.description}</p>
+                    <p className="profilePageDescription">{profileInfo?.description}</p>
                 </div>
             </div>
             <div className="profilePagePostsContainer">
