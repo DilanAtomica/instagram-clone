@@ -16,11 +16,13 @@ function ProfilePage(props) {
     const [favoritesButton , setFavoritesButton] = useState(false);
 
     const [posts, setPosts] = useState([]);
+    const [followingCount, setFollowingCount] = useState(null);
 
 
    useEffect(() => {
        if(userInfo === null) return
         getPosts();
+        getFollowingCount();
         console.log("hey");
     }, [userInfo]);
 
@@ -30,19 +32,25 @@ function ProfilePage(props) {
         setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
     };
 
+    const getFollowingCount = async() => {
+        const followingCountCollection = collection(db, "users", userInfo.userID, "following");
+        const data = await getDocs(followingCountCollection);
+        setFollowingCount(data.docs.map((doc) => ({...doc.data(), id: doc.id})).length)
+    }
+
     return (
         <div className="profilePage">
             <div className="profilePageInfoContainer">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Hayao_Miyazaki_cropped_1_Hayao_Miyazaki_201211.jpg" />
+                <img src={userInfo?.avatar} />
                 <div className="profilePageInfo">
                     <div className="profilePageInfoTop">
-                        <h1>coolguy1</h1>
+                        <h1>{userInfo?.username}</h1>
                         <button type="button">Edit Profile</button>
                     </div>
                     <div className="profilePageInfoMiddle">
-                        <p><span>0</span> Posts</p>
-                        <p><span>0</span> Followers</p>
-                        <p><span>0</span> Follow</p>
+                        <p><span>{posts?.length}</span> Posts</p>
+                        <p><span>{userInfo?.followerCount || 0}</span> Followers</p>
+                        <p><span>{followingCount}</span> Following</p>
                     </div>
                     <p className="profilePageDescription">I love to be happy lol</p>
                 </div>

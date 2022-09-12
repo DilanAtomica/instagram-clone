@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
-import {addDoc, collection, getDocs, serverTimestamp} from "firebase/firestore";
+import {addDoc, collection, updateDoc, getDocs, serverTimestamp, doc, getDoc} from "firebase/firestore";
 import {db, auth} from "./utils/firebase";
 import NavBar from "./Components/NavBar/NavBar";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
@@ -106,6 +106,11 @@ function App() {
     const followUser = async(userID) => {
         const followedUsers = collection(db, "users", userInfo.userID, "following");
         await addDoc(followedUsers, {userID});
+
+        const userDoc = await doc(db, "users", userID);
+        const userData = await getDoc(userDoc);
+        const userResult = userData.data();
+        await updateDoc(userDoc, {followerCount: userResult.followerCount + 1});
 
     }
 

@@ -38,7 +38,10 @@ function RegisterPage(props) {
     const submitForm = async(data) => {
         try {
             await createUserWithEmailAndPassword(auth, data.email, data.password);
-            await addDoc(usersCollection, {username: data.username, email: data.email, avatar: "https://cdn130.picsart.com/344993131001211.png"});
+            await addDoc(usersCollection, {
+                username: data.username, email: data.email, avatar: "https://cdn130.picsart.com/344993131001211.png",
+                followerCount: 0
+            });
             navigate("/home");
         } catch (error) {
             console.log(error);
