@@ -40,7 +40,7 @@ function RegisterPage(props) {
             await createUserWithEmailAndPassword(auth, data.email, data.password);
             await addDoc(usersCollection, {
                 username: data.username, email: data.email, avatar: "https://cdn130.picsart.com/344993131001211.png",
-                followerCount: 0
+                followerCount: 0, description: "",
             });
             navigate("/home");
         } catch (error) {

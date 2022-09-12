@@ -44,12 +44,11 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                 </div>
                 <div className="postModalCommentsContainer">
                     <div className="postModalComment">
-                        <img src="https://filterblog.s3.amazonaws.com/2014/08/ghibli-totoro.jpg" />
+                        <img src={publisherAvatar} />
                         <div className="postModalComment-right">
-                            <p><span>someGuy</span> {text}</p>
+                            <p><span>{publisherName}</span> {text}</p>
                             <div className="postModalCommentDate">
                                 <p>1 week</p>
-                                <button type="button">Reply</button>
                             </div>
                         </div>
                     </div>

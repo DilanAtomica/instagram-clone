@@ -52,7 +52,7 @@ function ProfilePage(props) {
                         <p><span>{userInfo?.followerCount || 0}</span> Followers</p>
                         <p><span>{followingCount}</span> Following</p>
                     </div>
-                    <p className="profilePageDescription">I love to be happy lol</p>
+                    <p className="profilePageDescription">{userInfo?.description}</p>
                 </div>
             </div>
             <div className="profilePagePostsContainer">

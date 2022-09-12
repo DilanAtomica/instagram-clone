@@ -145,6 +145,8 @@ function App() {
                     username: account.username,
                     userID: account.id,
                     avatar: account.avatar,
+                    followerCount: account.followerCount,
+                    description: account.description,
                 });
             }
         });
