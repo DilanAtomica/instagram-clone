@@ -7,9 +7,13 @@ import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {useNavigate} from "react-router-dom";
 
-function HomePagePost({image, text, username, avatar, publisherID}) {
+function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal}) {
 
     const navigate = useNavigate();
+
+    const handleOnClick = () => {
+        showPostModal(image, text, timestamp, postID, publisherID);
+    }
 
     return (
         <div className="homePagePost">
@@ -34,7 +38,7 @@ function HomePagePost({image, text, username, avatar, publisherID}) {
                     <p>Liked by <span>Thomas</span> and <span>47 others</span></p>
                 </div>
                 <p className="homePagePostTitle"><span>Kurt</span> {text}</p>
-                <a className="homePagePostComments" href="">Show all 5 comments</a>
+                <button className="homePagePostComments" onClick={handleOnClick}>Show all comments</button>
                 <p className="homePagePostDate">JULY 24</p>
             </div>
 

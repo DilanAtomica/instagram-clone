@@ -1,7 +1,7 @@
 .homePage {
     background-color: #FAFAFA;
     width: 100%;
-    height: calc(100vh - 4rem);
+    min-height: calc(100vh - 4rem);
     margin-top: 4rem;
     position: relative;
 }

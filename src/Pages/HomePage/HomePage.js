@@ -9,7 +9,7 @@ import Suggestion from "../../Components/HomePage/Suggestion";
 
 function HomePage(props) {
 
-    const {followUser, userInfo} = useContext(AppContext);
+    const {followUser, userInfo, showPostModal} = useContext(AppContext);
 
     const [followingPosts, setFollowingPosts] = useState(null);
     const [userSuggestions, setUserSuggestions] = useState(null);
@@ -77,6 +77,7 @@ function HomePage(props) {
                     {followingPosts?.map(post => (
                         <HomePagePost key={post.data.id} image={post.data.image} text={post.data.text}
                                       username={post.username} avatar={post.avatar} publisherID={post.data.publisherID}
+                                      showPostModal={showPostModal} timestamp={post.data.timestamp} postID={post.data.id}
                         />
                     ))}
                 </div>
