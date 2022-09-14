@@ -64,7 +64,7 @@ function RegisterPage(props) {
                     <button type="submit">Register</button>
                 </form>
             </div>
-            <p>Already have an account? <span>Log in now</span></p>
+            <p>Already have an account? <a href="/">Log in now</a></p>
         </div>
     );
 }

@@ -56,7 +56,9 @@ function ProfilePage(props) {
                 <div className="profilePageInfo">
                     <div className="profilePageInfoTop">
                         <h1>{profileInfo?.username}</h1>
-                        <button type="button">Edit Profile</button>
+                        {userID === userInfo?.userID &&
+                            <button type="button">Edit Profile</button>
+                        }
                     </div>
                     <div className="profilePageInfoMiddle">
                         <p><span>{posts?.length}</span> Posts</p>
@@ -76,8 +78,7 @@ function ProfilePage(props) {
                 <div className="profilePagePosts">
                     {posts.map(post => (
                         <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} postID={post.id}
-                                         publisherID={post.publisherID}
-                        />
+                                         publisherID={post.publisherID}/>
                     ))}
                 </div>
             </div>

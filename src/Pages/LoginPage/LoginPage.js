@@ -48,7 +48,7 @@ function LoginPage(props) {
                     <button type="submit">Log in</button>
                 </form>
             </div>
-                <p>Dont have an account? <span>Register now</span></p>
+                <p>Dont have an account? <a href="/register">Register now</a></p>
         </div>
     );
 }

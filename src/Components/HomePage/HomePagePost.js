@@ -5,13 +5,18 @@ import {FiMoreHorizontal} from "react-icons/fi";
 import {HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
+import {useNavigate} from "react-router-dom";
 
-function HomePagePost({image, text, username, avatar}) {
+function HomePagePost({image, text, username, avatar, publisherID}) {
+
+    const navigate = useNavigate();
+
     return (
         <div className="homePagePost">
             <div className="homePagePostHeader">
                 <div className="homePagePostHeader-left">
-                    <img src={avatar} /> <span className="homePagePostHeader-name">{username}</span>
+                    <img onClick={() => navigate("/profile/" + publisherID)} src={avatar} />
+                    <span className="homePagePostHeader-name" onClick={() => navigate("/profile/" + publisherID)}>{username}</span>
                 </div>
                 <div className="homePagePostHeader-right">
                     <FiMoreHorizontal />

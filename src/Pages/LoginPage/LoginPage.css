@@ -60,7 +60,7 @@
     border: 1px solid lightgrey;
 }
 
-.loginPage > p > span {
+.loginPage > p > a {
     color: #33A6EB;
     font-weight: 700;
     cursor: pointer;

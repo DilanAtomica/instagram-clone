@@ -29,12 +29,14 @@
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 999px;
+    cursor: pointer;
 }
 
 .homePagePostHeader-left > span {
     font-size: 0.8rem;
     font-weight: 700;
     margin-left: 0.5rem;
+    cursor: pointer;
 }
 
 .homePagePostHeader-right {

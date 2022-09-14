@@ -61,7 +61,7 @@
     border: 1px solid lightgrey;
 }
 
-.registerPage > p > span {
+.registerPage > p > a {
     color: #33A6EB;
     font-weight: 700;
     cursor: pointer;
