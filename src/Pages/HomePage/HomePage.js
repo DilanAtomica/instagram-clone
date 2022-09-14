@@ -1,13 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "./HomePage.css";
-import {BiUserCircle} from "react-icons/bi";
 import {AppContext} from "../../App";
 import HomePagePost from "../../Components/HomePage/HomePagePost";
 import {collection, getDocs, doc, getDoc} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import Suggestion from "../../Components/HomePage/Suggestion";
+import {useNavigate} from "react-router-dom";
 
 function HomePage(props) {
+
+    const navigate = useNavigate();
 
     const {followUser, userInfo, showPostModal} = useContext(AppContext);
 
@@ -83,13 +85,12 @@ function HomePage(props) {
                 </div>
                 <div className="homePageSuggestionsContainer">
                     <div className="suggestionsAvatar">
-                            <img alt={userInfo?.username} src={userInfo?.avatar} />
-                            <p>{userInfo?.username}</p>
+                            <img onClick={() => navigate("/profile/" + userInfo.userID)} alt={userInfo?.username} src={userInfo?.avatar} />
+                            <p onClick={() => navigate("/profile/" + userInfo.userID)}>{userInfo?.username}</p>
                     </div>
                     <div className="suggestions">
                         <div className="suggestionsHeader">
                             <p>Suggestions for you</p>
-                            <a href="">See all</a>
                         </div>
                         {userSuggestions?.map(user => (
                             <Suggestion key={user.id} username={user.username} userID={user.id} avatar={user.avatar}

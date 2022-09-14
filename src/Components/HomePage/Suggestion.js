@@ -1,6 +1,5 @@
 import React from 'react';
 import "./Suggestion.css";
-import {BiUserCircle} from "react-icons/bi";
 import {useNavigate} from "react-router-dom";
 
 function Suggestion({username, userID, avatar, followUser}) {
@@ -15,7 +14,7 @@ function Suggestion({username, userID, avatar, followUser}) {
     return (
         <div className="suggestion">
             <div className="suggestion-right">
-                <BiUserCircle style={{fontSize: "2rem"}} />
+                <img alt={username} src={avatar} />
                 <p>{username}</p>
             </div>
             <button onClick={handleOnClick} type="button">Follow</button>

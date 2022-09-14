@@ -33,12 +33,14 @@
     height: 3.75rem;
     object-fit: cover;
     border-radius: 999px;
+    cursor: pointer;
 }
 
 .suggestionsAvatar > p {
     font-size: 14px;
     font-weight: 700;
     margin-left: 1rem;
+    cursor: pointer;
 }
 
 .suggestions {
@@ -56,13 +58,6 @@
     font-size: 14px;
     font-weight: 700;
     color: #8e8e8e;
-}
-
-.suggestionsHeader > a {
-    text-decoration: none;
-    font-size: 12px;
-    color: #262626;
-    font-weight: 700;
 }
 
 
