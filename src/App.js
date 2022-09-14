@@ -19,8 +19,6 @@ function App() {
 
     const [userInfo, setUserInfo] = useState(null);
 
-    const [userSuggestions, setUserSuggestions] = useState(null);
-
     const [showPostingModal, setShowPostingModal] = useState(false);
 
     const [postModal, setPostModal] = useState(null);
@@ -42,13 +40,6 @@ function App() {
             unsubscribe();
         }
     }, []);
-
-    useEffect(() => {
-        if(!userInfo) return
-        getUserSuggestions();
-        console.log("STOP")
-
-    }, [userInfo]);
 
     const showPostModal = async(image, text, timestamp, postID, publisherID) => {
         const data = await getDocs(usersCollection);
@@ -79,28 +70,6 @@ function App() {
 
     const hidePostModal = (e) => {
         if(e.target.id === "postModalContainer") setPostModal(null);
-    }
-
-    const getUserSuggestions = async() => {
-        const usersCollection = collection(db, "users");
-        const usersData = await getDocs(usersCollection);
-        let userResult = usersData.docs.map((doc) => ({...doc.data(), id: doc.id}));
-        userResult = userResult.filter(user => user.id !== userInfo.userID);
-
-        const followingCollection = collection(db, "users", userInfo.userID, "following");
-        const followingData = await getDocs(followingCollection)
-        let followingResult = followingData.docs.map((doc) => ({...doc.data(), id: doc.id}));
-
-        let suggestionList = [];
-
-        for(let i = 0; i < userResult.length; i++) {
-            let matched = false;
-            for(let j = 0; j < followingResult.length; j++) {
-                if(userResult[i].id === followingResult[j].userID) matched = true;
-            }
-            if(!matched) suggestionList.push(userResult[i]);
-        }
-        setUserSuggestions(suggestionList);
     }
 
     const followUser = async(userID) => {
@@ -160,7 +129,7 @@ function App() {
 
 
     return (
-      <AppContext.Provider value={{user, setUser, userInfo, userSuggestions, followUser,
+      <AppContext.Provider value={{user, setUser, userInfo, followUser,
           showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal}}>
         <div className="App">
             {postModal &&

@@ -5,18 +5,43 @@ import {AppContext} from "../../App";
 import HomePagePost from "../../Components/HomePage/HomePagePost";
 import {collection, getDocs, doc, getDoc} from "firebase/firestore";
 import {db} from "../../utils/firebase";
+import Suggestion from "../../Components/HomePage/Suggestion";
 
 function HomePage(props) {
 
-    const {userSuggestions, followUser, userInfo} = useContext(AppContext);
+    const {followUser, userInfo} = useContext(AppContext);
 
     const [followingPosts, setFollowingPosts] = useState(null);
+    const [userSuggestions, setUserSuggestions] = useState(null);
 
     useEffect(() => {
         if(userInfo === null) return;
         getFollowingPosts();
+        getUserSuggestions();
         console.log("STOPP");
     }, [userInfo]);
+
+    const getUserSuggestions = async() => {
+        const usersCollection = collection(db, "users");
+        const usersData = await getDocs(usersCollection);
+        let userResult = usersData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        userResult = userResult.filter(user => user.id !== userInfo.userID);
+
+        const followingCollection = collection(db, "users", userInfo.userID, "following");
+        const followingData = await getDocs(followingCollection)
+        let followingResult = followingData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+
+        let suggestionList = [];
+
+        for(let i = 0; i < userResult.length; i++) {
+            let matched = false;
+            for(let j = 0; j < followingResult.length; j++) {
+                if(userResult[i].id === followingResult[j].userID) matched = true;
+            }
+            if(!matched) suggestionList.push(userResult[i]);
+        }
+        setUserSuggestions(suggestionList);
+    }
 
     const getFollowingPosts = async() => {
         const followingCollection = collection(db, "users", userInfo.userID, "following");
@@ -66,13 +91,9 @@ function HomePage(props) {
                             <a href="">See all</a>
                         </div>
                         {userSuggestions?.map(user => (
-                            <div key={user.id} className="suggestion">
-                                <div className="suggestion-right">
-                                    <BiUserCircle style={{fontSize: "2rem"}} />
-                                    <p>{user.username}</p>
-                                </div>
-                                <button onClick={() => followUser(user.id)} type="button">Follow</button>
-                            </div>
+                            <Suggestion key={user.id} username={user.username} userID={user.id} avatar={user.avatar}
+                                        followUser={followUser}
+                            />
                         ))}
                     </div>
                 </div>

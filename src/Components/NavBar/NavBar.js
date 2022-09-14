@@ -47,7 +47,7 @@ function NavBar(props) {
     return (
         <header className="navBar">
             <nav>
-                <img alt="logo" src={Logo} />
+                <img onClick={() => navigate("/home")} alt="logo" src={Logo} />
                 <div style={{paddingRight: inputFocused && "1.8rem"}} className="searchField">
                     <input style={{paddingLeft: inputFocused && "1rem", paddingRight: inputFocused && "1rem"}}
                            onBlur={() => setInputFocused(false)}
