@@ -67,6 +67,13 @@ nav > img {
     font-size: 1.6rem;
 }
 
+.navigationLinks > li > img {
+    object-fit: cover;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+}
+
 .navigationLinks > li {
     margin: 0.5rem;
     position: relative;

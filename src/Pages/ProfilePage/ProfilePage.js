@@ -11,7 +11,7 @@ import {useParams} from "react-router-dom";
 
 function ProfilePage(props) {
 
-    const {userInfo} = useContext(AppContext);
+    const {userInfo, followUser} = useContext(AppContext);
     let { userID } = useParams();
 
     const [postsButton, setPostsButton] = useState(true);
@@ -49,6 +49,10 @@ function ProfilePage(props) {
         setFollowingCount(data.docs.map((doc) => ({...doc.data(), id: doc.id})).length)
     }
 
+    const handleOnClick = () => {
+        followUser(userID);
+    }
+
     return (
         <div className="profilePage">
             <div className="profilePageInfoContainer">
@@ -56,8 +60,9 @@ function ProfilePage(props) {
                 <div className="profilePageInfo">
                     <div className="profilePageInfoTop">
                         <h1>{profileInfo?.username}</h1>
-                        {userID === userInfo?.userID &&
-                            <button type="button">Edit Profile</button>
+                        {userID === userInfo?.userID ?
+                            <button type="button">Edit Profile</button> :
+                            <button onClick={handleOnClick} type="button">Follow</button>
                         }
                     </div>
                     <div className="profilePageInfoMiddle">

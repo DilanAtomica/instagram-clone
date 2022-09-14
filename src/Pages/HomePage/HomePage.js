@@ -49,10 +49,11 @@ function HomePage(props) {
         const followingCollection = collection(db, "users", userInfo.userID, "following");
         const followingData = await getDocs(followingCollection);
         const followingResult = followingData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        console.log(followingResult);
 
         let posts = [];
 
-        for(let i = 0; i < followingResult.length; i++) {
+        for(let i = 0; i <= followingResult.length - 1; i++) {
             const userInfoCollection = doc(db, "users", followingResult[i].userID);
             const userInfoData = await getDoc(userInfoCollection);
             const userInfoResult = userInfoData.data();
@@ -67,9 +68,9 @@ function HomePage(props) {
                 username: userInfoResult.username,
             }));
 
-            posts.push(postsResult);
+            postsResult.map(post => posts.push(post));
         }
-        setFollowingPosts(posts[0]);
+        setFollowingPosts(posts);
     }
 
     return (

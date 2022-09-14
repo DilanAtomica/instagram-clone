@@ -62,7 +62,7 @@ function NavBar(props) {
                     <li><HiOutlineHeart /></li>
                     <li onClick={() => setShowPostingModal(true)}><AiOutlineCamera /></li>
                     <li>
-                        <FaUserCircle onClick={handleAvatarClick} />
+                        <img src={userInfo?.avatar} onClick={handleAvatarClick} />
                         {isAvatarClicked && <div style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownArrow"></div>}
                         {isAvatarClicked && <ul style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownBox">
                             <li onClick={navigateProfile}><BiUserCircle className="avatarDropDownIcon" /> Profile</li>
