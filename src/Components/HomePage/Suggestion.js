@@ -14,8 +14,8 @@ function Suggestion({username, userID, avatar, followUser}) {
     return (
         <div className="suggestion">
             <div className="suggestion-right">
-                <img alt={username} src={avatar} />
-                <p>{username}</p>
+                <img onClick={() => navigate("/profile/" + userID)} alt={username} src={avatar} />
+                <p onClick={() => navigate("/profile/" + userID)}>{username}</p>
             </div>
             <button onClick={handleOnClick} type="button">Follow</button>
         </div>

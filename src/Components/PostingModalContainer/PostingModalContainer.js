@@ -8,10 +8,13 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {db, storage} from "../../utils/firebase";
 import {v4} from "uuid";
 import {addDoc, collection, serverTimestamp} from "firebase/firestore";
+import {useNavigate} from "react-router-dom";
 
 function PostingModalContainer(props) {
 
-    const {hidePostingModal, userInfo} = useContext(AppContext);
+    const navigate = useNavigate();
+
+    const {hidePostingModal, userInfo, setShowPostingModal} = useContext(AppContext);
 
     const [imageInput, setImageInput] = useState("");
     const [textInput, setTextInput] = useState(null);
@@ -34,6 +37,9 @@ function PostingModalContainer(props) {
         });
         setImageInput("");
         setTextInput("");
+        navigate("/profile/" + userInfo.userID);
+        setShowPostingModal(false);
+
     }
 
     const handleOnClick = (e) => {

@@ -26,6 +26,7 @@
 .suggestionsAvatar {
     display: flex;
     align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .suggestionsAvatar > img {
@@ -58,6 +59,7 @@
     font-size: 14px;
     font-weight: 700;
     color: #8e8e8e;
+    margin-bottom: 0.5rem;
 }
 
 

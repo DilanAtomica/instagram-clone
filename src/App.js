@@ -139,8 +139,8 @@ function App() {
                                     replyToComment={replyToComment}
 
             />}
-            {showPostingModal && <PostingModalContainer />}
             <BrowserRouter>
+                {showPostingModal && <PostingModalContainer />}
             <Routes>
               <Route path="/" element={<> <LoginPage /> </>} />
               <Route path="/register" element={<> <RegisterPage /> </>} />
