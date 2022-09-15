@@ -16,6 +16,8 @@ function HomePage(props) {
     const [followingPosts, setFollowingPosts] = useState(null);
     const [userSuggestions, setUserSuggestions] = useState(null);
 
+
+
     useEffect(() => {
         if(userInfo === null) return;
         getFollowingPosts();
@@ -85,6 +87,7 @@ function HomePage(props) {
                         <HomePagePost key={post.data.id} image={post.data.image} text={post.data.text}
                                       username={post.username} avatar={post.avatar} publisherID={post.data.publisherID}
                                       showPostModal={showPostModal} timestamp={post.data.timestamp} postID={post.data.id}
+
                         />
                     ))}
                 </div>

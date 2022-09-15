@@ -11,6 +11,8 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
 
     const navigate = useNavigate();
 
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
     const handleOnClick = () => {
         showPostModal(image, text, timestamp, postID, publisherID);
     }
@@ -39,7 +41,9 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                 </div>
                 <p className="homePagePostTitle"><span>Kurt</span> {text}</p>
                 <button className="homePagePostComments" onClick={handleOnClick}>Show all comments</button>
-                <p className="homePagePostDate">JULY 24</p>
+                <p className="homePagePostDate">
+                    {months[new Date(timestamp.seconds*1000).getMonth()]} {new Date(timestamp.seconds*1000).getDate()}
+                </p>
             </div>
 
             <div className="homePagePostComment">

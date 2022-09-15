@@ -47,6 +47,7 @@ function ProfilePage(props) {
             else return -1;
                 });
         setPosts(posts);
+        console.log(new Date(posts[0].timestamp.seconds*1000))
     };
 
     const getFollowingCount = async(userID) => {
