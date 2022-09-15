@@ -70,6 +70,10 @@ function HomePage(props) {
 
             postsResult.map(post => posts.push(post));
         }
+        posts.sort(function (a, b) {
+            if(a.data.timestamp.seconds < b.data.timestamp.seconds) return 1;
+            else return -1;
+        });
         setFollowingPosts(posts);
     }
 
