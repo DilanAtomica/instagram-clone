@@ -10,6 +10,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import PostingModalContainer from "./Components/PostingModalContainer/PostingModalContainer";
 import PostModalContainer from "./Components/PostModalContainer/PostModalContainer";
+import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 
 export const AppContext = createContext();
 
@@ -112,6 +113,7 @@ function App() {
             if(account.email === authUser.email) {
                 setUserInfo({
                     username: account.username,
+                    email: account.email,
                     userID: account.id,
                     avatar: account.avatar,
                     followerCount: account.followerCount,
@@ -146,6 +148,8 @@ function App() {
               <Route path="/register" element={<> <RegisterPage /> </>} />
               <Route path="/home" element={<> <NavBar /> <HomePage /> </>} />
               <Route path="/profile/:userID" element={<> <NavBar /> <ProfilePage /> </>} />
+                <Route path="/profile/:userID/settings" element={<> <NavBar /> <SettingsPage /> </>} />
+
             </Routes>
           </BrowserRouter>
         </div>

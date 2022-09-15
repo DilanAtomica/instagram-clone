@@ -66,7 +66,7 @@ function NavBar(props) {
                         {isAvatarClicked && <div style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownArrow"></div>}
                         {isAvatarClicked && <ul style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownBox">
                             <li onClick={navigateProfile}><BiUserCircle className="avatarDropDownIcon" /> Profile</li>
-                            <li><FiSettings className="avatarDropDownIcon" /> Settings</li>
+                            <li onClick={() => navigate("/profile/" + userInfo?.userID + "/settings")}><FiSettings className="avatarDropDownIcon" /> Settings</li>
                             <li onClick={logout}>Log out</li>
                         </ul>}
                     </li>

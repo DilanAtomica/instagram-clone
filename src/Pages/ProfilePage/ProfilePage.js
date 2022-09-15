@@ -6,13 +6,14 @@ import {collection, doc, getDoc, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import {AppContext} from "../../App";
 import ProfilePagePost from "../../Components/ProfilePage/ProfilePagePost";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 function ProfilePage(props) {
 
     const {userInfo, followUser} = useContext(AppContext);
     let { userID } = useParams();
+    const navigate = useNavigate();
 
     const [postsButton, setPostsButton] = useState(true);
     const [favoritesButton , setFavoritesButton] = useState(false);
@@ -61,7 +62,7 @@ function ProfilePage(props) {
                     <div className="profilePageInfoTop">
                         <h1>{profileInfo?.username}</h1>
                         {userID === userInfo?.userID ?
-                            <button type="button">Edit Profile</button> :
+                            <button onClick={() => navigate("/profile/" + userInfo?.userID + "/settings")} type="button">Edit Profile</button> :
                             <button onClick={handleOnClick} type="button">Follow</button>
                         }
                     </div>

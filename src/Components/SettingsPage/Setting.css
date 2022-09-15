@@ -1,0 +1,39 @@
+.setting {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.settingLabel {
+    width: 10rem;
+    padding-right: 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #262626;
+}
+
+.setting > input, .setting > textarea {
+    width: 20rem;
+    height: 1.75rem;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    padding: 0.1rem 0.5rem;
+}
+
+.setting > textarea {
+    height: 5rem;
+    resize: none;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #262626;
+}
+
+.setting > input[type="text"] {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #262626;
+}
+
+
