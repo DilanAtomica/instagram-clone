@@ -16,8 +16,6 @@ function HomePage(props) {
     const [followingPosts, setFollowingPosts] = useState(null);
     const [userSuggestions, setUserSuggestions] = useState(null);
 
-
-
     useEffect(() => {
         if(userInfo === null) return;
         getFollowingPosts();

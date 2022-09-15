@@ -123,6 +123,7 @@
     font-size: 0.65rem;
     color: #8e8e8e;
     border-bottom: 1px solid rgba(239,239,239);
+    text-transform: uppercase;
 }
 
 .postModalInputContainer {

@@ -14,6 +14,8 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
 
     const [inputValue, setInputValue] = useState("");
 
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
     const handleOnClick = (e) => {
         hidePostModal(e);
     }
@@ -67,7 +69,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                     <FaRegComment id="commentIcon" onClick={focusInput} />
                 </div>
                 <p id="likesCounter">10,654 likes</p>
-                <p id="postDate">POSTED 7 DAYS AGO</p>
+                <p id="postDate">{months[new Date(timestamp.seconds*1000).getMonth()]} {new Date(timestamp.seconds*1000).getDate()}</p>
                 <form onSubmit={handleOnSubmit} className="postModalInputContainer">
                     <VscSmiley id="smileyIcon" />
                     <input ref={commentInput} onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Write a comment..." />
