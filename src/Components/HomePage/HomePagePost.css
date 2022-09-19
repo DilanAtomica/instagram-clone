@@ -76,6 +76,13 @@
     font-size: 1.5rem;
 }
 
+.homePagePostLikes > img {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: cover;
+    border-radius: 999px;
+}
+
 .homePagePostLikes > p {
     font-size: 14px;
     margin-left: 0.25rem;

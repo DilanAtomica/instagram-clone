@@ -72,7 +72,14 @@ function HomePage(props) {
                  const likesCollection = collection(db, "users", followingResult[i].userID, "posts", postsResult[j].data.id, "likes");
                  const likesData = await getDocs(likesCollection);
                  let likesResult = likesData.docs.map((doc) => ({...doc.data(), id: doc.id}));
-                 postsResult[j] = {...postsResult[j], likes: likesResult.length}
+                 postsResult[j] = {...postsResult[j], likes: likesResult.length};
+
+                 let userData = null;
+                 if(likesResult[0]) {
+                     const docRefUser = doc(db, "users", likesResult[0].userID);
+                     const userDocData = await getDoc(docRefUser);
+                     userData = userDocData.data();
+                 }
 
                  let isLiked = false;
                  likesResult.forEach(like => {
@@ -81,7 +88,9 @@ function HomePage(props) {
                      }
                  });
 
-                 postsResult[j] = {...postsResult[j], likedByUser: isLiked};
+                 postsResult[j] = {...postsResult[j], likedByUser: isLiked, randomUserLikeName: userData?.username,
+                     randomUserLikeAvatar: userData?.avatar,
+                 };
              }
 
             postsResult.map(post => posts.push(post));
@@ -104,6 +113,8 @@ function HomePage(props) {
                                       username={post.username} avatar={post.avatar} publisherID={post.data.publisherID}
                                       showPostModal={showPostModal} timestamp={post.data.timestamp} postID={post.data.id}
                                       likePost={likePost} likes={post.likes} isLiked={post.likedByUser}
+                                      randomUserLikeName={post.randomUserLikeName} randomUserLikeAvatar={post.randomUserLikeAvatar}
+
 
                         />
                     ))}

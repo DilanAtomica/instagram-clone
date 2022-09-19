@@ -7,7 +7,8 @@ import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {useNavigate} from "react-router-dom";
 
-function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked}) {
+function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked,
+                          randomUserLikeName, randomUserLikeAvatar}) {
 
     const navigate = useNavigate();
 
@@ -46,8 +47,8 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                     <FaRegComment style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
                 </div>
                 <div className="homePagePostLikes">
-                    <BiUserCircle />
-                    <p>Liked by <span>Thomas</span> and <span>{likes} others</span></p>
+                    <img src={randomUserLikeAvatar} />
+                    <p>Liked by <span>{randomUserLikeName}</span> and <span>{likes} others</span></p>
                 </div>
                 <p className="homePagePostTitle"><span>Kurt</span> {text}</p>
                 <button className="homePagePostComments" onClick={handleOnClick}>Show all comments</button>

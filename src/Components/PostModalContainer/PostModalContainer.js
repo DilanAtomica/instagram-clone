@@ -75,7 +75,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
 
                 </div>
                 <div className="postModalActions">
-                    {likedByUser
+                    {isHeartFilled
                         ? <HiHeart style={{color: "red"}} onClick={handleHeartClick} id="heartIcon" />
                         : <HiOutlineHeart style={{color: "black"}} onClick={handleHeartClick} id="heartIcon" />
                     }
