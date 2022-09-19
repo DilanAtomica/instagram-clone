@@ -1,35 +1,44 @@
 import React, {useContext, useRef, useState} from 'react';
 import "./PostModalContainer.css";
-import {HiOutlineHeart} from "react-icons/hi";
+import {HiOutlineHeart, HiHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {AppContext} from "../../App";
 import PostModalComment from "./PostModalComment";
 
-function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments, replyToComment}) {
+function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments,
+                                replyToComment, likes, likedByUser
+}) {
 
-    const {hidePostModal} = useContext(AppContext);
+    const {hidePostModal, likePost} = useContext(AppContext);
 
     const commentInput = useRef(null);
 
     const [inputValue, setInputValue] = useState("");
 
+    const [isHeartFilled, setIsHeartFilled] = useState(likedByUser);
+
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const handleOnClick = (e) => {
         hidePostModal(e);
-    }
+    };
 
     const focusInput = () => {
         console.log(commentInput)
         commentInput.current.focus();
-    }
+    };
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         commentPost(publisherID, postID, inputValue);
         setInputValue("");
-    }
+    };
+
+    const handleHeartClick = () => {
+        setIsHeartFilled(!isHeartFilled);
+        likePost(publisherID, postID);
+    };
 
     return (
         <div onClick={handleOnClick} className="postModalContainer" id="postModalContainer">
@@ -65,10 +74,13 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
 
                 </div>
                 <div className="postModalActions">
-                    <HiOutlineHeart id="heartIcon" />
+                    {likedByUser
+                        ? <HiHeart style={{color: "red"}} onClick={handleHeartClick} id="heartIcon" />
+                        : <HiOutlineHeart style={{color: "black"}} onClick={handleHeartClick} id="heartIcon" />
+                    }
                     <FaRegComment id="commentIcon" onClick={focusInput} />
                 </div>
-                <p id="likesCounter">10,654 likes</p>
+                <p id="likesCounter">{likes} likes</p>
                 <p id="postDate">{months[new Date(timestamp.seconds*1000).getMonth()]} {new Date(timestamp.seconds*1000).getDate()}</p>
                 <form onSubmit={handleOnSubmit} className="postModalInputContainer">
                     <VscSmiley id="smileyIcon" />

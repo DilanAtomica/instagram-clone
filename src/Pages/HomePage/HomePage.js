@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import "./HomePage.css";
 import {AppContext} from "../../App";
 import HomePagePost from "../../Components/HomePage/HomePagePost";
-import {collection, getDocs, doc, getDoc, addDoc, deleteDoc} from "firebase/firestore";
+import {collection, getDocs, doc, getDoc} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import Suggestion from "../../Components/HomePage/Suggestion";
 import {useNavigate} from "react-router-dom";
@@ -11,7 +11,7 @@ function HomePage(props) {
 
     const navigate = useNavigate();
 
-    const {followUser, userInfo, showPostModal} = useContext(AppContext);
+    const {followUser, userInfo, showPostModal, likePost} = useContext(AppContext);
 
     const [followingPosts, setFollowingPosts] = useState(null);
     const [userSuggestions, setUserSuggestions] = useState(null);
@@ -69,11 +69,19 @@ function HomePage(props) {
             }));
 
              for(let j = 0; j < postsResult.length; j++) {
-                 console.log(postsResult[j].data.id);
                  const likesCollection = collection(db, "users", followingResult[i].userID, "posts", postsResult[j].data.id, "likes");
                  const likesData = await getDocs(likesCollection);
                  let likesResult = likesData.docs.map((doc) => ({...doc.data(), id: doc.id}));
                  postsResult[j] = {...postsResult[j], likes: likesResult.length}
+
+                 let isLiked = false;
+                 likesResult.forEach(like => {
+                     if(like.userID === userInfo.userID) {
+                         isLiked = true;
+                     }
+                 });
+
+                 postsResult[j] = {...postsResult[j], likedByUser: isLiked};
              }
 
             postsResult.map(post => posts.push(post));
@@ -85,31 +93,7 @@ function HomePage(props) {
         setFollowingPosts(posts);
     }
 
-    const likePost = async(publisherID, postID) => {
-        let alreadyLiked = false;
-        let docID = "";
-        const likesCollection = collection(db, "users", publisherID, "posts", postID, "likes");
-        const likesData = await getDocs(likesCollection);
-        const likesResult = likesData.docs.map((doc) => ({...doc.data(), id: doc.id}));
 
-        likesResult.forEach(like => {
-            if(like.userID === userInfo.userID) {
-                alreadyLiked = true;
-                docID = like.id;
-            }
-        });
-
-        if(alreadyLiked) {
-            await deleteDoc(doc(db, "users", publisherID, "posts", postID, "likes", docID));
-            console.log(1);
-            console.log(docID)
-        } else {
-            await addDoc(likesCollection, {
-                userID: userInfo.userID,
-            });
-            console.log(2)
-        }
-    }
 
     return (
         <div className="homePage">
@@ -119,7 +103,7 @@ function HomePage(props) {
                         <HomePagePost key={post.data.id} image={post.data.image} text={post.data.text}
                                       username={post.username} avatar={post.avatar} publisherID={post.data.publisherID}
                                       showPostModal={showPostModal} timestamp={post.data.timestamp} postID={post.data.id}
-                                      likePost={likePost} likes={post.likes}
+                                      likePost={likePost} likes={post.likes} isLiked={post.likedByUser}
 
                         />
                     ))}

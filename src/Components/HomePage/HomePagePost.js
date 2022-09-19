@@ -7,22 +7,22 @@ import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {useNavigate} from "react-router-dom";
 
-function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes}) {
+function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked}) {
 
     const navigate = useNavigate();
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    const [liked, setLiked] = useState(false);
+    const [isHeartFilled, setIsHeartFilled] = useState(isLiked);
 
     const handleOnClick = () => {
         showPostModal(image, text, timestamp, postID, publisherID);
-    }
+    };
 
     const handleHeartClick = () => {
-        setLiked(!liked);
+        setIsHeartFilled(!isHeartFilled);
         likePost(publisherID, postID);
-    }
+    };
 
     return (
         <div className="homePagePost">
@@ -39,9 +39,9 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
 
             <div className="homePagePostFooter">
                 <div className="homePagePostActionButtons">
-                    {liked
-                        ? <HiOutlineHeart onClick={handleHeartClick} style={{color: "black"}}  id="heartIcon" />
-                        : <HiHeart onClick={handleHeartClick} style={{color: "red"}} id="heartIcon" />
+                    {isHeartFilled
+                        ? <HiHeart onClick={handleHeartClick} style={{color: "red"}} id="heartIcon" />
+                        : <HiOutlineHeart onClick={handleHeartClick} style={{color: "black"}}  id="heartIcon" />
                     }
                     <FaRegComment style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
                 </div>

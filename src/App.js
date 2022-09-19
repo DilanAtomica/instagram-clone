@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
-import {addDoc, collection, updateDoc, getDocs, serverTimestamp, doc, getDoc} from "firebase/firestore";
+import {addDoc, collection, updateDoc, getDocs, serverTimestamp, doc, getDoc, deleteDoc} from "firebase/firestore";
 import {db, auth} from "./utils/firebase";
 import NavBar from "./Components/NavBar/NavBar";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
@@ -53,6 +53,14 @@ function App() {
                 const commentsData = await getDocs(commentsCollection);
                 const commentsResults = commentsData.docs.map((doc) => ({...doc.data(), id: doc.id}));
 
+                const likesCollection = collection(db, "users", publisherID, "posts", postID, "likes");
+                const likesData = await getDocs(likesCollection);
+                const likesResults = likesData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+                let likedByUser = false;
+                likesResults.forEach(user => {
+                    if(user.userID === userInfo.userID) likedByUser = true;
+                })
+
                 setPostModal({
                     image: image,
                     text: text,
@@ -62,6 +70,8 @@ function App() {
                     publisherName:  result[i].username,
                     publisherAvatar: result[i].avatar,
                     comments: commentsResults,
+                    likes: likesResults.length,
+                    likedByUser: likedByUser,
                 });
             }
         }
@@ -127,18 +137,41 @@ function App() {
     const hidePostingModal = (e) => {
         if(e.target.id === "postingModalContainer") setShowPostingModal(false);
         if(e.target.id === "exitPostModalIcon") setShowPostingModal(false);
+    };
+
+    const likePost = async(publisherID, postID) => {
+        let alreadyLiked = false;
+        let docID = "";
+        const likesCollection = collection(db, "users", publisherID, "posts", postID, "likes");
+        const likesData = await getDocs(likesCollection);
+        const likesResult = likesData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+
+        likesResult.forEach(like => {
+            if(like.userID === userInfo.userID) {
+                alreadyLiked = true;
+                docID = like.id;
+            }
+        });
+
+        if(alreadyLiked) {
+            await deleteDoc(doc(db, "users", publisherID, "posts", postID, "likes", docID));
+        } else {
+            await addDoc(likesCollection, {
+                userID: userInfo.userID,
+            });
+        }
     }
 
 
     return (
       <AppContext.Provider value={{user, setUser, userInfo, followUser,
-          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal}}>
+          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal, likePost}}>
         <div className="App">
             {postModal &&
                 <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}
                                     postID={postModal.postID} publisherID={postModal.publisherID} publisherName={postModal.publisherName}
                                     publisherAvatar={postModal.publisherAvatar} comments={postModal.comments} commentPost={commentPost}
-                                    replyToComment={replyToComment}
+                                    replyToComment={replyToComment} likes={postModal.likes} likedByUser={postModal.likedByUser}
 
             />}
             <BrowserRouter>
