@@ -47,8 +47,13 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                     <FaRegComment style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
                 </div>
                 <div className="homePagePostLikes">
-                    <img src={randomUserLikeAvatar} />
-                    <p>Liked by <span>{randomUserLikeName}</span> and <span>{likes} others</span></p>
+                    {randomUserLikeName && <img src={randomUserLikeAvatar} />}
+                    {randomUserLikeName
+                        ? <p>Liked by <span>{randomUserLikeName}</span> and <span>{likes} others</span></p>
+                        : <p><span>{likes} likes</span></p>
+                    }
+
+
                 </div>
                 <p className="homePagePostTitle"><span>Kurt</span> {text}</p>
                 <button className="homePagePostComments" onClick={handleOnClick}>Show all comments</button>
