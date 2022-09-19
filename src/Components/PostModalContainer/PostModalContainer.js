@@ -10,7 +10,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                                 replyToComment, likes, likedByUser
 }) {
 
-    const {hidePostModal, likePost, userInfo} = useContext(AppContext);
+    const {hidePostModal, likePost, userInfo, showPostModal} = useContext(AppContext);
 
     const commentInput = useRef(null);
 
@@ -32,7 +32,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
     const handleOnSubmit = (e) => {
         e.preventDefault();
         commentPost(publisherID, postID, inputValue);
-        setInputValue("");
+        showPostModal(image, text, timestamp, postID, publisherID);
     };
 
     const handleHeartClick = () => {
