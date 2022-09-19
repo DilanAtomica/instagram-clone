@@ -11,7 +11,7 @@ function HomePage(props) {
 
     const navigate = useNavigate();
 
-    const {followUser, userInfo, showPostModal, likePost} = useContext(AppContext);
+    const {followUser, userInfo, showPostModal, likePost, commentPost} = useContext(AppContext);
 
     const [followingPosts, setFollowingPosts] = useState(null);
     const [userSuggestions, setUserSuggestions] = useState(null);
@@ -114,6 +114,7 @@ function HomePage(props) {
                                       showPostModal={showPostModal} timestamp={post.data.timestamp} postID={post.data.id}
                                       likePost={likePost} likes={post.likes} isLiked={post.likedByUser}
                                       randomUserLikeName={post.randomUserLikeName} randomUserLikeAvatar={post.randomUserLikeAvatar}
+                                      commentPost={commentPost}
 
 
                         />

@@ -43,11 +43,10 @@ function ProfilePage(props) {
         const data = await getDocs(postsCollection);
         let posts = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
         posts.sort(function(a, b) {
-            if(a.timestamp.seconds < b.timestamp.seconds) return 1;
+            if(a.timestamp?.seconds < b.timestamp?.seconds) return 1;
             else return -1;
                 });
         setPosts(posts);
-        console.log(new Date(posts[0].timestamp.seconds*1000))
     };
 
     const getFollowingCount = async(userID) => {

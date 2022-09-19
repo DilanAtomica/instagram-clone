@@ -165,7 +165,7 @@ function App() {
 
     return (
       <AppContext.Provider value={{user, setUser, userInfo, followUser,
-          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal, likePost}}>
+          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost}}>
         <div className="App">
             {postModal &&
                 <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}

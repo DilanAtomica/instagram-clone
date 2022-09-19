@@ -8,13 +8,15 @@ import {VscSmiley} from "react-icons/vsc";
 import {useNavigate} from "react-router-dom";
 
 function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked,
-                          randomUserLikeName, randomUserLikeAvatar}) {
+                          randomUserLikeName, randomUserLikeAvatar, commentPost}) {
 
     const navigate = useNavigate();
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const [isHeartFilled, setIsHeartFilled] = useState(isLiked);
+
+    const [inputComment, setInputComment] = useState("");
 
     const handleOnClick = () => {
         showPostModal(image, text, timestamp, postID, publisherID);
@@ -24,6 +26,13 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
         setIsHeartFilled(!isHeartFilled);
         likePost(publisherID, postID);
     };
+
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        commentPost(publisherID, postID, inputComment);
+        setInputComment("");
+        showPostModal(image, text, timestamp, postID, publisherID);
+    }
 
     return (
         <div className="homePagePost">
@@ -47,7 +56,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                     <FaRegComment style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
                 </div>
                 <div className="homePagePostLikes">
-                    {randomUserLikeName && <img src={randomUserLikeAvatar} />}
+                    {randomUserLikeName && <img alt={randomUserLikeName} src={randomUserLikeAvatar} />}
                     {randomUserLikeName
                         ? <p>Liked by <span>{randomUserLikeName}</span> and <span>{likes} others</span></p>
                         : <p><span>{likes} likes</span></p>
@@ -62,11 +71,11 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                 </p>
             </div>
 
-            <div className="homePagePostComment">
+            <form onSubmit={handleOnSubmit} className="homePagePostComment">
                 <VscSmiley style={{fontSize: "2rem", paddingLeft: "0.5rem", paddingTop: "0.5rem"}} />
-                <input type="text" placeholder="Write a comment..."/>
-                <button type="button">Publish</button>
-            </div>
+                <input value={inputComment} onChange={(e) => setInputComment(e.target.value)} type="text" placeholder="Write a comment..."/>
+                <button type="submit">Publish</button>
+            </form>
 
         </div>
     );
