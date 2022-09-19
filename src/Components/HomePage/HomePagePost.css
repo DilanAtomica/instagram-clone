@@ -64,6 +64,10 @@
     margin-bottom: 0.5rem;
 }
 
+#heartIcon {
+    cursor: pointer;
+}
+
 .homePagePostLikes {
     display: flex;
     align-items: center;
