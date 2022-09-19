@@ -10,7 +10,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                                 replyToComment, likes, likedByUser
 }) {
 
-    const {hidePostModal, likePost} = useContext(AppContext);
+    const {hidePostModal, likePost, userInfo} = useContext(AppContext);
 
     const commentInput = useRef(null);
 
@@ -36,6 +36,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
     };
 
     const handleHeartClick = () => {
+        if(userInfo?.userID === publisherID) return;
         setIsHeartFilled(!isHeartFilled);
         likePost(publisherID, postID);
     };
