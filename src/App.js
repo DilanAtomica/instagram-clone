@@ -153,11 +153,18 @@ function App() {
             }
         });
 
+        const favoritedCollection = collection(db, "users", userInfo.userID, "favorited");
+
         if(alreadyLiked) {
             await deleteDoc(doc(db, "users", publisherID, "posts", postID, "likes", docID));
         } else {
             await addDoc(likesCollection, {
                 userID: userInfo.userID,
+            });
+            await addDoc(favoritedCollection, {
+                publisherID: publisherID,
+                postID: postID,
+                timestamp: serverTimestamp(),
             });
         }
     };
@@ -169,7 +176,8 @@ function App() {
             const daysSince = (currentDateSeconds - datePostedSeconds) / 1000 / 60 / 60 / 24;
 
             if(daysSince < 1) return "Today"
-            return Math.ceil(daysSince) + " days ago";
+            if(daysSince > 1 && daysSince < 2) return Math.floor(daysSince) + " day ago";
+            else return Math.floor(daysSince) + " days ago";
         } else {
             return "Today";
         }

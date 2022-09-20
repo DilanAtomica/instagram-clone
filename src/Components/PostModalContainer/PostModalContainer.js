@@ -11,7 +11,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                                 replyToComment, likes, likedByUser,
 }) {
 
-    const {hidePostModal, likePost, userInfo, showPostModal, setPostModal, getDaysSince} = useContext(AppContext);
+    const {hidePostModal, likePost, userInfo, showPostModal, setPostModal, getDaysSince, followUser} = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -49,6 +49,11 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
         navigate("/profile/" + userID);
     };
 
+    const handleFollowClick = () => {
+        followUser(publisherID);
+        navigate("/profile/" + publisherID);
+    }
+
 
     return (
         <div onClick={handleOnClick} className="postModalContainer" id="postModalContainer">
@@ -58,10 +63,10 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
             </div>
             <div className="postModalRight">
                 <div className="postModalRightHeader">
-                    <img onClick={() => visitUser(publisherID)} src={publisherAvatar} />
+                    <img onClick={() => visitUser(publisherID)} src={publisherAvatar} alt={publisherName} />
                     <h1 onClick={() => visitUser(publisherID)}>{publisherName}</h1>
                     <span>•</span>
-                    <button type="button">Follow</button>
+                    <button onClick={handleFollowClick} type="button">Follow</button>
                 </div>
                 <div className="postModalCommentsContainer">
                     <div className="postModalComment">

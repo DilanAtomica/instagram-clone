@@ -16,7 +16,6 @@ function ProfilePage(props) {
     const navigate = useNavigate();
 
     const [postsButton, setPostsButton] = useState(true);
-    const [favoritesButton , setFavoritesButton] = useState(false);
 
     const [posts, setPosts] = useState([]);
     const [followingCount, setFollowingCount] = useState(null);
@@ -26,10 +25,15 @@ function ProfilePage(props) {
    useEffect(() => {
        if(userID === null) return
         getProfileInfo();
-        getPosts(userID);
+       if(postsButton) {
+           getPosts(userID);
+       } else {
+           getFavoritedPosts(userID);
+       }
+
         getFollowingCount(userID);
         console.log("hey");
-    }, [userID]);
+    }, [userID, postsButton]);
 
    const getProfileInfo = async () => {
        const userDoc = doc(db, "users", userID);
@@ -49,15 +53,38 @@ function ProfilePage(props) {
         setPosts(posts);
     };
 
+    const getFavoritedPosts = async (userID) => {
+        const favoritedPostsCollection = collection(db, "users", userID, "favorited");
+        const data = await getDocs(favoritedPostsCollection);
+        let posts = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        posts.sort(function(a, b) {
+            if(a.timestamp?.seconds < b.timestamp?.seconds) return 1;
+            else return -1;
+        });
+
+        let favoritedPosts = [];
+
+        for(let i = 0; i < posts.length; i++) {
+            const postDoc = doc(db, "users", posts[i].publisherID, "posts", posts[i].postID);
+            const docData = await getDoc(postDoc);
+            let docResult = docData.data();
+            docResult = {...docResult, id: docData.id};
+            favoritedPosts.push(docResult);
+            console.log(docResult);
+        }
+
+        setPosts(favoritedPosts);
+    };
+
     const getFollowingCount = async(userID) => {
         const followingCountCollection = collection(db, "users", userID, "following");
         const data = await getDocs(followingCountCollection);
         setFollowingCount(data.docs.map((doc) => ({...doc.data(), id: doc.id})).length)
     }
 
-    const handleOnClick = () => {
+    const handleFollowClick = () => {
         followUser(userID);
-    }
+    };
 
     return (
         <div className="profilePage">
@@ -68,7 +95,7 @@ function ProfilePage(props) {
                         <h1>{profileInfo?.username}</h1>
                         {userID === userInfo?.userID ?
                             <button onClick={() => navigate("/profile/" + userInfo?.userID + "/settings")} type="button">Edit Profile</button> :
-                            <button onClick={handleOnClick} type="button">Follow</button>
+                            <button onClick={handleFollowClick} type="button">Follow</button>
                         }
                     </div>
                     <div className="profilePageInfoMiddle">
@@ -81,9 +108,9 @@ function ProfilePage(props) {
             </div>
             <div className="profilePagePostsContainer">
                 <div className="profilePageCategories">
-                    <button style={{borderTop: postsButton && "1px solid black", color: postsButton && "#262626"}}
+                    <button onClick={() => setPostsButton(true)} style={{borderTop: postsButton && "1px solid black", color: postsButton && "#262626"}}
                             type="button"><BsGrid3X3 id="gridIcon" /> Posts</button>
-                    <button style={{borderTop: favoritesButton && "1px solid black", color: favoritesButton && "#262626"}}
+                    <button onClick={() => setPostsButton(false)} style={{borderTop: !postsButton && "1px solid black", color: !postsButton && "#262626"}}
                             type="button"><HiOutlineHeart id="gridIcon" /> Favorites</button>
                 </div>
                 <div className="profilePagePosts">
