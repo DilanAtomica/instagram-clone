@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import "./HomePagePost.css";
-import {BiUserCircle} from "react-icons/bi";
 import {FiMoreHorizontal} from "react-icons/fi";
 import {HiOutlineHeart, HiHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
@@ -11,6 +10,8 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                           randomUserLikeName, randomUserLikeAvatar, commentPost}) {
 
     const navigate = useNavigate();
+
+    const commentInput = useRef(null);
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -32,7 +33,11 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
         commentPost(publisherID, postID, inputComment);
         setInputComment("");
         showPostModal(image, text, timestamp, postID, publisherID);
-    }
+    };
+
+    const focusInput = () => {
+        commentInput.current.focus();
+    };
 
     return (
         <div className="homePagePost">
@@ -53,7 +58,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                         ? <HiHeart onClick={handleHeartClick} style={{color: "red"}} id="heartIcon" />
                         : <HiOutlineHeart onClick={handleHeartClick} style={{color: "black"}}  id="heartIcon" />
                     }
-                    <FaRegComment style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
+                    <FaRegComment onClick={focusInput} id="commentIcon" style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
                 </div>
                 <div className="homePagePostLikes">
                     {randomUserLikeName && <img alt={randomUserLikeName} src={randomUserLikeAvatar} />}
@@ -73,7 +78,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
 
             <form onSubmit={handleOnSubmit} className="homePagePostComment">
                 <VscSmiley style={{fontSize: "2rem", paddingLeft: "0.5rem", paddingTop: "0.5rem"}} />
-                <input value={inputComment} onChange={(e) => setInputComment(e.target.value)} type="text" placeholder="Write a comment..."/>
+                <input ref={commentInput} value={inputComment} onChange={(e) => setInputComment(e.target.value)} type="text" placeholder="Write a comment..."/>
                 <button type="submit">Publish</button>
             </form>
 

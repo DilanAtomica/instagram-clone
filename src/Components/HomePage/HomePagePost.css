@@ -64,7 +64,11 @@
     margin-bottom: 0.5rem;
 }
 
-#heartIcon {
+.homePagePostActionButtons > #commentIcon {
+    cursor: pointer;
+}
+
+.homePagePostActionButtons > #heartIcon {
     cursor: pointer;
 }
 
