@@ -5,7 +5,7 @@ import PostModalReply from "./PostModalReply";
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 
-function PostModalComment({comment, commenterName, commenterAvatar, commenterID, commentID, publisherID, postID, replyToComment}) {
+function PostModalComment({comment, commenterName, commenterAvatar, commenterID, commentID, publisherID, postID, replyToComment, visitUser}) {
 
     const [showInputReply, setShowInputReply] = useState(false);
     const [inputValue, setInputValue] = useState("");
@@ -35,11 +35,15 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
         console.log("hey");
     }, []);
 
+    const handleOnUserClick = () => {
+        visitUser(commenterID);
+    };
+
     return (
         <div key={commentID} className="postModalComment">
-            <img src={commenterAvatar} />
+            <img onClick={handleOnUserClick} src={commenterAvatar} />
             <div className="postModalComment-right">
-                <p><span>{commenterName}</span> {comment}</p>
+                <p><span onClick={handleOnUserClick}>{commenterName}</span> {comment}</p>
                 <div className="postModalCommentDate">
                     <p>1 week</p>
                     <button onClick={handleOnClick} type="button">Reply</button>
@@ -51,7 +55,7 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
                 </form>
                 {replies?.map(reply => (
                     <PostModalReply key={reply.id} replyID={reply.id} replierName={reply.replierName} replierAvatar={reply.replierAvatar} replierID={reply.replierID}
-                                    timestamp={reply.timestamp} reply={reply.reply}
+                                    timestamp={reply.timestamp} reply={reply.reply} visitUser={visitUser}
                     />
                 ))}
             </div>

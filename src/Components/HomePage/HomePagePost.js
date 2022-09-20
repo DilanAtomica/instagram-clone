@@ -7,7 +7,7 @@ import {VscSmiley} from "react-icons/vsc";
 import {useNavigate} from "react-router-dom";
 
 function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked,
-                          randomUserLikeName, randomUserLikeAvatar, commentPost}) {
+                          randomUserLikeName, randomUserLikeAvatar, randomUserID, commentPost, visitRandomUser}) {
 
     const navigate = useNavigate();
 
@@ -39,6 +39,10 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
         commentInput.current.focus();
     };
 
+    const handleOnUserClick = () => {
+        visitRandomUser(randomUserID);
+    }
+
     return (
         <div className="homePagePost">
             <div className="homePagePostHeader">
@@ -61,9 +65,9 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                     <FaRegComment onClick={focusInput} id="commentIcon" style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
                 </div>
                 <div className="homePagePostLikes">
-                    {randomUserLikeName && <img alt={randomUserLikeName} src={randomUserLikeAvatar} />}
+                    {randomUserLikeName && <img onClick={handleOnUserClick} alt={randomUserLikeName} src={randomUserLikeAvatar} />}
                     {randomUserLikeName
-                        ? <p>Liked by <span>{randomUserLikeName}</span> and <span>{likes} others</span></p>
+                        ? <p>Liked by <span onClick={handleOnUserClick}>{randomUserLikeName}</span> and <span>{likes} others</span></p>
                         : <p><span>{likes} likes</span></p>
                     }
 

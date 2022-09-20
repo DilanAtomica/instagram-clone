@@ -79,6 +79,7 @@ function HomePage(props) {
                      const docRefUser = doc(db, "users", likesResult[0].userID);
                      const userDocData = await getDoc(docRefUser);
                      userData = userDocData.data();
+                     userData = {...userData, userID: likesResult[0].userID};
                  }
 
                  let isLiked = false;
@@ -89,7 +90,7 @@ function HomePage(props) {
                  });
 
                  postsResult[j] = {...postsResult[j], likedByUser: isLiked, randomUserLikeName: userData?.username,
-                     randomUserLikeAvatar: userData?.avatar,
+                     randomUserLikeAvatar: userData?.avatar, randomUserID: userData?.userID,
                  };
              }
 
@@ -100,6 +101,10 @@ function HomePage(props) {
             else return -1;
         });
         setFollowingPosts(posts);
+    };
+
+    const visitRandomUser = (userID) => {
+        navigate("/profile/" + userID);
     }
 
 
@@ -114,7 +119,7 @@ function HomePage(props) {
                                       showPostModal={showPostModal} timestamp={post.data.timestamp} postID={post.data.id}
                                       likePost={likePost} likes={post.likes} isLiked={post.likedByUser}
                                       randomUserLikeName={post.randomUserLikeName} randomUserLikeAvatar={post.randomUserLikeAvatar}
-                                      commentPost={commentPost}
+                                      randomUserID={post.randomUserID} commentPost={commentPost} visitRandomUser={visitRandomUser}
 
 
                         />

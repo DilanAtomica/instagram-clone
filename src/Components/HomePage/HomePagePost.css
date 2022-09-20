@@ -85,6 +85,7 @@
     height: 1.5rem;
     object-fit: cover;
     border-radius: 999px;
+    cursor: pointer;
 }
 
 .homePagePostLikes > p {
@@ -94,6 +95,7 @@
 
 .homePagePostLikes > p > span {
     font-weight: 700;
+    cursor: pointer;
 }
 
 .homePagePostTitle {

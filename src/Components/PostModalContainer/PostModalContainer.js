@@ -5,12 +5,15 @@ import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {AppContext} from "../../App";
 import PostModalComment from "./PostModalComment";
+import {useNavigate} from "react-router-dom";
 
 function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments,
                                 replyToComment, likes, likedByUser
 }) {
 
-    const {hidePostModal, likePost, userInfo, showPostModal} = useContext(AppContext);
+    const {hidePostModal, likePost, userInfo, showPostModal, setPostModal} = useContext(AppContext);
+
+    const navigate = useNavigate();
 
     const commentInput = useRef(null);
 
@@ -41,6 +44,11 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
         likePost(publisherID, postID);
     };
 
+    const visitUser = (userID) => {
+        setPostModal(null);
+        navigate("/profile/" + userID);
+    };
+
     return (
         <div onClick={handleOnClick} className="postModalContainer" id="postModalContainer">
         <div className="postModal">
@@ -68,7 +76,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                     {comments.map(comment => (
                         <PostModalComment key={comment.id} commenterAvatar={comment.commenterAvatar} commenterName={comment.commenterName}
                                           commentID={comment.id} commenterID={comment.commenterID} comment={comment.comment}
-                                          publisherID={publisherID} postID={postID} replyToComment={replyToComment}
+                                          publisherID={publisherID} postID={postID} replyToComment={replyToComment} visitUser={visitUser}
                         />
                     ))}
 

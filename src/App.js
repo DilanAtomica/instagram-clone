@@ -160,21 +160,20 @@ function App() {
                 userID: userInfo.userID,
             });
         }
-    }
-
+    };
 
     return (
       <AppContext.Provider value={{user, setUser, userInfo, followUser,
-          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost}}>
+          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal}}>
         <div className="App">
-            {postModal &&
-                <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}
-                                    postID={postModal.postID} publisherID={postModal.publisherID} publisherName={postModal.publisherName}
-                                    publisherAvatar={postModal.publisherAvatar} comments={postModal.comments} commentPost={commentPost}
-                                    replyToComment={replyToComment} likes={postModal.likes} likedByUser={postModal.likedByUser}
-
-            />}
             <BrowserRouter>
+                {postModal &&
+                    <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}
+                                        postID={postModal.postID} publisherID={postModal.publisherID} publisherName={postModal.publisherName}
+                                        publisherAvatar={postModal.publisherAvatar} comments={postModal.comments} commentPost={commentPost}
+                                        replyToComment={replyToComment} likes={postModal.likes} likedByUser={postModal.likedByUser}
+
+                    />}
                 {showPostingModal && <PostingModalContainer />}
             <Routes>
               <Route path="/" element={<> <LoginPage /> </>} />
