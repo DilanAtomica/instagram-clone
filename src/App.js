@@ -153,10 +153,19 @@ function App() {
             }
         });
 
+        let favoritedDocID = "";
         const favoritedCollection = collection(db, "users", userInfo.userID, "favorited");
+        const favoritedData = await getDocs(favoritedCollection);
+        const favoritedResult = favoritedData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        favoritedResult.forEach(favorite => {
+           if(favorite.postID === postID) {
+               favoritedDocID = favorite.id;
+           }
+        });
 
         if(alreadyLiked) {
             await deleteDoc(doc(db, "users", publisherID, "posts", postID, "likes", docID));
+            await deleteDoc(doc(db, "users", userInfo.userID, "favorited", favoritedDocID));
         } else {
             await addDoc(likesCollection, {
                 userID: userInfo.userID,
