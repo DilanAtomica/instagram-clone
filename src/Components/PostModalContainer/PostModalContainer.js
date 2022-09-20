@@ -8,10 +8,10 @@ import PostModalComment from "./PostModalComment";
 import {useNavigate} from "react-router-dom";
 
 function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments,
-                                replyToComment, likes, likedByUser
+                                replyToComment, likes, likedByUser,
 }) {
 
-    const {hidePostModal, likePost, userInfo, showPostModal, setPostModal} = useContext(AppContext);
+    const {hidePostModal, likePost, userInfo, showPostModal, setPostModal, getDaysSince} = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -49,6 +49,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
         navigate("/profile/" + userID);
     };
 
+
     return (
         <div onClick={handleOnClick} className="postModalContainer" id="postModalContainer">
         <div className="postModal">
@@ -57,18 +58,18 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
             </div>
             <div className="postModalRight">
                 <div className="postModalRightHeader">
-                    <img src={publisherAvatar} />
-                    <h1>{publisherName}</h1>
+                    <img onClick={() => visitUser(publisherID)} src={publisherAvatar} />
+                    <h1 onClick={() => visitUser(publisherID)}>{publisherName}</h1>
                     <span>•</span>
                     <button type="button">Follow</button>
                 </div>
                 <div className="postModalCommentsContainer">
                     <div className="postModalComment">
-                        <img src={publisherAvatar} />
+                        <img onClick={() => visitUser(publisherID)} src={publisherAvatar} />
                         <div className="postModalComment-right">
-                            <p><span>{publisherName}</span> {text}</p>
+                            <p><span onClick={() => visitUser(publisherID)}>{publisherName}</span> {text}</p>
                             <div className="postModalCommentDate">
-                                <p>1 week</p>
+                                <p>{getDaysSince(timestamp)} days ago</p>
                             </div>
                         </div>
                     </div>
@@ -76,7 +77,10 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                     {comments.map(comment => (
                         <PostModalComment key={comment.id} commenterAvatar={comment.commenterAvatar} commenterName={comment.commenterName}
                                           commentID={comment.id} commenterID={comment.commenterID} comment={comment.comment}
-                                          publisherID={publisherID} postID={postID} replyToComment={replyToComment} visitUser={visitUser}
+                                          publisherID={publisherID} postID={postID} replyToComment={replyToComment} timestamp={comment.timestamp}
+                                          visitUser={visitUser}
+                                          getDaysSince={getDaysSince}
+
                         />
                     ))}
 

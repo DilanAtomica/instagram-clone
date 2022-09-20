@@ -5,7 +5,8 @@ import PostModalReply from "./PostModalReply";
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 
-function PostModalComment({comment, commenterName, commenterAvatar, commenterID, commentID, publisherID, postID, replyToComment, visitUser}) {
+function PostModalComment({comment, commenterName, commenterAvatar, commenterID, commentID, publisherID, postID, replyToComment, timestamp,
+                              visitUser, getDaysSince}) {
 
     const [showInputReply, setShowInputReply] = useState(false);
     const [inputValue, setInputValue] = useState("");
@@ -45,7 +46,7 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
             <div className="postModalComment-right">
                 <p><span onClick={handleOnUserClick}>{commenterName}</span> {comment}</p>
                 <div className="postModalCommentDate">
-                    <p>1 week</p>
+                    <p>{getDaysSince(timestamp)} days ago</p>
                     <button onClick={handleOnClick} type="button">Reply</button>
                 </div>
                 <form onSubmit={handleOnSubmit} style={{display: showInputReply && "flex"}} className="postModalCommentInputReply">
@@ -54,8 +55,9 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
                     <button type="submit">Publish</button>
                 </form>
                 {replies?.map(reply => (
-                    <PostModalReply key={reply.id} replyID={reply.id} replierName={reply.replierName} replierAvatar={reply.replierAvatar} replierID={reply.replierID}
-                                    timestamp={reply.timestamp} reply={reply.reply} visitUser={visitUser}
+                    <PostModalReply key={reply.id} replyID={reply.id} replierName={reply.replierName} replierAvatar={reply.replierAvatar}
+                                    replierID={reply.replierID} timestamp={reply.timestamp} reply={reply.reply} visitUser={visitUser}
+                                    getDaysSince={getDaysSince}
                     />
                 ))}
             </div>

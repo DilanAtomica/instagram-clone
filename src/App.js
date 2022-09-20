@@ -162,9 +162,18 @@ function App() {
         }
     };
 
+    const getDaysSince = (timestamp) => {
+        const currentDateSeconds = new Date().getTime();
+        const datePostedSeconds = timestamp.seconds*1000;
+        const daysSince = (currentDateSeconds - datePostedSeconds) / 1000 / 60 / 60 / 24;
+        return Math.ceil(daysSince);
+    };
+
     return (
       <AppContext.Provider value={{user, setUser, userInfo, followUser,
-          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal}}>
+          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal,
+          getDaysSince
+      }}>
         <div className="App">
             <BrowserRouter>
                 {postModal &&

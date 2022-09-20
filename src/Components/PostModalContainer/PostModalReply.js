@@ -1,7 +1,7 @@
 import React from 'react';
 import "./PostModalReply.css";
 
-function PostModalReply({reply, replierName, replierAvatar, replierID, timestamp, replyID, visitUser}) {
+function PostModalReply({reply, replierName, replierAvatar, replierID, timestamp, replyID, visitUser, getDaysSince}) {
 
     const handleOnUserClick = () => {
         visitUser(replierID);
@@ -12,7 +12,7 @@ function PostModalReply({reply, replierName, replierAvatar, replierID, timestamp
             <img onClick={handleOnUserClick} src={replierAvatar} />
             <div className="postModalReply-right">
                 <p className="postModalReplyText"><span onClick={handleOnUserClick}>{replierName}</span> {reply}</p>
-                <p className="postModalReply-date">1 day</p>
+                <p className="postModalReply-date">{getDaysSince(timestamp)} days ago</p>
             </div>
         </div>
     );
