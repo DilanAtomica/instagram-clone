@@ -163,10 +163,16 @@ function App() {
     };
 
     const getDaysSince = (timestamp) => {
-        const currentDateSeconds = new Date().getTime();
-        const datePostedSeconds = timestamp.seconds*1000;
-        const daysSince = (currentDateSeconds - datePostedSeconds) / 1000 / 60 / 60 / 24;
-        return Math.ceil(daysSince);
+        if(timestamp) {
+            const currentDateSeconds = new Date().getTime();
+            const datePostedSeconds = timestamp?.seconds*1000;
+            const daysSince = (currentDateSeconds - datePostedSeconds) / 1000 / 60 / 60 / 24;
+
+            if(daysSince < 1) return "Today"
+            return Math.ceil(daysSince) + " days ago";
+        } else {
+            return "Today";
+        }
     };
 
     return (

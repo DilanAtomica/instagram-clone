@@ -69,7 +69,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                         <div className="postModalComment-right">
                             <p><span onClick={() => visitUser(publisherID)}>{publisherName}</span> {text}</p>
                             <div className="postModalCommentDate">
-                                <p>{getDaysSince(timestamp)} days ago</p>
+                                <p>{getDaysSince(timestamp)}</p>
                             </div>
                         </div>
                     </div>

@@ -46,7 +46,7 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
             <div className="postModalComment-right">
                 <p><span onClick={handleOnUserClick}>{commenterName}</span> {comment}</p>
                 <div className="postModalCommentDate">
-                    <p>{getDaysSince(timestamp)} days ago</p>
+                    <p>{getDaysSince(timestamp)}</p>
                     <button onClick={handleOnClick} type="button">Reply</button>
                 </div>
                 <form onSubmit={handleOnSubmit} style={{display: showInputReply && "flex"}} className="postModalCommentInputReply">

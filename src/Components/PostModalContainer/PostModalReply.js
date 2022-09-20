@@ -12,7 +12,7 @@ function PostModalReply({reply, replierName, replierAvatar, replierID, timestamp
             <img onClick={handleOnUserClick} src={replierAvatar} />
             <div className="postModalReply-right">
                 <p className="postModalReplyText"><span onClick={handleOnUserClick}>{replierName}</span> {reply}</p>
-                <p className="postModalReply-date">{getDaysSince(timestamp)} days ago</p>
+                <p className="postModalReply-date">{getDaysSince(timestamp)}</p>
             </div>
         </div>
     );

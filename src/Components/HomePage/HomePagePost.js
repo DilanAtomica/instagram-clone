@@ -47,7 +47,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
         <div className="homePagePost">
             <div className="homePagePostHeader">
                 <div className="homePagePostHeader-left">
-                    <img onClick={() => navigate("/profile/" + publisherID)} src={avatar} />
+                    <img onClick={() => navigate("/profile/" + publisherID)} src={avatar} alt={username} />
                     <span className="homePagePostHeader-name" onClick={() => navigate("/profile/" + publisherID)}>{username}</span>
                 </div>
                 <div className="homePagePostHeader-right">
@@ -73,7 +73,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
 
 
                 </div>
-                <p className="homePagePostTitle"><span>Kurt</span> {text}</p>
+                <p className="homePagePostTitle"><span onClick={() => navigate("/profile/" + publisherID)}>{username}</span> {text}</p>
                 <button className="homePagePostComments" onClick={handleOnClick}>Show all comments</button>
                 <p className="homePagePostDate">
                     {months[new Date(timestamp.seconds*1000).getMonth()]} {new Date(timestamp.seconds*1000).getDate()}
