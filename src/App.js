@@ -91,8 +91,20 @@ function App() {
         const userData = await getDoc(userDoc);
         const userResult = userData.data();
         await updateDoc(userDoc, {followerCount: userResult.followerCount + 1});
+    };
 
-    }
+    const unFollowUser = async(followingUserID) => {
+        const followedUserDoc = collection(db, "users", userInfo.userID, "following");
+        const followedUserData = await getDocs(followedUserDoc);
+        const followedUserResult = followedUserData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        let docID = "";
+        for(let i = 0; i < followedUserResult.length; i++) {
+            if(followedUserResult[i].userID === followingUserID) docID = followedUserResult[i].id;
+        }
+        await deleteDoc(doc(db, "users", userInfo.userID, "following", docID));
+    };
+
+
 
     const commentPost = async(publisherID, postID, comment) => {
         const commentCollection = collection(db, "users", publisherID, "posts", postID, "comments");
@@ -193,9 +205,8 @@ function App() {
     };
 
     return (
-      <AppContext.Provider value={{user, setUser, userInfo, followUser,
-          showPostingModal, setShowPostingModal, hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal,
-          getDaysSince
+      <AppContext.Provider value={{user, setUser, userInfo, followUser, unFollowUser, showPostingModal, setShowPostingModal,
+          hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal, getDaysSince
       }}>
         <div className="App">
             <BrowserRouter>

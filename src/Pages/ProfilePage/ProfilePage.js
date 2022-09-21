@@ -11,19 +11,22 @@ import {useNavigate, useParams} from "react-router-dom";
 
 function ProfilePage(props) {
 
-    const {userInfo, followUser} = useContext(AppContext);
+    const {userInfo, followUser, unFollowUser} = useContext(AppContext);
     let { userID } = useParams();
     const navigate = useNavigate();
 
     const [postsButton, setPostsButton] = useState(true);
+
+    const [alreadyFollowing, setAlreadyFollowing] = useState(false);
 
     const [posts, setPosts] = useState([]);
     const [followingCount, setFollowingCount] = useState(null);
     const [profileInfo, setProfileInfo] = useState(null);
 
 
+
    useEffect(() => {
-       if(userID === null) return
+       if(userID === null || userInfo === null) return
         getProfileInfo();
        if(postsButton) {
            getPosts(userID);
@@ -33,7 +36,12 @@ function ProfilePage(props) {
 
         getFollowingCount(userID);
         console.log("hey");
-    }, [userID, postsButton]);
+    }, [userID, postsButton, userInfo]);
+
+   useEffect(() => {
+       if(userID === null || userInfo === null) return
+       isFollowing(userID);
+   }, [alreadyFollowing]);
 
    const getProfileInfo = async () => {
        const userDoc = doc(db, "users", userID);
@@ -84,6 +92,25 @@ function ProfilePage(props) {
 
     const handleFollowClick = () => {
         followUser(userID);
+        setAlreadyFollowing(true);
+    };
+
+    const handleUnFollowClick = () => {
+        unFollowUser(userID);
+        setAlreadyFollowing(false);
+    }
+
+    const isFollowing = async(userID) => {
+        if(userID === userInfo.userID) return;
+        const followingCountCollection = collection(db, "users", userInfo.userID, "following");
+        const followingData = await getDocs(followingCountCollection);
+        const followingResult = followingData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        let alreadyFollowing = false;
+
+        for(let i = 0; i < followingResult.length; i++) {
+            if(followingResult[i].userID === userID) alreadyFollowing = true;
+        }
+        setAlreadyFollowing(alreadyFollowing);
     };
 
     return (
@@ -93,9 +120,10 @@ function ProfilePage(props) {
                 <div className="profilePageInfo">
                     <div className="profilePageInfoTop">
                         <h1>{profileInfo?.username}</h1>
-                        {userID === userInfo?.userID ?
-                            <button onClick={() => navigate("/profile/" + userInfo?.userID + "/settings")} type="button">Edit Profile</button> :
-                            <button onClick={handleFollowClick} type="button">Follow</button>
+                        {userID === userInfo?.userID
+                            ? <button onClick={() => navigate("/profile/" + userInfo?.userID + "/settings")} type="button">Edit Profile</button>
+                            : alreadyFollowing ? <button onClick={handleUnFollowClick} type="button">Unfollow</button>
+                            : <button onClick={handleFollowClick} type="button">Follow</button>
                         }
                     </div>
                     <div className="profilePageInfoMiddle">
