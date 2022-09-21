@@ -59,7 +59,7 @@ function App() {
                 let likedByUser = false;
                 likesResults.forEach(user => {
                     if(user.userID === userInfo.userID) likedByUser = true;
-                })
+                });
 
                 setPostModal({
                     image: image,
@@ -72,6 +72,7 @@ function App() {
                     comments: commentsResults,
                     likes: likesResults.length,
                     likedByUser: likedByUser,
+                    alreadyFollowing: await isFollowing(publisherID),
                 });
             }
         }
@@ -102,6 +103,19 @@ function App() {
             if(followedUserResult[i].userID === followingUserID) docID = followedUserResult[i].id;
         }
         await deleteDoc(doc(db, "users", userInfo.userID, "following", docID));
+    };
+
+    const isFollowing = async(userID) => {
+        if(userID === userInfo.userID) return;
+        const followingCountCollection = collection(db, "users", userInfo.userID, "following");
+        const followingData = await getDocs(followingCountCollection);
+        const followingResult = followingData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        let alreadyFollowing = false;
+
+        for(let i = 0; i < followingResult.length; i++) {
+            if(followingResult[i].userID === userID) alreadyFollowing = true;
+        }
+        return alreadyFollowing;
     };
 
 
@@ -205,7 +219,7 @@ function App() {
     };
 
     return (
-      <AppContext.Provider value={{user, setUser, userInfo, followUser, unFollowUser, showPostingModal, setShowPostingModal,
+      <AppContext.Provider value={{user, setUser, userInfo, followUser, unFollowUser, isFollowing, showPostingModal, setShowPostingModal,
           hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal, getDaysSince
       }}>
         <div className="App">
@@ -215,6 +229,7 @@ function App() {
                                         postID={postModal.postID} publisherID={postModal.publisherID} publisherName={postModal.publisherName}
                                         publisherAvatar={postModal.publisherAvatar} comments={postModal.comments} commentPost={commentPost}
                                         replyToComment={replyToComment} likes={postModal.likes} likedByUser={postModal.likedByUser}
+                                        alreadyFollowing={postModal.alreadyFollowing}
 
                     />}
                 {showPostingModal && <PostingModalContainer />}

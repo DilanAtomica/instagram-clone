@@ -8,10 +8,10 @@ import PostModalComment from "./PostModalComment";
 import {useNavigate} from "react-router-dom";
 
 function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments,
-                                replyToComment, likes, likedByUser,
+                                replyToComment, likes, likedByUser, alreadyFollowing
 }) {
 
-    const {hidePostModal, likePost, userInfo, showPostModal, setPostModal, getDaysSince, followUser} = useContext(AppContext);
+    const {hidePostModal, likePost, userInfo, showPostModal, setPostModal, getDaysSince, followUser, unFollowUser} = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -51,8 +51,14 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
 
     const handleFollowClick = () => {
         followUser(publisherID);
-        navigate("/profile/" + publisherID);
+        showPostModal(image, text, timestamp, postID, publisherID);
     }
+
+    const handleUnFollowClick = () => {
+        unFollowUser(publisherID);
+        showPostModal(image, text, timestamp, postID, publisherID);
+    }
+
 
 
     return (
@@ -66,7 +72,10 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                     <img onClick={() => visitUser(publisherID)} src={publisherAvatar} alt={publisherName} />
                     <h1 onClick={() => visitUser(publisherID)}>{publisherName}</h1>
                     <span>•</span>
-                    <button onClick={handleFollowClick} type="button">Follow</button>
+                    {publisherID === userInfo?.userID ? "" : alreadyFollowing
+                        ?  <button onClick={handleUnFollowClick} type="button">Unfollow</button>
+                        :  <button onClick={handleFollowClick} type="button">Follow</button>
+                    }
                 </div>
                 <div className="postModalCommentsContainer">
                     <div className="postModalComment">
