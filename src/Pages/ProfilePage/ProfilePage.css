@@ -117,14 +117,3 @@
     margin-top: 1rem;
 }
 
-.profilePagePosts > img {
-    object-fit: cover;
-    width: 18rem;
-    height: 18rem;
-    margin: 0 1.5rem 1.5rem 0;
-    cursor: pointer;
-}
-
-.profilePagePosts > img:hover {
-    filter: brightness(80%);
-}

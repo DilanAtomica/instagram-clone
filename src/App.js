@@ -11,6 +11,7 @@ import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import PostingModalContainer from "./Components/PostingModalContainer/PostingModalContainer";
 import PostModalContainer from "./Components/PostModalContainer/PostModalContainer";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
+import ExplorePage from "./Pages/ExplorePage/ExplorePage";
 
 export const AppContext = createContext();
 
@@ -238,7 +239,8 @@ function App() {
               <Route path="/register" element={<> <RegisterPage /> </>} />
               <Route path="/home" element={<> <NavBar /> <HomePage /> </>} />
               <Route path="/profile/:userID" element={<> <NavBar /> <ProfilePage /> </>} />
-                <Route path="/profile/:userID/settings" element={<> <NavBar /> <SettingsPage /> </>} />
+              <Route path="/profile/:userID/settings" element={<> <NavBar /> <SettingsPage /> </>} />
+              <Route path="/explore" element={<> <NavBar /> <ExplorePage /> </>} />
 
             </Routes>
           </BrowserRouter>

@@ -1,0 +1,11 @@
+.profilePagePost {
+    object-fit: cover;
+    width: 18rem;
+    height: 18rem;
+    margin: 0 1.5rem 1.5rem 0;
+    cursor: pointer;
+}
+
+.profilePagePost:hover {
+    filter: brightness(80%);
+}

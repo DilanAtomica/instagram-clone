@@ -1,14 +1,13 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import "./NavBar.css";
 import Logo from "../../Images/logo.png";
 import {FiSearch} from "react-icons/fi";
 import {TiDelete} from "react-icons/ti";
-import {AiFillHome, AiOutlineHome, AiFillCamera, AiOutlineCamera} from "react-icons/ai";
-import {FaUserCircle} from "react-icons/fa";
+import {AiOutlineHome, AiOutlineCamera} from "react-icons/ai";
+import {MdOutlineExplore} from "react-icons/md";
 import {FiSend} from "react-icons/fi";
 import {BiUserCircle} from "react-icons/bi";
 import {FiSettings} from "react-icons/fi";
-import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {AppContext} from "../../App";
 import {signOut} from "firebase/auth";
 import {auth} from "../../utils/firebase";
@@ -59,10 +58,10 @@ function NavBar(props) {
                 <ul className="navigationLinks">
                     <li onClick={() => navigate("/home")}><AiOutlineHome /></li>
                     <li><FiSend /></li>
-                    <li><HiOutlineHeart /></li>
+                    <li onClick={() => navigate("/explore")}><MdOutlineExplore /></li>
                     <li onClick={() => setShowPostingModal(true)}><AiOutlineCamera /></li>
                     <li>
-                        <img src={userInfo?.avatar} onClick={handleAvatarClick} />
+                        <img alt={userInfo?.username} src={userInfo?.avatar} onClick={handleAvatarClick} />
                         {isAvatarClicked && <div style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownArrow"></div>}
                         {isAvatarClicked && <ul style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownBox">
                             <li onClick={navigateProfile}><BiUserCircle className="avatarDropDownIcon" /> Profile</li>
