@@ -29,6 +29,8 @@ function MessageModalContainer({userSuggestions, hideMessageModal}) {
         await addDoc(participantChatCollection, {
             participantID: userInfo.userID,
         });
+
+        hideMessageModal();
     }
 
 

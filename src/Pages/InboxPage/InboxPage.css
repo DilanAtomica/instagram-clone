@@ -95,24 +95,6 @@
     justify-content: flex-end;
 }
 
-.inboxRight-message {
-    width: 92.5%;
-    height: max-content;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 2rem;
-}
-
-.inboxRight-message > p {
-    font-size: 0.9rem;
-    line-height: 18px;
-    color: #262626;
-    background-color: #EFEFEF;
-    width: 13rem;
-    padding: 1rem;
-    border-radius: 15px;
-}
-
 .inboxRight-bottom > form {
     width: 100%;
     height: 5rem;
