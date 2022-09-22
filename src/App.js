@@ -12,6 +12,7 @@ import PostingModalContainer from "./Components/PostingModalContainer/PostingMod
 import PostModalContainer from "./Components/PostModalContainer/PostModalContainer";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import ExplorePage from "./Pages/ExplorePage/ExplorePage";
+import InboxPage from "./Pages/InboxPage/InboxPage";
 
 export const AppContext = createContext();
 
@@ -241,6 +242,7 @@ function App() {
               <Route path="/profile/:userID" element={<> <NavBar /> <ProfilePage /> </>} />
               <Route path="/profile/:userID/settings" element={<> <NavBar /> <SettingsPage /> </>} />
               <Route path="/explore" element={<> <NavBar /> <ExplorePage /> </>} />
+              <Route path="/inbox" element={<> <NavBar /> <InboxPage /> </>} />
 
             </Routes>
           </BrowserRouter>

@@ -37,6 +37,11 @@ function NavBar(props) {
         navigate("/profile/" + userInfo?.userID);
     }
 
+    const navigateSettings = () => {
+        setIsAvatarClicked(false);
+        navigate("/profile/" + userInfo?.userID + "/settings");
+    }
+
     const logout = async() => {
         await signOut(auth);
         setUser(null);
@@ -65,7 +70,7 @@ function NavBar(props) {
                         {isAvatarClicked && <div style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownArrow"></div>}
                         {isAvatarClicked && <ul style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownBox">
                             <li onClick={navigateProfile}><BiUserCircle className="avatarDropDownIcon" /> Profile</li>
-                            <li onClick={() => navigate("/profile/" + userInfo?.userID + "/settings")}><FiSettings className="avatarDropDownIcon" /> Settings</li>
+                            <li onClick={navigateSettings}><FiSettings className="avatarDropDownIcon" /> Settings</li>
                             <li onClick={logout}>Log out</li>
                         </ul>}
                     </li>

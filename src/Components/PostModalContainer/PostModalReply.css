@@ -10,6 +10,7 @@
     height: 2.5rem;
     border-radius: 999px;
     margin-right: 1rem;
+    cursor: pointer;
 }
 
 .postModalReplyText {
