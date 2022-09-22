@@ -16,6 +16,7 @@
     border-radius: 5px;
     background-color: white;
     position: relative;
+    top: 4rem;
 }
 
 .inboxLeft {
@@ -42,37 +43,12 @@
 .inboxLeft-top > #pencilIcon {
     font-size: 1.7rem;
     margin-right: 1rem;
+    cursor: pointer;
 }
 
 .inboxLeft-bottom {
     height: calc(100% - 3.5rem);
     width: 100%;
-}
-
-.inboxLeft-user {
-    display: flex;
-    align-items: center;
-    margin-top: 0.5rem;
-    padding: 0.5rem 0;
-    cursor: pointer;
-}
-
-.inboxLeft-user:hover {
-    background-color: #FAFAFA;
-}
-
-.inboxLeft-user > img {
-    object-fit: cover;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 999px;
-    margin-left: 1.25rem;
-    margin-right: 0.75rem;
-}
-
-.inboxLeft-user > h2 {
-    font-size: 0.9rem;
-    font-weight: 400;
 }
 
 .inboxRight {

@@ -1,0 +1,26 @@
+
+.chatUser {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    cursor: pointer;
+}
+
+.chatUser:hover {
+    background-color: #FAFAFA;
+}
+
+.chatUser > img {
+    object-fit: cover;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 999px;
+    margin-left: 1.25rem;
+    margin-right: 0.75rem;
+}
+
+.chatUser > h2 {
+    font-size: 0.9rem;
+    font-weight: 400;
+}

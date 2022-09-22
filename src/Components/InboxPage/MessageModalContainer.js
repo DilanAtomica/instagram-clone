@@ -1,30 +1,51 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import "./MessageModalContainer.css";
+import MessageModalSuggestion from "./MessageModalSuggestion";
+import {addDoc, collection} from "firebase/firestore";
+import {db} from "../../utils/firebase";
+import {AppContext} from "../../App";
 
-function MessageModalContainer(props) {
+function MessageModalContainer({userSuggestions, hideMessageModal}) {
 
-    const [chosenUser, setChosenUser] = useState(null);
+    const {userInfo} = useContext(AppContext);
 
-    const handleOnClick = (e) => {
+    const [chosenUser, setChosenUser] = useState();
 
+    const chooseUser = (userID) => {
+        setChosenUser(userID);
     }
 
+    const handleOnClick = (e) => {
+        if(e.target.id === "messageModalContainer") hideMessageModal();
+    }
+
+    const createChat = async() => {
+        const userChatCollection = collection(db, "users", userInfo.userID, "chats");
+        await addDoc(userChatCollection, {
+            participantID: chosenUser,
+        });
+
+        const participantChatCollection = collection(db, "users", chosenUser, "chats");
+        await addDoc(participantChatCollection, {
+            participantID: userInfo.userID,
+        });
+    }
+
+
     return (
-        <div className="messageModalContainer">
+        <div onClick={handleOnClick} className="messageModalContainer" id="messageModalContainer">
             <div className="messageModal">
                 <div className="messageModalTop">
                     <h1>New Message</h1>
-                    <button type="button">Next</button>
+                    <button onClick={createChat} type="button">Next</button>
                 </div>
                 <div className="messageModalSuggestions">
                     <h2>Suggestions</h2>
-                    <div className="messageModalSuggestion">
-                        <div className="messageModalSuggestion-left">
-                            <img src="https://www.vectornator.io/blog/content/images/2022/03/62024ea00c20c3ee4ef61310_Studio-Ghibli-Thumbnail.png" />
-                            <h3>Oskar</h3>
-                        </div>
-                        <div onClick={handleOnClick} id="checkIcon"></div>
-                    </div>
+                    {userSuggestions?.map(user => (
+                        <MessageModalSuggestion key={user?.id} username={user?.username} userID={user?.id} avatar={user?.avatar}
+                                                chooseUser={chooseUser} chosenUser={chosenUser}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
