@@ -62,7 +62,7 @@ function NavBar(props) {
                 </div>
                 <ul className="navigationLinks">
                     <li onClick={() => navigate("/home")}><AiOutlineHome /></li>
-                    <li><FiSend /></li>
+                    <li onClick={() => navigate("/inbox")}><FiSend /></li>
                     <li onClick={() => navigate("/explore")}><MdOutlineExplore /></li>
                     <li onClick={() => setShowPostingModal(true)}><AiOutlineCamera /></li>
                     <li>

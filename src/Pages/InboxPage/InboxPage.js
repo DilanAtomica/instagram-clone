@@ -38,7 +38,14 @@ function InboxPage(props) {
         let users = [];
 
         for(let i = 0; i < usersResult.length; i++) {
-            if(usersResult.id !== userInfo.userID) users.push(usersResult[i]);
+            let isEligible = true;
+            if(usersResult[i].id === userInfo.userID) isEligible = false;
+
+            for(let j = 0; j < chatUsers.length; j++) {
+                if(usersResult[i].id === chatUsers[j].userID) isEligible = false;
+            }
+
+            if(isEligible === true) users.push(usersResult[i]);
         }
         setUserSuggestions(users);
     };
@@ -111,6 +118,8 @@ function InboxPage(props) {
 
         setInputMessage("");
 
+        await showChosenChat(currentChat.userID, currentChat.username, currentChat.avatar);
+
     }
 
     return (
@@ -147,7 +156,8 @@ function InboxPage(props) {
                     </div>
                 </div>
             </div>
-            {showMessageModal && <MessageModalContainer userSuggestions={userSuggestions} hideMessageModal={hideMessageModal} />}
+            {showMessageModal && <MessageModalContainer userSuggestions={userSuggestions} hideMessageModal={hideMessageModal}
+            />}
         </div>
     );
 }
