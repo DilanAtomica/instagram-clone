@@ -1,6 +1,7 @@
 import React from 'react';
 import "./InboxPage.css";
 import {HiOutlinePencilAlt} from "react-icons/hi";
+import MessageModalContainer from "../../Components/InboxPage/MessageModalContainer";
 
 function InboxPage(props) {
     return (
@@ -33,10 +34,9 @@ function InboxPage(props) {
                             <input type="text" placeholder="Send a message..."/>
                         </form>
                     </div>
-
                 </div>
-
             </div>
+            <MessageModalContainer />
 
         </div>
     );

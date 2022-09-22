@@ -1,8 +1,7 @@
 .inboxPage {
     background-color: #FAFAFA;
     width: 100%;
-    min-height: calc(100vh - 4rem);
-    margin-top: 4rem;
+    min-height: 100vh;
     position: relative;
     overflow: auto;
 }
@@ -16,6 +15,7 @@
     border: 1px solid lightgrey;
     border-radius: 5px;
     background-color: white;
+    position: relative;
 }
 
 .inboxLeft {
