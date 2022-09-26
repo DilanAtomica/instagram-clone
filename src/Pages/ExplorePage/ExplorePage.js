@@ -7,12 +7,13 @@ import {AppContext} from "../../App";
 
 function ExplorePage(props) {
 
-    const {userInfo} = useContext(AppContext);
+    const {userInfo, activateLoader, deActiveLoader} = useContext(AppContext);
 
     const [explorePosts, setExplorePosts] = useState(null);
 
     useEffect(() => {
         if(userInfo === null) return;
+        activateLoader();
         getExplorePosts(userInfo.userID);
         console.log("SPAM");
     }, [userInfo]);
@@ -35,9 +36,8 @@ function ExplorePage(props) {
             }
         }
 
-        console.log(posts);
         setExplorePosts(posts);
-
+        deActiveLoader();
 
     }
 

@@ -28,14 +28,13 @@ function ProfilePage(props) {
    useEffect(() => {
        if(userID === null || userInfo === null) return
        activateLoader();
-        getProfileInfo();
-       if(postsButton) {
-           getPosts(userID);
-       } else {
-           getFavoritedPosts(userID);
-       }
-        getFollowingCount(userID);
-        setAlreadyFollowing(isFollowing(userID));
+       getProfileInfo();
+       getFollowingCount(userID);
+       setAlreadyFollowing(isFollowing(userID));
+
+       if(postsButton) getPosts(userID);
+       else getFavoritedPosts(userID);
+
         console.log("hey");
     }, [userID, postsButton, userInfo]);
 
