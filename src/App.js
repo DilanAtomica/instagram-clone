@@ -13,6 +13,7 @@ import PostModalContainer from "./Components/PostModalContainer/PostModalContain
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import ExplorePage from "./Pages/ExplorePage/ExplorePage";
 import InboxPage from "./Pages/InboxPage/InboxPage";
+import LoadingSpinner from "./Components/LoadingSpinner/LoadingSpinner";
 
 export const AppContext = createContext();
 
@@ -225,6 +226,7 @@ function App() {
           hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal, getDaysSince
       }}>
         <div className="App">
+            <LoadingSpinner />
             <BrowserRouter>
                 {postModal &&
                     <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}

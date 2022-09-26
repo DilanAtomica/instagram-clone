@@ -36,7 +36,6 @@ function InboxPage(props) {
         const usersResult = usersData.docs.map((doc) => ({...doc.data(), id: doc.id}));
 
         let users = [];
-
         for(let i = 0; i < usersResult.length; i++) {
             let isEligible = true;
             if(usersResult[i].id === userInfo.userID) isEligible = false;
