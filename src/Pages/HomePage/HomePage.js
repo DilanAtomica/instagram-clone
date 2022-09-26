@@ -11,13 +11,14 @@ function HomePage(props) {
 
     const navigate = useNavigate();
 
-    const {followUser, userInfo, showPostModal, likePost, commentPost} = useContext(AppContext);
+    const {followUser, userInfo, showPostModal, likePost, commentPost, activateLoader, deActiveLoader} = useContext(AppContext);
 
     const [followingPosts, setFollowingPosts] = useState(null);
     const [userSuggestions, setUserSuggestions] = useState(null);
 
     useEffect(() => {
         if(userInfo === null) return;
+        activateLoader();
         getFollowingPosts();
         getUserSuggestions();
         console.log("STOPP");
@@ -101,6 +102,7 @@ function HomePage(props) {
             else return -1;
         });
         setFollowingPosts(posts);
+        deActiveLoader();
     };
 
     const visitRandomUser = (userID) => {
