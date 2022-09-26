@@ -27,6 +27,8 @@ function App() {
 
     const [postModal, setPostModal] = useState(null);
 
+    const [loading, setLoading] = useState(false);
+
     const usersCollection = collection(db, "users");
 
     useEffect(() => {
@@ -221,12 +223,21 @@ function App() {
         }
     };
 
+    const activateLoader = () => {
+        setLoading(true);
+    };
+
+    const deActiveLoader = () => {
+        setLoading(false);
+    };
+
     return (
       <AppContext.Provider value={{user, setUser, userInfo, followUser, unFollowUser, isFollowing, showPostingModal, setShowPostingModal,
-          hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal, getDaysSince
+          hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal, getDaysSince, activateLoader,
+          deActiveLoader, loading
       }}>
         <div className="App">
-            <LoadingSpinner />
+            <LoadingSpinner isLoading={loading} />
             <BrowserRouter>
                 {postModal &&
                     <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}

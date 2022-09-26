@@ -11,7 +11,7 @@ import {useNavigate, useParams} from "react-router-dom";
 
 function ProfilePage(props) {
 
-    const {userInfo, followUser, unFollowUser, isFollowing} = useContext(AppContext);
+    const {userInfo, followUser, unFollowUser, isFollowing, activateLoader, deActiveLoader} = useContext(AppContext);
     let { userID } = useParams();
     const navigate = useNavigate();
 
@@ -27,13 +27,13 @@ function ProfilePage(props) {
 
    useEffect(() => {
        if(userID === null || userInfo === null) return
+       activateLoader();
         getProfileInfo();
        if(postsButton) {
            getPosts(userID);
        } else {
            getFavoritedPosts(userID);
        }
-
         getFollowingCount(userID);
         setAlreadyFollowing(isFollowing(userID));
         console.log("hey");
@@ -56,6 +56,7 @@ function ProfilePage(props) {
             else return -1;
                 });
         setPosts(posts);
+        deActiveLoader();
     };
 
     const getFavoritedPosts = async (userID) => {
@@ -79,12 +80,13 @@ function ProfilePage(props) {
         }
 
         setPosts(favoritedPosts);
+        deActiveLoader();
     };
 
     const getFollowingCount = async(userID) => {
         const followingCountCollection = collection(db, "users", userID, "following");
         const data = await getDocs(followingCountCollection);
-        setFollowingCount(data.docs.map((doc) => ({...doc.data(), id: doc.id})).length)
+        setFollowingCount(data.docs.map((doc) => ({...doc.data(), id: doc.id})).length);
     }
 
     const handleFollowClick = () => {
