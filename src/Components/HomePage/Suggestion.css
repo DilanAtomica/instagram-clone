@@ -26,12 +26,3 @@
     margin-left: 0.5rem;
     cursor: pointer;
 }
-
-.suggestion > button {
-    font-size: 12px;
-    color: #0095f6;
-    font-weight: 700;
-    background: none;
-    border: none;
-    cursor: pointer;
-}

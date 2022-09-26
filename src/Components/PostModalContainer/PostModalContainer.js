@@ -6,6 +6,7 @@ import {VscSmiley} from "react-icons/vsc";
 import {AppContext} from "../../App";
 import PostModalComment from "./PostModalComment";
 import {useNavigate} from "react-router-dom";
+import Button from "../Buttons/Button";
 
 function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments,
                                 replyToComment, likes, likedByUser, alreadyFollowing
@@ -112,7 +113,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                 <form onSubmit={handleOnSubmit} className="postModalInputContainer">
                     <VscSmiley id="smileyIcon" />
                     <input ref={commentInput} onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Write a comment..." />
-                    <button type="submit">Publish</button>
+                    <Button text="Publish" type="submit" margin="0 1rem 0 0" fontSize="14" />
                 </form>
             </div>
         </div>

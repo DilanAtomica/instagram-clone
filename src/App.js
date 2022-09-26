@@ -57,6 +57,11 @@ function App() {
                 const commentsCollection = collection(db, "users", publisherID, "posts", postID, "comments");
                 const commentsData = await getDocs(commentsCollection);
                 const commentsResults = commentsData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+                commentsResults.sort(function(a, b) {
+                    if(a.timestamp?.seconds < b.timestamp?.seconds) return 1;
+                    else return -1;
+                });
+
 
                 const likesCollection = collection(db, "users", publisherID, "posts", postID, "likes");
                 const likesData = await getDocs(likesCollection);
@@ -167,7 +172,6 @@ function App() {
 
     const hidePostingModal = (e) => {
         if(e.target.id === "postingModalContainer") setShowPostingModal(false);
-        if(e.target.id === "exitPostModalIcon") setShowPostingModal(false);
     };
 
     const likePost = async(publisherID, postID) => {
@@ -234,10 +238,10 @@ function App() {
     return (
       <AppContext.Provider value={{user, setUser, userInfo, followUser, unFollowUser, isFollowing, showPostingModal, setShowPostingModal,
           hidePostingModal, showPostModal, hidePostModal, postModal, likePost, commentPost, setPostModal, getDaysSince, activateLoader,
-          deActiveLoader, loading
+          deActiveLoader
       }}>
         <div className="App">
-            <LoadingSpinner isLoading={loading} />
+            {loading && <LoadingSpinner />}
             <BrowserRouter>
                 {postModal &&
                     <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}

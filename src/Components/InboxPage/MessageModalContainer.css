@@ -36,17 +36,6 @@
     margin-right: 6rem;
 }
 
-.messageModalTop > button {
-    color: #0095f6;
-    font-size: 0.9rem;
-    font-weight: 500;
-    background: none;
-    border: none;
-    outline: none;
-    margin-right: 1.5rem;
-    cursor: pointer;
-}
-
 .messageModalSuggestions {
     display: flex;
     flex-direction: column;

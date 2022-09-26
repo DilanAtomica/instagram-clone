@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Suggestion.css";
 import {useNavigate} from "react-router-dom";
+import Button from "../Buttons/Button";
 
 function Suggestion({username, userID, avatar, followUser}) {
 
@@ -17,7 +18,7 @@ function Suggestion({username, userID, avatar, followUser}) {
                 <img onClick={() => navigate("/profile/" + userID)} alt={username} src={avatar} />
                 <p onClick={() => navigate("/profile/" + userID)}>{username}</p>
             </div>
-            <button onClick={handleOnClick} type="button">Follow</button>
+            <Button onClick={handleOnClick} fontSize={"12"} text="Follow" type="button" />
         </div>
     );
 }

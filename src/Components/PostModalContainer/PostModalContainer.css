@@ -143,14 +143,4 @@
     flex: 1;
 }
 
-.postModalInputContainer > button {
-    background: none;
-    border: none;
-    color: #0095f6;
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-right: 1rem;
-    cursor: pointer;
-}
-
 

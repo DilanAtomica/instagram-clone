@@ -9,6 +9,7 @@ import {db, storage} from "../../utils/firebase";
 import {v4} from "uuid";
 import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
+import Button from "../Buttons/Button";
 
 function PostingModalContainer(props) {
 
@@ -50,13 +51,12 @@ function PostingModalContainer(props) {
         <div onClick={handleOnClick} className="postingModalContainer" id="postingModalContainer">
             <form onSubmit={createPost} className="postingModal">
                 <div className="postingModalHeader">
-                    <TiDeleteOutline id="exitPostModalIcon" onClick={hidePostingModal} />
                     <h2>Create a new post</h2>
-                    <button type="submit">Share</button>
+                    <Button type="submit" text="Share" fontSize="14" padding="0.75rem 0.5rem 0.5rem" />
                 </div>
                 <div className="postingModalContent">
                     <div className="postingModalContent-left">
-                        {imageInput.length > 1 ? <img src={imageInput} /> :
+                        {imageInput.length > 1 ? <img alt="Upload image" src={imageInput} /> :
                             <label id="imageInputLabel" htmlFor="imageInput">
                                 Upload image
                                 <input id="imageInput" onChange={handleImageChange} className="profile-imageInput" type="file" />
@@ -66,8 +66,8 @@ function PostingModalContainer(props) {
                     </div>
                     <div className="postingModalContent-right">
                         <div className="postingModalProfile">
-                            <BiUserCircle style={{fontSize: "1.5rem"}} />
-                            <p>Frillo</p>
+                            <img alt={userInfo?.username} src={userInfo?.avatar} />
+                            <p>{userInfo?.username}</p>
                         </div>
                         <textarea onChange={(e) => setTextInput(e.target.value)}
                                   rows="10" placeholder="Write a subtitle..." />

@@ -5,6 +5,7 @@ import {HiOutlineHeart, HiHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {useNavigate} from "react-router-dom";
+import Button from "../Buttons/Button";
 
 function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked,
                           randomUserLikeName, randomUserLikeAvatar, randomUserID, commentPost, visitRandomUser}) {
@@ -83,7 +84,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
             <form onSubmit={handleOnSubmit} className="homePagePostComment">
                 <VscSmiley style={{fontSize: "2rem", paddingLeft: "0.5rem", paddingTop: "0.5rem"}} />
                 <input ref={commentInput} value={inputComment} onChange={(e) => setInputComment(e.target.value)} type="text" placeholder="Write a comment..."/>
-                <button type="submit">Publish</button>
+                <Button padding="0.75rem 0.5rem 0.5rem" fontSize="14" text="Publish" type="submit" />
             </form>
 
         </div>
