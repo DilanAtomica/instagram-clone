@@ -10,7 +10,7 @@ import Message from "../../Components/InboxPage/Message";
 
 function InboxPage(props) {
 
-    const {userInfo} = useContext(AppContext);
+    const {userInfo, activateLoader, deActiveLoader} = useContext(AppContext);
 
     const [inputMessage, setInputMessage] = useState("");
     const [userSuggestions, setUserSuggestions] = useState(null);
@@ -24,6 +24,7 @@ function InboxPage(props) {
 
     useEffect(() => {
         if(userInfo === null) return;
+        activateLoader();
         getChatUsers();
         getUserSuggestions();
         console.log("NOO");
@@ -47,6 +48,7 @@ function InboxPage(props) {
             if(isEligible === true) users.push(usersResult[i]);
         }
         setUserSuggestions(users);
+        deActiveLoader();
     };
 
     const getChatUsers = async() => {
