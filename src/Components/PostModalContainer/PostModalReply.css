@@ -5,18 +5,11 @@
 }
 
 .postModalReplyText {
-    font-size: 0.85rem;
-    color: #262626;
+    font-size: 14px;
     margin-right: 0.5rem;
-    cursor: pointer;
     margin-top: 0.20rem;
     margin-bottom: 0.5rem;
 }
-
-.postModalReplyText > span {
-    font-weight: 600;
-}
-
 .postModalReply-date {
     font-size: 0.8rem;
     color: #8e8e8e;

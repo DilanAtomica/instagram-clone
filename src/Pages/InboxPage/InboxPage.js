@@ -9,6 +9,7 @@ import ChatUser from "../../Components/InboxPage/ChatUser";
 import Message from "../../Components/InboxPage/Message";
 import Avatar from "../../Components/Avatar/Avatar";
 import {useNavigate} from "react-router-dom";
+import Username from "../../Components/Username/Username";
 
 function InboxPage(props) {
 
@@ -149,7 +150,8 @@ function InboxPage(props) {
                 <div className="inboxRight">
                     <div className="inboxRight-top">
                         <Avatar action={visitProfilePage} userID={currentChat?.userID} image={currentChat?.avatar} altText={currentChat?.username} size="1.5rem" margin="0 0.5rem 0 2rem" />
-                        <h2>{currentChat?.username}</h2>
+                        <Username visitProfilePage={visitProfilePage} username={currentChat?.username}
+                                  userID={currentChat?.userID} fontSize={14} />
                     </div>
                     <div className="inboxRight-bottom">
                         <div className="inboxRight-messageBox">

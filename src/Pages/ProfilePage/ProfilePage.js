@@ -104,7 +104,7 @@ function ProfilePage(props) {
     return (
         <div className="profilePage">
             <div className="profilePageInfoContainer">
-                <Avatar image={profileInfo?.avatar} altText={profileInfo?.username} size="10rem" margin="0 10rem 0 10rem" />
+                <Avatar image={profileInfo?.avatar} altText={profileInfo?.username} size="10rem" margin="0 7rem 0 4rem" />
                 <div className="profilePageInfo">
                     <div className="profilePageInfoTop">
                         <h1>{profileInfo?.username}</h1>

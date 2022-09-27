@@ -7,6 +7,7 @@ import {db} from "../../utils/firebase";
 import Suggestion from "../../Components/HomePage/Suggestion";
 import {useNavigate} from "react-router-dom";
 import Avatar from "../../Components/Avatar/Avatar";
+import Username from "../../Components/Username/Username";
 
 function HomePage(props) {
 
@@ -110,8 +111,6 @@ function HomePage(props) {
         navigate("/profile/" + userID);
     }
 
-
-
     return (
         <div className="homePage">
             <div className="homePageContainer">
@@ -132,7 +131,10 @@ function HomePage(props) {
                     <div className="suggestionsAvatar">
                         <Avatar action={visitProfilePage} userID={userInfo?.userID} size="3.75rem"
                                 altText={userInfo?.username} image={userInfo?.avatar} />
-                            <p onClick={() => navigate("/profile/" + userInfo?.userID)}>{userInfo?.username}</p>
+                        <Username visitProfilePage={visitProfilePage} username={userInfo?.username} userID={userInfo?.userID}
+                                  fontSize={14} margin="0 0 0 1rem"
+                        />
+
                     </div>
                     <div className="suggestions">
                         <div className="suggestionsHeader">

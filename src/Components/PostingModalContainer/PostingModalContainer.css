@@ -109,18 +109,14 @@
     align-items: center;
 }
 
-.postingModalProfile > p {
-    font-size: 16px;
-    font-weight: 700;
-    color: #262626;
-    margin-left: 0.5rem;
-
-}
-
 .postingModalContent-right > textarea {
     outline: none;
     border: none;
     margin-top: 1rem;
     resize: none;
     border-bottom: 1px solid lightgrey;
+}
+
+.postingModalContent-right > textarea::placeholder {
+    font-size: 1rem;
 }

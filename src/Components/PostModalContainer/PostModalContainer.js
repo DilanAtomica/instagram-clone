@@ -8,6 +8,7 @@ import PostModalComment from "./PostModalComment";
 import {useNavigate} from "react-router-dom";
 import Button from "../Buttons/Button";
 import Avatar from "../Avatar/Avatar";
+import Username from "../Username/Username";
 
 function PostModalContainer({image, text, timestamp, postID, publisherID, publisherName, publisherAvatar, commentPost, comments,
                                 replyToComment, likes, likedByUser, alreadyFollowing
@@ -46,11 +47,6 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
         likePost(publisherID, postID);
     };
 
-    const visitUser = (userID) => {
-        setPostModal(null);
-        navigate("/profile/" + userID);
-    };
-
     const handleFollowClick = () => {
         followUser(publisherID);
         showPostModal(image, text, timestamp, postID, publisherID);
@@ -78,7 +74,8 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                 <div className="postModalRightHeader">
                     <Avatar action={visitProfilePage} userID={publisherID} image={publisherAvatar}
                             altText={publisherName} size="2.5rem" margin="0 0.75rem 0 1rem" />
-                    <h1 onClick={() => visitUser(publisherID)}>{publisherName}</h1>
+                    <Username visitProfilePage={visitProfilePage} username={publisherName}
+                              userID={publisherID} fontSize={14} margin="0 0.5rem 0 0"/>
                     <span>•</span>
                     {publisherID === userInfo?.userID ? "" : alreadyFollowing
                         ?  <Button action={handleUnFollowClick} fontSize="14" type="button" text="Unfollow" />
@@ -90,7 +87,8 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                         <Avatar action={visitProfilePage} userID={publisherID} image={publisherAvatar}
                                 altText={publisherName} size="2.5rem" margin="0 0.75rem 0 0" />
                         <div className="postModalComment-right">
-                            <p><span onClick={() => visitUser(publisherID)}>{publisherName}</span> {text}</p>
+                            <p><Username visitProfilePage={visitProfilePage} username={publisherName}
+                                         userID={publisherID} fontSize={14} margin="0 0.25rem 0 0"/> {text}</p>
                             <div className="postModalCommentDate">
                                 <p>{getDaysSince(timestamp)}</p>
                             </div>
@@ -101,7 +99,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                         <PostModalComment key={comment.id} commenterAvatar={comment.commenterAvatar} commenterName={comment.commenterName}
                                           commentID={comment.id} commenterID={comment.commenterID} comment={comment.comment}
                                           publisherID={publisherID} postID={postID} replyToComment={replyToComment} timestamp={comment.timestamp}
-                                          visitUser={visitUser} getDaysSince={getDaysSince} visitProfilePage={visitProfilePage}
+                                          getDaysSince={getDaysSince} visitProfilePage={visitProfilePage}
 
                         />
                     ))}

@@ -11,16 +11,7 @@
 }
 
 .postModalComment-right > p {
-    font-size: 0.85rem;
-    color: #262626;
-    margin-right: 0.5rem;
-    margin-top: 0.20rem;
-    margin-bottom: 0.5rem;
-}
-
-.postModalComment-right > p > span {
-    font-weight: 600;
-    cursor: pointer;
+    font-size: 14px;
 }
 
 .postModalCommentDate {

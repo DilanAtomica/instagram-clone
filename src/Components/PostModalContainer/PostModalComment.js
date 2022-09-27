@@ -5,6 +5,7 @@ import PostModalReply from "./PostModalReply";
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import Avatar from "../Avatar/Avatar";
+import Username from "../Username/Username";
 
 function PostModalComment({comment, commenterName, commenterAvatar, commenterID, commentID, publisherID, postID, replyToComment, timestamp,
                               visitUser, getDaysSince,visitProfilePage}) {
@@ -37,15 +38,14 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
         console.log("hey");
     }, []);
 
-    const handleOnUserClick = () => {
-        visitUser(commenterID);
-    };
+
 
     return (
         <div key={commentID} className="postModalComment">
             <Avatar action={visitProfilePage} userID={commenterID} image={commenterAvatar} altText={commenterName} size="2.5rem" margin="0 1rem 0 0" />
             <div className="postModalComment-right">
-                <p><span onClick={handleOnUserClick}>{commenterName}</span> {comment}</p>
+                <p><Username visitProfilePage={visitProfilePage} username={commenterName}
+                             userID={commenterID} fontSize={14} margin="0.20rem 0.25rem 0.5rem 0"/> {comment}</p>
                 <div className="postModalCommentDate">
                     <p>{getDaysSince(timestamp)}</p>
                     <button onClick={handleOnClick} type="button">Reply</button>

@@ -10,11 +10,3 @@
     display: flex;
     align-items: center;
 }
-
-.suggestion-right > p {
-    font-weight: 700;
-    font-size: 14px;
-    color: #262626;
-    margin-left: 0.5rem;
-    cursor: pointer;
-}

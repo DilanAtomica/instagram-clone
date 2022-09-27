@@ -29,13 +29,6 @@
     margin-bottom: 0.5rem;
 }
 
-.suggestionsAvatar > p {
-    font-size: 14px;
-    font-weight: 700;
-    margin-left: 1rem;
-    cursor: pointer;
-}
-
 .suggestions {
     display: flex;
     flex-direction: column;

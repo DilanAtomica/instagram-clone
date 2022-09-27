@@ -2,6 +2,7 @@ import React from 'react';
 import "./Suggestion.css";
 import Button from "../Buttons/Button";
 import Avatar from "../Avatar/Avatar";
+import Username from "../Username/Username";
 
 function Suggestion({username, userID, avatar, followUser, action}) {
 
@@ -14,7 +15,9 @@ function Suggestion({username, userID, avatar, followUser, action}) {
         <div className="suggestion">
             <div className="suggestion-right">
                 <Avatar action={action} altText={username} image={avatar} size="2rem" />
-                <p onClick={action}>{username}</p>
+                <Username visitProfilePage={action} username={username} userID={userID}
+                          fontSize={14} margin="0 0 0 0.5rem"
+                />
             </div>
             <Button action={handleOnClick} fontSize={"12"} text="Follow" type="button" />
         </div>

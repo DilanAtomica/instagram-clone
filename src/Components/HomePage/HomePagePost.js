@@ -7,6 +7,7 @@ import {VscSmiley} from "react-icons/vsc";
 import {useNavigate} from "react-router-dom";
 import Button from "../Buttons/Button";
 import Avatar from "../Avatar/Avatar";
+import Username from "../Username/Username";
 
 function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked,
                           randomUserLikeName, randomUserLikeAvatar, randomUserID, commentPost, visitProfilePage}) {
@@ -41,16 +42,14 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
         commentInput.current.focus();
     };
 
-    const handleOnUserClick = () => {
-        visitProfilePage(randomUserID);
-    }
-
     return (
         <div className="homePagePost">
             <div className="homePagePostHeader">
                 <div className="homePagePostHeader-left">
                     <Avatar action={visitProfilePage} userID={publisherID} image={avatar} altText={username} size="2.25rem" />
-                    <span className="homePagePostHeader-name" onClick={() => navigate("/profile/" + publisherID)}>{username}</span>
+                    <Username visitProfilePage={visitProfilePage} username={username} userID={publisherID}
+                              fontSize={13} margin="0 0 0 0.5rem"
+                    />
                 </div>
                 <div className="homePagePostHeader-right">
                     <FiMoreHorizontal />
@@ -69,12 +68,19 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                 <div className="homePagePostLikes">
                     {randomUserLikeName && <Avatar action={visitProfilePage} userID={randomUserID} image={randomUserLikeAvatar} altText={randomUserLikeName} size="1.5rem" />}
                     {randomUserLikeName
-                        ? <p>Liked by <span onClick={handleOnUserClick}>{randomUserLikeName}</span> and <span>{likes} others</span></p>
+                        ? <p>Liked by <Username visitProfilePage={visitProfilePage} username={randomUserLikeName} userID={randomUserID}
+                                                fontSize={14}
+                        /> and <span>{likes} others</span></p>
                         : <p><span>{likes} likes</span></p>
                     }
 
                 </div>
-                <p className="homePagePostTitle"><span onClick={() => navigate("/profile/" + publisherID)}>{username}</span> {text}</p>
+                <p className="homePagePostTitle">
+                    <Username visitProfilePage={visitProfilePage} username={randomUserLikeName}
+                              userID={randomUserID} fontSize={14} margin="0 0 0 0rem"/>
+                    <span> {text}</span>
+
+                </p>
                 <button className="homePagePostComments" onClick={handleOnClick}>Show all comments</button>
                 <p className="homePagePostDate">
                     {months[new Date(timestamp.seconds*1000).getMonth()]} {new Date(timestamp.seconds*1000).getDate()}
