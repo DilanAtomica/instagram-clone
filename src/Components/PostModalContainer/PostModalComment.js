@@ -4,9 +4,10 @@ import {VscSmiley} from "react-icons/vsc";
 import PostModalReply from "./PostModalReply";
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
+import Avatar from "../Avatar/Avatar";
 
 function PostModalComment({comment, commenterName, commenterAvatar, commenterID, commentID, publisherID, postID, replyToComment, timestamp,
-                              visitUser, getDaysSince}) {
+                              visitUser, getDaysSince,visitProfilePage}) {
 
     const [showInputReply, setShowInputReply] = useState(false);
     const [inputValue, setInputValue] = useState("");
@@ -42,7 +43,7 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
 
     return (
         <div key={commentID} className="postModalComment">
-            <img onClick={handleOnUserClick} src={commenterAvatar} />
+            <Avatar action={visitProfilePage} userID={commenterID} image={commenterAvatar} altText={commenterName} size="2.5rem" margin="0 1rem 0 0" />
             <div className="postModalComment-right">
                 <p><span onClick={handleOnUserClick}>{commenterName}</span> {comment}</p>
                 <div className="postModalCommentDate">
@@ -57,7 +58,7 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
                 {replies?.map(reply => (
                     <PostModalReply key={reply.id} replyID={reply.id} replierName={reply.replierName} replierAvatar={reply.replierAvatar}
                                     replierID={reply.replierID} timestamp={reply.timestamp} reply={reply.reply} visitUser={visitUser}
-                                    getDaysSince={getDaysSince}
+                                    getDaysSince={getDaysSince} visitProfilePage={visitProfilePage}
                     />
                 ))}
             </div>

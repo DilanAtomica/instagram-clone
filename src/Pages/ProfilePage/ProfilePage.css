@@ -14,15 +14,6 @@
     margin-bottom: 4rem;
 }
 
-.profilePageInfoContainer > img {
-    object-fit: cover;
-    height: 10rem;
-    width: 10rem;
-    border-radius: 100px;
-    margin-right: 5rem;
-    margin-left: 5rem;
-}
-
 .profilePageInfo {
     display: flex;
     flex-direction: column;

@@ -23,14 +23,6 @@
     font-size: 1.5rem;
 }
 
-.homePagePostHeader-left > img {
-    object-fit: cover;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 999px;
-    cursor: pointer;
-}
-
 .homePagePostHeader-left > span {
     font-size: 0.8rem;
     font-weight: 700;
@@ -78,14 +70,6 @@
     background-color: white;
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
-}
-
-.homePagePostLikes > img {
-    width: 1.5rem;
-    height: 1.5rem;
-    object-fit: cover;
-    border-radius: 999px;
-    cursor: pointer;
 }
 
 .homePagePostLikes > p {

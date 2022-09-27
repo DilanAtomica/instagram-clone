@@ -11,14 +11,6 @@
     align-items: center;
 }
 
-.suggestion-right > img {
-    object-fit: cover;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 999px;
-    cursor: pointer;
-}
-
 .suggestion-right > p {
     font-weight: 700;
     font-size: 14px;

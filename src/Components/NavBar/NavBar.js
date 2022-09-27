@@ -12,6 +12,7 @@ import {AppContext} from "../../App";
 import {signOut} from "firebase/auth";
 import {auth} from "../../utils/firebase";
 import {useNavigate} from "react-router-dom";
+import Avatar from "../Avatar/Avatar";
 
 function NavBar(props) {
 
@@ -66,7 +67,7 @@ function NavBar(props) {
                     <li onClick={() => navigate("/explore")}><MdOutlineExplore /></li>
                     <li onClick={() => setShowPostingModal(true)}><AiOutlineCamera /></li>
                     <li>
-                        <img alt={userInfo?.username} src={userInfo?.avatar} onClick={handleAvatarClick} />
+                        <Avatar showSettings={handleAvatarClick} image={userInfo?.avatar} altText={userInfo?.username} size="2rem" />
                         {isAvatarClicked && <div style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownArrow"></div>}
                         {isAvatarClicked && <ul style={{opacity: isAvatarClicked && "1"}} className="avatarDropDownBox">
                             <li onClick={navigateProfile}><BiUserCircle className="avatarDropDownIcon" /> Profile</li>

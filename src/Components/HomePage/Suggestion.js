@@ -1,24 +1,22 @@
 import React from 'react';
 import "./Suggestion.css";
-import {useNavigate} from "react-router-dom";
 import Button from "../Buttons/Button";
+import Avatar from "../Avatar/Avatar";
 
-function Suggestion({username, userID, avatar, followUser}) {
-
-    const navigate = useNavigate();
+function Suggestion({username, userID, avatar, followUser, action}) {
 
     const handleOnClick = () => {
         followUser(userID);
-        navigate("/profile/" + userID)
+        action(userID);
     }
 
     return (
         <div className="suggestion">
             <div className="suggestion-right">
-                <img onClick={() => navigate("/profile/" + userID)} alt={username} src={avatar} />
-                <p onClick={() => navigate("/profile/" + userID)}>{username}</p>
+                <Avatar action={action} altText={username} image={avatar} size="2rem" />
+                <p onClick={action}>{username}</p>
             </div>
-            <Button onClick={handleOnClick} fontSize={"12"} text="Follow" type="button" />
+            <Button action={handleOnClick} fontSize={"12"} text="Follow" type="button" />
         </div>
     );
 }

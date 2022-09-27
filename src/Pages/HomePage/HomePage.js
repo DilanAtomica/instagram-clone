@@ -6,6 +6,7 @@ import {collection, getDocs, doc, getDoc} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import Suggestion from "../../Components/HomePage/Suggestion";
 import {useNavigate} from "react-router-dom";
+import Avatar from "../../Components/Avatar/Avatar";
 
 function HomePage(props) {
 
@@ -105,7 +106,7 @@ function HomePage(props) {
         deActiveLoader();
     };
 
-    const visitRandomUser = (userID) => {
+    const visitProfilePage = (userID) => {
         navigate("/profile/" + userID);
     }
 
@@ -121,7 +122,7 @@ function HomePage(props) {
                                       showPostModal={showPostModal} timestamp={post.data.timestamp} postID={post.data.id}
                                       likePost={likePost} likes={post.likes} isLiked={post.likedByUser}
                                       randomUserLikeName={post.randomUserLikeName} randomUserLikeAvatar={post.randomUserLikeAvatar}
-                                      randomUserID={post.randomUserID} commentPost={commentPost} visitRandomUser={visitRandomUser}
+                                      randomUserID={post.randomUserID} commentPost={commentPost} visitProfilePage={visitProfilePage}
 
 
                         />
@@ -129,15 +130,16 @@ function HomePage(props) {
                 </div>
                 <div className="homePageSuggestionsContainer">
                     <div className="suggestionsAvatar">
-                            <img onClick={() => navigate("/profile/" + userInfo.userID)} alt={userInfo?.username} src={userInfo?.avatar} />
-                            <p onClick={() => navigate("/profile/" + userInfo.userID)}>{userInfo?.username}</p>
+                        <Avatar action={visitProfilePage} userID={userInfo?.userID} size="3.75rem"
+                                altText={userInfo?.username} image={userInfo?.avatar} />
+                            <p onClick={() => navigate("/profile/" + userInfo?.userID)}>{userInfo?.username}</p>
                     </div>
                     <div className="suggestions">
                         <div className="suggestionsHeader">
                             <p>Suggestions for you</p>
                         </div>
                         {userSuggestions?.map(user => (
-                            <Suggestion key={user.id} username={user.username} userID={user.id} avatar={user.avatar}
+                            <Suggestion action={visitProfilePage} key={user.id} username={user.username} userID={user.id} avatar={user.avatar}
                                         followUser={followUser}
                             />
                         ))}

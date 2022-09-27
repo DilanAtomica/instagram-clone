@@ -109,13 +109,6 @@
     align-items: center;
 }
 
-.postingModalProfile > img {
-    width: 1.5rem;
-    height: 1.5rem;
-    object-fit: cover;
-    border-radius: 999px;
-}
-
 .postingModalProfile > p {
     font-size: 16px;
     font-weight: 700;

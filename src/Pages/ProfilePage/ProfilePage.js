@@ -7,6 +7,7 @@ import {db} from "../../utils/firebase";
 import {AppContext} from "../../App";
 import ProfilePagePost from "../../Components/ProfilePage/ProfilePagePost";
 import {useNavigate, useParams} from "react-router-dom";
+import Avatar from "../../Components/Avatar/Avatar";
 
 
 function ProfilePage(props) {
@@ -103,7 +104,7 @@ function ProfilePage(props) {
     return (
         <div className="profilePage">
             <div className="profilePageInfoContainer">
-                <img src={profileInfo?.avatar} />
+                <Avatar image={profileInfo?.avatar} altText={profileInfo?.username} size="10rem" margin="0 10rem 0 10rem" />
                 <div className="profilePageInfo">
                     <div className="profilePageInfoTop">
                         <h1>{profileInfo?.username}</h1>

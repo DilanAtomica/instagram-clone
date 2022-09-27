@@ -40,7 +40,7 @@ function MessageModalContainer({userSuggestions, hideMessageModal}) {
             <div className="messageModal">
                 <div className="messageModalTop">
                     <h1>New Message</h1>
-                    <Button onClick={createChat} type="button" text="Next" fontSize="14" margin="0 1.5rem 0 0" />
+                    <Button action={createChat} type="button" text="Next" fontSize="14" margin="0 1.5rem 0 0" />
                 </div>
                 <div className="messageModalSuggestions">
                     <h2>Suggestions</h2>

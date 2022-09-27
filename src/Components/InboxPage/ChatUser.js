@@ -1,5 +1,6 @@
 import React from 'react';
 import "./ChatUser.css";
+import Avatar from "../Avatar/Avatar";
 
 function ChatUser({userID, username, avatar, showChosenChat}) {
 
@@ -9,7 +10,7 @@ function ChatUser({userID, username, avatar, showChosenChat}) {
 
     return (
         <div onClick={handleOnClick} className="chatUser">
-            <img alt={username} src={avatar} />
+            <Avatar altText={username} image={avatar} size="4rem" margin="0 0.75rem 0 1.25rem" />
             <h2>{username}</h2>
         </div>
     );

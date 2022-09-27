@@ -29,14 +29,6 @@
     margin-bottom: 0.5rem;
 }
 
-.suggestionsAvatar > img {
-    width: 3.75rem;
-    height: 3.75rem;
-    object-fit: cover;
-    border-radius: 999px;
-    cursor: pointer;
-}
-
 .suggestionsAvatar > p {
     font-size: 14px;
     font-weight: 700;

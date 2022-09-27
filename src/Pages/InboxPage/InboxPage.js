@@ -7,10 +7,14 @@ import {db} from "../../utils/firebase";
 import {AppContext} from "../../App";
 import ChatUser from "../../Components/InboxPage/ChatUser";
 import Message from "../../Components/InboxPage/Message";
+import Avatar from "../../Components/Avatar/Avatar";
+import {useNavigate} from "react-router-dom";
 
 function InboxPage(props) {
 
     const {userInfo, activateLoader, deActiveLoader} = useContext(AppContext);
+
+    const navigate = useNavigate();
 
     const [inputMessage, setInputMessage] = useState("");
     const [userSuggestions, setUserSuggestions] = useState(null);
@@ -120,7 +124,10 @@ function InboxPage(props) {
         setInputMessage("");
 
         await showChosenChat(currentChat.userID, currentChat.username, currentChat.avatar);
+    };
 
+    const visitProfilePage = (userID) => {
+        navigate("/profile/" + userID);
     }
 
     return (
@@ -141,7 +148,7 @@ function InboxPage(props) {
                 </div>
                 <div className="inboxRight">
                     <div className="inboxRight-top">
-                        <img src={currentChat?.avatar} />
+                        <Avatar action={visitProfilePage} userID={currentChat?.userID} image={currentChat?.avatar} altText={currentChat?.username} size="1.5rem" margin="0 0.5rem 0 2rem" />
                         <h2>{currentChat?.username}</h2>
                     </div>
                     <div className="inboxRight-bottom">

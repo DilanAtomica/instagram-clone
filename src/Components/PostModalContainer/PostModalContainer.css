@@ -52,15 +52,6 @@
     margin-top: 1rem;
 }
 
-.postModalRightHeader > img {
-    object-fit: cover;
-    height: 2.5rem;
-    width: 2.5rem;
-    border-radius: 999px;
-    margin: 0 0.75rem 0 1rem;
-    cursor: pointer;
-}
-
 .postModalRightHeader > h1 {
     font-weight: 600;
     font-size: 0.9rem;
@@ -73,15 +64,6 @@
     margin-right: 0.5rem;
 }
 
-.postModalRightHeader > button {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #0095f6;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
 .postModalCommentsContainer {
     padding: 1rem 0 0 1rem;
     max-height: 33rem;
@@ -92,8 +74,6 @@
 .postModalCommentsContainer::-webkit-scrollbar {
     display: none;
 }
-
-
 
 .postModalActions {
     display: flex;

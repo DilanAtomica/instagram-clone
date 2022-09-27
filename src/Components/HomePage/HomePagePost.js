@@ -6,9 +6,10 @@ import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {useNavigate} from "react-router-dom";
 import Button from "../Buttons/Button";
+import Avatar from "../Avatar/Avatar";
 
 function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked,
-                          randomUserLikeName, randomUserLikeAvatar, randomUserID, commentPost, visitRandomUser}) {
+                          randomUserLikeName, randomUserLikeAvatar, randomUserID, commentPost, visitProfilePage}) {
 
     const navigate = useNavigate();
 
@@ -41,14 +42,14 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
     };
 
     const handleOnUserClick = () => {
-        visitRandomUser(randomUserID);
+        visitProfilePage(randomUserID);
     }
 
     return (
         <div className="homePagePost">
             <div className="homePagePostHeader">
                 <div className="homePagePostHeader-left">
-                    <img onClick={() => navigate("/profile/" + publisherID)} src={avatar} alt={username} />
+                    <Avatar action={visitProfilePage} userID={publisherID} image={avatar} altText={username} size="2.25rem" />
                     <span className="homePagePostHeader-name" onClick={() => navigate("/profile/" + publisherID)}>{username}</span>
                 </div>
                 <div className="homePagePostHeader-right">
@@ -66,12 +67,11 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                     <FaRegComment onClick={focusInput} id="commentIcon" style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
                 </div>
                 <div className="homePagePostLikes">
-                    {randomUserLikeName && <img onClick={handleOnUserClick} alt={randomUserLikeName} src={randomUserLikeAvatar} />}
+                    {randomUserLikeName && <Avatar action={visitProfilePage} userID={randomUserID} image={randomUserLikeAvatar} altText={randomUserLikeName} size="1.5rem" />}
                     {randomUserLikeName
                         ? <p>Liked by <span onClick={handleOnUserClick}>{randomUserLikeName}</span> and <span>{likes} others</span></p>
                         : <p><span>{likes} likes</span></p>
                     }
-
 
                 </div>
                 <p className="homePagePostTitle"><span onClick={() => navigate("/profile/" + publisherID)}>{username}</span> {text}</p>

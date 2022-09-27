@@ -10,6 +10,7 @@ import {v4} from "uuid";
 import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import Button from "../Buttons/Button";
+import Avatar from "../Avatar/Avatar";
 
 function PostingModalContainer(props) {
 
@@ -47,6 +48,11 @@ function PostingModalContainer(props) {
         hidePostingModal(e);
     }
 
+    const visitProfilePage = (userID) => {
+        setShowPostingModal(null);
+        navigate("/profile/" + userID);
+    }
+
     return (
         <div onClick={handleOnClick} className="postingModalContainer" id="postingModalContainer">
             <form onSubmit={createPost} className="postingModal">
@@ -66,7 +72,7 @@ function PostingModalContainer(props) {
                     </div>
                     <div className="postingModalContent-right">
                         <div className="postingModalProfile">
-                            <img alt={userInfo?.username} src={userInfo?.avatar} />
+                            <Avatar action={visitProfilePage} userID={userInfo?.userID} image={userInfo?.avatar} altText={userInfo?.username} size="1.5rem" />
                             <p>{userInfo?.username}</p>
                         </div>
                         <textarea onChange={(e) => setTextInput(e.target.value)}
