@@ -1,13 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "./HomePage.css";
 import {AppContext} from "../../App";
-import HomePagePost from "../../Components/HomePage/HomePagePost";
 import {collection, getDocs, doc, getDoc} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import Suggestion from "../../Components/HomePage/Suggestion";
 import {useNavigate} from "react-router-dom";
 import Avatar from "../../Components/Avatar/Avatar";
 import Username from "../../Components/Username/Username";
+import HomePagePostsContainer from "../../Components/HomePage/HomePagePostsContainer";
+import HomePageSuggestionsContainer from "../../Components/HomePage/HomePageSuggestionsContainer";
 
 function HomePage(props) {
 
@@ -114,41 +115,12 @@ function HomePage(props) {
     return (
         <div className="homePage">
             <div className="homePageContainer">
-                <div className="homePagePosts">
-                    {followingPosts?.map(post => (
-                        <HomePagePost key={post.data.id} image={post.data.image} text={post.data.text}
-                                      username={post.username} avatar={post.avatar} publisherID={post.data.publisherID}
-                                      showPostModal={showPostModal} timestamp={post.data.timestamp} postID={post.data.id}
-                                      likePost={likePost} likes={post.likes} isLiked={post.likedByUser}
-                                      randomUserLikeName={post.randomUserLikeName} randomUserLikeAvatar={post.randomUserLikeAvatar}
-                                      randomUserID={post.randomUserID} commentPost={commentPost} visitProfilePage={visitProfilePage}
+                 <HomePagePostsContainer followingPosts={followingPosts} visitProfilePage={visitProfilePage} showPostModal={showPostModal}
+                                            likePost={likePost} commentPost={commentPost}/>
 
-
-                        />
-                    ))}
-                </div>
-                <div className="homePageSuggestionsContainer">
-                    <div className="suggestionsAvatar">
-                        <Avatar action={visitProfilePage} userID={userInfo?.userID} size="3.75rem"
-                                altText={userInfo?.username} image={userInfo?.avatar} />
-                        <Username visitProfilePage={visitProfilePage} username={userInfo?.username} userID={userInfo?.userID}
-                                  fontSize={14} margin="0 0 0 1rem"
-                        />
-
-                    </div>
-                    <div className="suggestions">
-                        <div className="suggestionsHeader">
-                            <p>Suggestions for you</p>
-                        </div>
-                        {userSuggestions?.map(user => (
-                            <Suggestion action={visitProfilePage} key={user.id} username={user.username} userID={user.id} avatar={user.avatar}
-                                        followUser={followUser}
-                            />
-                        ))}
-                    </div>
-                </div>
+                <HomePageSuggestionsContainer followUser={followUser} userSuggestions={userSuggestions} userInfo={userInfo}
+                                              visitProfilePage={visitProfilePage} />
             </div>
-
         </div>
     );
 }

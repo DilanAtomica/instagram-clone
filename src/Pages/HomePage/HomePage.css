@@ -13,57 +13,11 @@
     padding-top: 2rem;
 }
 
-.homePagePosts {
-    width: 28rem;
-}
-
-
-.homePageSuggestionsContainer {
-    flex: 1;
-    margin-left: 2rem;
-    max-width: max-content;
-    display: flex;
-    flex-direction: column;
-}
-
-.suggestionsAvatar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.suggestions {
-    display: flex;
-    flex-direction: column;
-}
-
-.suggestionsHeader {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.5rem;
-}
-
-.suggestionsHeader > p {
-    font-size: 14px;
-    font-weight: 700;
-    color: #8e8e8e;
-    margin-bottom: 0.5rem;
-}
 
 @media only screen and (max-width: 1100px) {
     .homePageContainer {
         justify-content: center;
         width: 100%;
-    }
-}
-
-@media only screen and (max-width: 700px) {
-    .homePageSuggestionsContainer {
-        display: none;
-    }
-
-    .homePagePosts {
-        width: 95%;
     }
 }
 
