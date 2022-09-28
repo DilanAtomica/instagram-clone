@@ -8,7 +8,7 @@ function Username({visitProfilePage, username, userID, fontSize, margin}) {
     }
 
     return (
-        <div onClick={handleOnClick} className="username" style={{fontSize: fontSize + "px", margin: margin}}>{username}</div>
+        <span onClick={handleOnClick} className="username" style={{fontSize: fontSize + "px", margin: margin}}>{username}</span>
     );
 }
 

@@ -19,7 +19,7 @@ function Suggestion({username, userID, avatar, followUser, action}) {
                           fontSize={14} margin="0 0 0 0.5rem"
                 />
             </div>
-            <Button action={handleOnClick} fontSize={"12"} text="Follow" type="button" />
+            <Button action={handleOnClick} fontSize={"12"} text="Follow" type="button" margin="0 0 0 0.5rem" />
         </div>
     );
 }

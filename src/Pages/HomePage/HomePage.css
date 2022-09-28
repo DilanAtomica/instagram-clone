@@ -21,6 +21,9 @@
 .homePageSuggestionsContainer {
     flex: 1;
     margin-left: 2rem;
+    max-width: max-content;
+    display: flex;
+    flex-direction: column;
 }
 
 .suggestionsAvatar {
@@ -45,6 +48,23 @@
     font-weight: 700;
     color: #8e8e8e;
     margin-bottom: 0.5rem;
+}
+
+@media only screen and (max-width: 1100px) {
+    .homePageContainer {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .homePageSuggestionsContainer {
+        display: none;
+    }
+
+    .homePagePosts {
+        width: 95%;
+    }
 }
 
 

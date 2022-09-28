@@ -11,5 +11,10 @@
     margin: auto;
     overflow: auto;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
+}
+
+.searchResultContainer > h1 {
+    margin-top: 10rem;
 }
