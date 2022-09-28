@@ -18,6 +18,7 @@ function NavBar(props) {
 
     const [inputFocused, setInputFocused] = useState(false);
     const [isAvatarClicked, setIsAvatarClicked] = useState(false);
+    const [searchInput, setSearchInput] = useState("");
 
     const {setUser, setShowPostingModal, userInfo} = useContext(AppContext);
     const navigate = useNavigate();
@@ -47,20 +48,25 @@ function NavBar(props) {
         await signOut(auth);
         setUser(null);
         navigate("/");
+    };
+
+    const handleOnSubmit = () => {
+        navigate("/result/" + searchInput);
     }
 
     return (
         <header className="navBar">
             <nav>
                 <img onClick={() => navigate("/home")} alt="logo" src={Logo} />
-                <div style={{paddingRight: inputFocused && "1.8rem"}} className="searchField">
-                    <input style={{paddingLeft: inputFocused && "1rem", paddingRight: inputFocused && "1rem"}}
+                <form onSubmit={handleOnSubmit} style={{paddingRight: inputFocused && "1.8rem"}} className="searchField">
+                    <input onChange={(e) => setSearchInput(e.target.value)}
+                           value={searchInput} style={{paddingLeft: inputFocused && "1rem", paddingRight: inputFocused && "1rem"}}
                            onBlur={() => setInputFocused(false)}
                            onFocus={() => setInputFocused(true)} type="text" placeholder="Search" />
                     {!inputFocused && <FiSearch id="searchIcon" />}
                     {inputFocused && <TiDelete id="searchExitIcon"
-                     onClick={(e) => e.currentTarget.previousElementSibling.previousElementSibling.blur()} />}
-                </div>
+                     onClick={(e) => e.currentTarget.previousElementSibling.previousElementSibling.blur()}/>}
+                </form>
                 <ul className="navigationLinks">
                     <li onClick={() => navigate("/home")}><AiOutlineHome /></li>
                     <li onClick={() => navigate("/inbox")}><FiSend /></li>

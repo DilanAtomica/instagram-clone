@@ -1,0 +1,15 @@
+.searchResultPage {
+    background-color: #FAFAFA;
+    width: 100%;
+    min-height: calc(100vh - 4rem);
+    margin-top: 4rem;
+    position: relative;
+}
+
+.searchResultContainer {
+    width: 60rem;
+    margin: auto;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+}

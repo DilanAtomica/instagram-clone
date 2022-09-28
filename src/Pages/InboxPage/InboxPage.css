@@ -34,12 +34,6 @@
     border-bottom: 1px solid lightgrey;
 }
 
-.inboxLeft-top > h1 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-right: 7rem;
-}
-
 .inboxLeft-top > #pencilIcon {
     font-size: 1.7rem;
     margin-right: 1rem;

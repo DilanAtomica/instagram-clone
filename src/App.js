@@ -14,6 +14,7 @@ import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import ExplorePage from "./Pages/ExplorePage/ExplorePage";
 import InboxPage from "./Pages/InboxPage/InboxPage";
 import LoadingSpinner from "./Components/LoadingSpinner/LoadingSpinner";
+import SearchResultPage from "./Pages/SearchResultPage/SearchResultPage";
 
 export const AppContext = createContext();
 
@@ -260,6 +261,7 @@ function App() {
               <Route path="/profile/:userID/settings" element={<> <NavBar /> <SettingsPage /> </>} />
               <Route path="/explore" element={<> <NavBar /> <ExplorePage /> </>} />
               <Route path="/inbox" element={<> <NavBar /> <InboxPage /> </>} />
+              <Route path="/result/:search" element={<> <NavBar /> <SearchResultPage /> </>} />
 
             </Routes>
           </BrowserRouter>

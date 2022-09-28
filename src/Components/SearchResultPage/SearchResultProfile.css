@@ -1,0 +1,15 @@
+.searchResultProfile {
+    margin-top: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    height: max-content;
+    background-color: white;
+    border: 1px solid lightgrey;
+    padding: 1rem;
+    border-radius: 10px;
+}
+

@@ -136,7 +136,8 @@ function InboxPage(props) {
             <div className="inboxContainer">
                 <div className="inboxLeft">
                     <div className="inboxLeft-top">
-                        <h1>Dilan</h1>
+                        <Username visitProfilePage={visitProfilePage} username={userInfo?.username}
+                                  userID={currentChat?.userID} fontSize={18} margin="0 7rem 0 0" />
                         <HiOutlinePencilAlt onClick={() => setShowMessageModal(true)} id="pencilIcon"/>
                     </div>
                     <div className="inboxLeft-bottom">
