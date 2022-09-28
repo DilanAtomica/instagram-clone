@@ -6,9 +6,9 @@
 
 .settingLabel {
     width: 10rem;
-    padding-right: 2.5rem;
     display: flex;
     justify-content: flex-end;
+    padding-right: 2.5rem;
     font-size: 1rem;
     font-weight: 600;
     color: #262626;
@@ -35,5 +35,18 @@
     font-weight: 400;
     color: #262626;
 }
+
+@media only screen and (max-width: 650px) {
+    .setting {
+        flex-direction: column;
+    }
+    .settingLabel {
+        width: max-content;
+        text-align: center;
+        padding: 0;
+        margin-bottom: 0.5rem;
+    }
+}
+
 
 

@@ -8,7 +8,7 @@
 
 .settingsContainer {
     margin: auto;
-    width: 50vw;
+    width: 40rem;
     height: max-content;
     padding-bottom: 2rem;
     outline: 1px solid lightgrey;
@@ -101,5 +101,30 @@
 .settingsContainer > button:hover {
     opacity: 0.8;
 }
+
+@media only screen and (max-width: 1200px) {
+    .settingsContainer {
+        width: 40rem;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .settingsContainer {
+        width: 30rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .settingsContainer {
+        width: 98%;
+    }
+
+    .settingsContainer > button {
+
+    }
+}
+
+
+
 
 
