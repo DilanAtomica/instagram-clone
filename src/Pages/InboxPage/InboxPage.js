@@ -10,6 +10,8 @@ import Message from "../../Components/InboxPage/Message";
 import Avatar from "../../Components/Avatar/Avatar";
 import {useNavigate} from "react-router-dom";
 import Username from "../../Components/Username/Username";
+import CurrentUserChatsContainer from "../../Components/InboxPage/CurrentUserChatsContainer";
+import ChatWindow from "../../Components/InboxPage/ChatWindow";
 
 function InboxPage(props) {
 
@@ -98,7 +100,7 @@ function InboxPage(props) {
         setCurrentChat({messages: messagesResult, username: username, avatar: avatar, userID: userID, docID: chatDocID});
     };
 
-    const handleOnSubmit = async(e) => {
+    const sendMessage = async(e) => {
         e.preventDefault();
         const messagesCollection = collection(db, "users", userInfo.userID, "chats", currentChat.docID, "messages");
         await addDoc(messagesCollection, {
@@ -133,42 +135,16 @@ function InboxPage(props) {
 
     return (
         <div className="inboxPage">
+
             <div className="inboxContainer">
-                <div className="inboxLeft">
-                    <div className="inboxLeft-top">
-                        <Username visitProfilePage={visitProfilePage} username={userInfo?.username}
-                                  userID={currentChat?.userID} fontSize={18} margin="0 7rem 0 0" />
-                        <HiOutlinePencilAlt onClick={() => setShowMessageModal(true)} id="pencilIcon"/>
-                    </div>
-                    <div className="inboxLeft-bottom">
-                        {chatUsers?.map(user => (
-                            <ChatUser key={user.userID} userID={user.userID} username={user.username} avatar={user.avatar}
-                                      showChosenChat={showChosenChat}
-                            />
-                        ))}
-                    </div>
-                </div>
-                <div className="inboxRight">
-                    <div className="inboxRight-top">
-                        <Avatar action={visitProfilePage} userID={currentChat?.userID} image={currentChat?.avatar} altText={currentChat?.username} size="1.5rem" margin="0 0.5rem 0 2rem" />
-                        <Username visitProfilePage={visitProfilePage} username={currentChat?.username}
-                                  userID={currentChat?.userID} fontSize={14} />
-                    </div>
-                    <div className="inboxRight-bottom">
-                        <div className="inboxRight-messageBox">
-                            {currentChat?.messages?.map(message => (
-                                <Message key={message?.id} text={message?.text} sentByUserID={message?.sentByUserID} userID={userInfo?.userID} />
-                            ))}
-                        </div>
-                        <form onSubmit={handleOnSubmit}>
-                            <input value={inputMessage} onChange={(e) => setInputMessage(e.target.value)}
-                                   type="text" placeholder="Send a message..."/>
-                        </form>
-                    </div>
-                </div>
+                <CurrentUserChatsContainer visitProfilePage={visitProfilePage} userInfo={userInfo} currentChat={currentChat}
+                                           setShowMessageModal={setShowMessageModal} chatUsers={chatUsers} showChosenChat={showChosenChat}/>
+
+                <ChatWindow visitProfilePage={visitProfilePage} currentChat={currentChat} userInfo={userInfo} inputMessage={inputMessage}
+                            setInputMessage={setInputMessage} sendMessage={sendMessage}/>
             </div>
-            {showMessageModal && <MessageModalContainer userSuggestions={userSuggestions} hideMessageModal={hideMessageModal}
-            />}
+
+            {showMessageModal && <MessageModalContainer userSuggestions={userSuggestions} hideMessageModal={hideMessageModal}/>}
         </div>
     );
 }
