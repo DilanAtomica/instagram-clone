@@ -14,7 +14,7 @@
 
 .postingModal {
     height: 77.5vh;
-    width: 67.5vw;
+    width: 65rem;
     background-color: white;
     border-radius: 10px;
     display: flex;
@@ -26,4 +26,31 @@
     width: 100%;
     flex: 1;
     display: flex;
+}
+
+@media only screen and (max-width: 1100px) {
+    .postingModal {
+        width: 50rem;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .postingModal {
+        width: 40rem;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .postingModal {
+        width: 30rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .postingModal {
+        width: 100%;
+    }
+    .postingModalContent {
+        flex-direction: column;
+    }
 }
