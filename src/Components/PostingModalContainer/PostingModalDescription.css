@@ -1,0 +1,26 @@
+.postingModalDescription {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem;
+    background-color: white;
+    border-left: 1px solid lightgrey;
+    border-bottom-right-radius: 10px;
+}
+
+.postingModalProfile {
+    display: flex;
+    align-items: center;
+}
+
+.postingModalDescription > textarea {
+    outline: none;
+    border: none;
+    margin-top: 1rem;
+    resize: none;
+    border-bottom: 1px solid lightgrey;
+}
+
+.postingModalDescription > textarea::placeholder {
+    font-size: 1rem;
+}

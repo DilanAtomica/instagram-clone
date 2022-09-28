@@ -1,7 +1,5 @@
 import React from 'react';
 import "./PostingModalContainer.css";
-import {TiDeleteOutline} from "react-icons/ti";
-import {BiUserCircle} from "react-icons/bi";
 import {useContext, useState} from "react";
 import {AppContext} from "../../App";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
@@ -9,9 +7,9 @@ import {db, storage} from "../../utils/firebase";
 import {v4} from "uuid";
 import {addDoc, collection, serverTimestamp} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
-import Button from "../Buttons/Button";
-import Avatar from "../Avatar/Avatar";
-import Username from "../Username/Username";
+import PostingModalHeader from "./PostingModalHeader";
+import PostingModalUpload from "./PostingModalUpload";
+import PostingModalDescription from "./PostingModalDescription";
 
 function PostingModalContainer(props) {
 
@@ -22,7 +20,7 @@ function PostingModalContainer(props) {
     const [imageInput, setImageInput] = useState("");
     const [textInput, setTextInput] = useState(null);
 
-    const handleImageChange = async(e) => {
+    const uploadImage = async(e) => {
         const imageRef = ref(storage, `images/${e.target.files[0].name + v4()}`);
         await uploadBytes(imageRef, e.target.files[0]);
         const url = await getDownloadURL(imageRef);
@@ -57,30 +55,10 @@ function PostingModalContainer(props) {
     return (
         <div onClick={handleOnClick} className="postingModalContainer" id="postingModalContainer">
             <form onSubmit={createPost} className="postingModal">
-                <div className="postingModalHeader">
-                    <h2>Create a new post</h2>
-                    <Button type="submit" text="Share" fontSize="14" padding="0.75rem 0.5rem 0.5rem" />
-                </div>
+                <PostingModalHeader />
                 <div className="postingModalContent">
-                    <div className="postingModalContent-left">
-                        {imageInput.length > 1 ? <img alt="Upload image" src={imageInput} /> :
-                            <label id="imageInputLabel" htmlFor="imageInput">
-                                Upload image
-                                <input id="imageInput" onChange={handleImageChange} className="profile-imageInput" type="file" />
-                            </label>
-                        }
-
-                    </div>
-                    <div className="postingModalContent-right">
-                        <div className="postingModalProfile">
-                            <Avatar action={visitProfilePage} userID={userInfo?.userID} image={userInfo?.avatar}
-                                    altText={userInfo?.username} size="1.5rem" margin="0 0.5rem 0.5rem 0" />
-                            <Username visitProfilePage={visitProfilePage} username={userInfo?.username}
-                                      userID={userInfo?.userID} fontSize={16} margin="0 0 0.5rem 0"/>
-                        </div>
-                        <textarea onChange={(e) => setTextInput(e.target.value)}
-                                  rows="10" placeholder="Write a subtitle..." />
-                    </div>
+                    <PostingModalUpload  imageInput={imageInput} uploadImage={uploadImage}/>
+                    <PostingModalDescription visitProfilePage={visitProfilePage} userInfo={userInfo} setTextInput={setTextInput}/>
                 </div>
             </form>
         </div>
