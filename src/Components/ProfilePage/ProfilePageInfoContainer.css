@@ -1,0 +1,58 @@
+.profilePageInfoContainer {
+    width: 60rem;
+    margin: auto;
+    display: flex;
+    padding-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.profilePageInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.profilePageInfoTop {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.profilePageInfoTop > h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-right: 1rem;
+}
+
+.profilePageInfoTop > button {
+    background-color: #0095f6;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.profilePageInfoTop > button:hover {
+    opacity: 0.8;
+}
+
+.profilePageInfoMiddle {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.profilePageInfoMiddle > p {
+    font-size: 1rem;
+    margin-right: 2rem;
+}
+
+.profilePageInfoMiddle > p > span {
+    font-weight: 500;
+}
+
+.profilePageDescription {
+
+}

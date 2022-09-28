@@ -262,7 +262,6 @@ function App() {
               <Route path="/explore" element={<> <NavBar /> <ExplorePage /> </>} />
               <Route path="/inbox" element={<> <NavBar /> <InboxPage /> </>} />
               <Route path="/result/:search" element={<> <NavBar /> <SearchResultPage /> </>} />
-
             </Routes>
           </BrowserRouter>
         </div>

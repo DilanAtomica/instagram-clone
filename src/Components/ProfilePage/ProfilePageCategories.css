@@ -1,0 +1,31 @@
+.profilePageCategories {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid lightgrey;
+    width: 60rem;
+    margin: auto;
+}
+
+.profilePageCategories > button {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 1rem;
+    background: none;
+    transform: translateY(-1px);
+    padding-top: 0.5rem;
+    margin-right: 4rem;
+    color: #8e8e8e;
+    cursor: pointer;
+}
+
+.profilePageButtonActive {
+    border-top: 1px solid black !important;
+    color: #262626 !important;
+}
+
+.profilePageCategories > button > #gridIcon {
+    margin-right: 0.5rem;
+}

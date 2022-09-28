@@ -14,10 +14,9 @@ function HomePageSuggestionsContainer({userSuggestions, userInfo, visitProfilePa
                           fontSize={14} margin="0 0 0 1rem"/>
             </div>
 
+            <p className="suggestionsHeader">Suggestions for you</p>
+
             <div className="suggestions">
-                <div className="suggestionsHeader">
-                    <p>Suggestions for you</p>
-                </div>
                 {userSuggestions?.map(user => (
                     <Suggestion action={visitProfilePage} key={user.id} username={user.username} userID={user.id} avatar={user.avatar}
                                 followUser={followUser}/>

@@ -3,10 +3,7 @@ import "./HomePage.css";
 import {AppContext} from "../../App";
 import {collection, getDocs, doc, getDoc} from "firebase/firestore";
 import {db} from "../../utils/firebase";
-import Suggestion from "../../Components/HomePage/Suggestion";
 import {useNavigate} from "react-router-dom";
-import Avatar from "../../Components/Avatar/Avatar";
-import Username from "../../Components/Username/Username";
 import HomePagePostsContainer from "../../Components/HomePage/HomePagePostsContainer";
 import HomePageSuggestionsContainer from "../../Components/HomePage/HomePageSuggestionsContainer";
 

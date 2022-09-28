@@ -1,13 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react';
 import "./ProfilePage.css";
-import {BsGrid3X3} from "react-icons/bs";
-import {HiOutlineHeart} from "react-icons/hi";
 import {collection, doc, getDoc, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import {AppContext} from "../../App";
-import ProfilePagePost from "../../Components/ProfilePage/ProfilePagePost";
 import {useNavigate, useParams} from "react-router-dom";
-import Avatar from "../../Components/Avatar/Avatar";
+import ProfilePageInfoContainer from "../../Components/ProfilePage/ProfilePageInfoContainer";
+import ProfilePageCategories from "../../Components/ProfilePage/ProfilePageCategories";
+import ProfilePagePostsContainer from "../../Components/ProfilePage/ProfilePagePostsContainer";
 
 
 function ProfilePage(props) {
@@ -97,45 +96,32 @@ function ProfilePage(props) {
     const handleUnFollowClick = () => {
         unFollowUser(userID);
         setAlreadyFollowing(false);
+    };
+
+    const visitProfileSettings = (userID) => {
+        navigate("/profile/" + userInfo?.userID + "/settings");
+    }
+
+    const showOwnPosts = () => {
+        setPostsButton(true);
+    }
+
+    const showFavorites = () => {
+        setPostsButton(false);
     }
 
 
 
     return (
         <div className="profilePage">
-            <div className="profilePageInfoContainer">
-                <Avatar image={profileInfo?.avatar} altText={profileInfo?.username} size="10rem" margin="0 7rem 0 4rem" />
-                <div className="profilePageInfo">
-                    <div className="profilePageInfoTop">
-                        <h1>{profileInfo?.username}</h1>
-                        {userID === userInfo?.userID
-                            ? <button onClick={() => navigate("/profile/" + userInfo?.userID + "/settings")} type="button">Edit Profile</button>
-                            : alreadyFollowing ? <button onClick={handleUnFollowClick} type="button">Unfollow</button>
-                            : <button onClick={handleFollowClick} type="button">Follow</button>
-                        }
-                    </div>
-                    <div className="profilePageInfoMiddle">
-                        <p><span>{posts?.length}</span> Posts</p>
-                        <p><span>{profileInfo?.followerCount || 0}</span> Followers</p>
-                        <p><span>{followingCount}</span> Following</p>
-                    </div>
-                    <p className="profilePageDescription">{profileInfo?.description}</p>
-                </div>
-            </div>
-            <div className="profilePagePostsContainer">
-                <div className="profilePageCategories">
-                    <button onClick={() => setPostsButton(true)} style={{borderTop: postsButton && "1px solid black", color: postsButton && "#262626"}}
-                            type="button"><BsGrid3X3 id="gridIcon" /> Posts</button>
-                    <button onClick={() => setPostsButton(false)} style={{borderTop: !postsButton && "1px solid black", color: !postsButton && "#262626"}}
-                            type="button"><HiOutlineHeart id="gridIcon" /> Favorites</button>
-                </div>
-                <div className="profilePagePosts">
-                    {posts.map(post => (
-                        <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} postID={post.id}
-                                         publisherID={post.publisherID}/>
-                    ))}
-                </div>
-            </div>
+            <ProfilePageInfoContainer profileInfo={profileInfo} userID={userID} alreadyFollowing={alreadyFollowing}
+                                      handleFollowClick={handleFollowClick} handleUnFollowClick={handleUnFollowClick}
+                                      userInfo={userInfo} visitProfileSettings={visitProfileSettings} posts={posts}
+                                      followingCount={followingCount}/>
+
+            <ProfilePageCategories showOwnPosts={showOwnPosts} showFavorites={showFavorites} postsButton={postsButton} />
+
+            <ProfilePagePostsContainer posts={posts} />
 
         </div>
     );

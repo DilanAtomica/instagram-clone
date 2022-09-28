@@ -1,0 +1,8 @@
+.profilePagePostsContainer {
+    width: 60rem;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+

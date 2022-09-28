@@ -18,8 +18,9 @@
 }
 
 .suggestionsHeader {
-    display: flex;
-    justify-content: space-between;
+    font-size: 14px;
+    color: #8e8e8e;
+    font-weight: 700;
     margin-top: 0.5rem;
 }
 
