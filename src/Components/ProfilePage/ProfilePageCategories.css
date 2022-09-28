@@ -29,3 +29,10 @@
 .profilePageCategories > button > #gridIcon {
     margin-right: 0.5rem;
 }
+
+
+@media only screen and (max-width: 1000px) {
+    .profilePageCategories {
+        width: 100%;
+    }
+}
