@@ -23,7 +23,7 @@ function ProfilePageInfoContainer({profileInfo, userID, alreadyFollowing, handle
                 <div className="profilePageInfoMiddle">
                     <p><span>{posts?.length}</span> Posts</p>
                     <p><span>{profileInfo?.followerCount || 0}</span> Followers</p>
-                    <p><span>{followingCount}</span> Following</p>
+                    <p style={{marginRight: "0"}}><span>{followingCount}</span> Following</p>
                 </div>
                 <p className="profilePageDescription">{profileInfo?.description}</p>
             </div>
