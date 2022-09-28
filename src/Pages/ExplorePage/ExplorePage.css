@@ -10,11 +10,19 @@
     width: 60rem;
     margin: auto;
     overflow: auto;
-}
-
-.explorePosts {
-    width: 100%;
-    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
 }
+
+@media only screen and (max-width: 1000px) {
+    .explorePagePostsContainer {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .explorePagePostsContainer {
+        justify-content: center;
+    }
+}
+

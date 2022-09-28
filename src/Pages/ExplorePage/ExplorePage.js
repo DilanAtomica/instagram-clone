@@ -44,12 +44,10 @@ function ExplorePage(props) {
     return (
         <div className="explorePage">
             <div className="explorePagePostsContainer">
-                <div className="explorePosts">
                     {explorePosts?.map(post => (
                         <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} postID={post.id}
                                          publisherID={post.publisherID}/>
                     ))}
-                </div>
             </div>
         </div>
     );

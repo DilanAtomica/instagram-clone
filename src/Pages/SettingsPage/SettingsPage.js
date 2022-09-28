@@ -70,7 +70,7 @@ function SettingsPage(props) {
                 <Setting defaultValue={inputValues.inputUsername} labelName="Username" handleInputOnChange={handleInputOnChange}  />
                 <Setting defaultValue={inputValues.inputEmail} labelName="Email" handleInputOnChange={handleInputOnChange} />
                 <Setting defaultValue={inputValues.inputDescription} labelName="Description" handleInputOnChange={handleInputOnChange} />
-                <button type="submit">Submit</button>
+                <button type="submit">Save Changes</button>
 
 
             </form>
