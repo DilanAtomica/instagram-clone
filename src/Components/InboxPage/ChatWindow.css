@@ -7,16 +7,17 @@
 
 .chatWindowHeader {
     width: 100%;
-    height: 3.45rem;
+    min-height: 3.45rem;
     display: flex;
     align-items: center;
     border-bottom: 1px solid lightgrey;
 }
 
 .chatWindowFooter {
-    flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 3rem;
+    margin-bottom: 0.5rem;
 }
 
 .chatWindowMessages {
@@ -25,12 +26,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    overflow-y: scroll;
+    margin-bottom: 2rem;
 }
 
 .chatWindowFooter > form {
     width: 100%;
-    height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,4 +43,10 @@
     border: 1px solid lightgrey;
     padding: 0.75rem 1rem;
     outline: none;
+}
+
+@media only screen and (max-width: 1000px) {
+    .inboxContainer {
+        width: 100%;
+    }
 }

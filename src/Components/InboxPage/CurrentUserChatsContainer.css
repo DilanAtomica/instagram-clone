@@ -23,3 +23,16 @@
     height: calc(100% - 3.5rem);
     width: 100%;
 }
+
+@media only screen and (max-width: 600px) {
+    .currentUserChatsContainer {
+        width: 10rem;
+    }
+    .currentUserChatsHeader {
+        justify-content: space-around;
+    }
+
+    .currentUserChatsHeader > span {
+        margin: 0 0.5rem 0 0.5rem !important;
+    }
+}
