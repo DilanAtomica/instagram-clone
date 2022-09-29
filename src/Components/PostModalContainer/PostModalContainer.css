@@ -26,9 +26,10 @@
 .postModalLeft {
     height: 100%;
     background-color: black;
-    width: max-content;
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: max-content;
 }
 
 .postModalLeft > img {
@@ -118,12 +119,35 @@
 @media only screen and (max-width: 1150px) {
     .postModal {
         flex-direction: column;
-        height: 100%;
+        height: max-content;
     }
     .postModalRight {
         width: 100%;
     }
+
 }
+
+@media only screen and (max-width: 1150px) {
+    .postModalCommentsContainer {
+        max-height: 7.5rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .postModalCommentsContainer {
+        max-height: 5rem;
+    }
+
+    .postModalLeft > img {
+        max-height: 15rem;
+    }
+
+    .postModalLeft {
+        width: 100%;
+    }
+}
+
+
 
 
 
