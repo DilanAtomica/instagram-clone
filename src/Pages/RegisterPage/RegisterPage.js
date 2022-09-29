@@ -49,8 +49,8 @@ function RegisterPage(props) {
     }
 
     return (
-        <div className="registerPage">
-            <div className="registerContainer">
+        <main className="registerPage">
+            <section className="registerContainer">
                 <img alt="logo" src={Logo} />
                 <form onSubmit={handleSubmit(submitForm)}>
                     <input {...register("email")} type="email" placeholder="Email" />
@@ -63,9 +63,9 @@ function RegisterPage(props) {
                     <p>{errors.confirmPassword?.message}</p>
                     <button type="submit">Register</button>
                 </form>
-            </div>
+            </section>
             <p>Already have an account? <a href="/">Log in now</a></p>
-        </div>
+        </main>
     );
 }
 

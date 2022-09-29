@@ -39,8 +39,8 @@ function LoginPage(props) {
     }
 
     return (
-        <div className="loginPage">
-            <div className="loginContainer">
+        <main className="loginPage">
+            <section className="loginContainer">
                 <img alt="logo" src={Logo} />
                 <form onSubmit={handleSubmit(submitForm)}>
                     <input {...register("email")} type="email" placeholder="Email" />
@@ -49,9 +49,9 @@ function LoginPage(props) {
                     <p>{errors.password?.message}</p>
                     <button type="submit">Log in</button>
                 </form>
-            </div>
+            </section>
                 <p>Dont have an account? <a href="/register">Register now</a></p>
-        </div>
+        </main>
     );
 }
 
