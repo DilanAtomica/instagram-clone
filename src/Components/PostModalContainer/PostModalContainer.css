@@ -13,7 +13,7 @@
 }
 
 .postModal {
-    width: 100vw;
+    width: max-content;
     height: 90vh;
     margin: auto;
     position: absolute;
@@ -130,6 +130,16 @@
 @media only screen and (max-width: 1150px) {
     .postModalCommentsContainer {
         max-height: 7.5rem;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .postModalLeft > img {
+        max-height: 35rem;
+    }
+
+    .postModalLeft {
+        width: 100%;
     }
 }
 
