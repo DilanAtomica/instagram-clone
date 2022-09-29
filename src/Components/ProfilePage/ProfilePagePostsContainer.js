@@ -4,12 +4,14 @@ import ProfilePagePost from "./ProfilePagePost";
 
 function ProfilePagePostsContainer({posts}) {
     return (
-        <div className="profilePagePostsContainer">
+        <section>
+        <ul className="profilePagePostsContainer">
             {posts.map(post => (
                 <ProfilePagePost key={post.id} image={post.image} text={post.text} timestamp={post.timestamp} postID={post.id}
                                  publisherID={post.publisherID}/>
             ))}
-        </div>
+        </ul>
+        </section>
     );
 }
 

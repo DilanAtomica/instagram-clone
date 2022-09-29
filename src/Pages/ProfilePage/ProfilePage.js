@@ -113,7 +113,7 @@ function ProfilePage(props) {
 
 
     return (
-        <div className="profilePage">
+        <main className="profilePage">
             <ProfilePageInfoContainer profileInfo={profileInfo} userID={userID} alreadyFollowing={alreadyFollowing}
                                       handleFollowClick={handleFollowClick} handleUnFollowClick={handleUnFollowClick}
                                       userInfo={userInfo} visitProfileSettings={visitProfileSettings} posts={posts}
@@ -123,7 +123,7 @@ function ProfilePage(props) {
 
             <ProfilePagePostsContainer posts={posts} />
 
-        </div>
+        </main>
     );
 }
 

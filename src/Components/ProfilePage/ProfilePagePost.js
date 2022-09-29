@@ -11,7 +11,7 @@ function ProfilePagePost({image, text, timestamp, postID, publisherID}) {
     }
 
     return (
-        <img className="profilePagePost" onClick={handleOnClick} src={image}  alt={text}/>
+        <li><img className="profilePagePost" onClick={handleOnClick} src={image}  alt={text}/></li>
     );
 }
 

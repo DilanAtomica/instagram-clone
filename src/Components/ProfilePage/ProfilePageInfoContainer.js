@@ -9,7 +9,7 @@ function ProfilePageInfoContainer({profileInfo, userID, alreadyFollowing, handle
         visitProfileSettings(userInfo?.userID);
     }
     return (
-        <div className="profilePageInfoContainer">
+        <section className="profilePageInfoContainer">
             <Avatar image={profileInfo?.avatar} altText={profileInfo?.username} size="10rem" margin="0 7rem 0 4rem" />
             <div className="profilePageInfo">
                 <div className="profilePageInfoTop">
@@ -27,7 +27,7 @@ function ProfilePageInfoContainer({profileInfo, userID, alreadyFollowing, handle
                 </div>
                 <p className="profilePageDescription">{profileInfo?.description}</p>
             </div>
-        </div>
+        </section>
     );
 }
 

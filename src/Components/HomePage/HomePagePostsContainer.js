@@ -4,6 +4,7 @@ import HomePagePost from "./HomePagePost";
 
 function HomePagePostsContainer({followingPosts, visitProfilePage, likePost, commentPost, showPostModal}) {
     return (
+        <section>
         <ul className="homePagePostsContainer">
             {followingPosts?.map(post => (
                 <HomePagePost key={post.data.id} image={post.data.image} text={post.data.text}
@@ -14,6 +15,7 @@ function HomePagePostsContainer({followingPosts, visitProfilePage, likePost, com
                               randomUserID={post.randomUserID} commentPost={commentPost} visitProfilePage={visitProfilePage}/>
             ))}
         </ul>
+        </section>
     );
 }
 
