@@ -1,6 +1,6 @@
 import './App.css';
 import {createContext, useEffect, useState} from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
@@ -249,7 +249,7 @@ function App() {
       }}>
         <div className="App">
             {loading && <LoadingSpinner />}
-            <BrowserRouter>
+            <HashRouter>
                 {postModal &&
                     <PostModalContainer image={postModal.image} text={postModal.text} timestamp={postModal.timestamp}
                                         postID={postModal.postID} publisherID={postModal.publisherID} publisherName={postModal.publisherName}
@@ -270,7 +270,7 @@ function App() {
               <Route path="/result/:search" element={<> <NavBar /> <SearchResultPage /> </>} />
               <Route path="/error" element={<> <NavBar /> <ErrorPage /> </>} />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </div>
       </AppContext.Provider>
   );
