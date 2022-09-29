@@ -7,6 +7,8 @@ import {db, storage} from "../../utils/firebase";
 import {v4} from "uuid";
 import Setting from "../../Components/SettingsPage/Setting";
 import {doc, updateDoc} from "firebase/firestore";
+import Avatar from "../../Components/Avatar/Avatar";
+import Username from "../../Components/Username/Username";
 
 function SettingsPage(props) {
 
@@ -52,14 +54,16 @@ function SettingsPage(props) {
     }
 
     return (
-        <div className="settingsPage">
+        <main className="settingsPage">
+            <section>
             <form onSubmit={handleOnSubmit} className="settingsContainer">
                 <div className="settingAvatar">
                     <div className="settingCurrentAvatar">
-                        <img alt={userInfo?.username} src={inputValues.inputAvatar || userInfo?.avatar} />
+                        <Avatar altText={userInfo?.username} image={inputValues.inputAvatar || userInfo?.avatar} size="3rem"/>
                     </div>
+
                     <div className="settingInputAvatar">
-                        <h1>{userInfo?.username}</h1>
+                        <h1><Username fontSize={20} margin="0 0 0.25rem 0" username={userInfo?.username} userID={userInfo?.userID} /></h1>
                         <label id="avatarInputLabel" htmlFor="avatarInput">
                             Change avatar
                         <input onChange={handleAvatarChange} id="avatarInput" type="file" />
@@ -71,10 +75,9 @@ function SettingsPage(props) {
                 <Setting defaultValue={inputValues.inputEmail} labelName="Email" handleInputOnChange={handleInputOnChange} />
                 <Setting defaultValue={inputValues.inputDescription} labelName="Description" handleInputOnChange={handleInputOnChange} />
                 <button type="submit">Save Changes</button>
-
-
             </form>
-        </div>
+            </section>
+        </main>
     );
 }
 
