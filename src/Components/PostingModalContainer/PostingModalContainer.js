@@ -53,7 +53,7 @@ function PostingModalContainer(props) {
     }
 
     return (
-        <div onClick={handleOnClick} className="postingModalContainer" id="postingModalContainer">
+        <section onClick={handleOnClick} className="postingModalContainer" id="postingModalContainer">
             <form onSubmit={createPost} className="postingModal">
                 <PostingModalHeader />
                 <div className="postingModalContent">
@@ -61,7 +61,7 @@ function PostingModalContainer(props) {
                     <PostingModalDescription visitProfilePage={visitProfilePage} userInfo={userInfo} setTextInput={setTextInput}/>
                 </div>
             </form>
-        </div>
+        </section>
     );
 }
 
