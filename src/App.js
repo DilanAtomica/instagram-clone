@@ -64,6 +64,12 @@ function App() {
                     else return -1;
                 });
 
+                for(let j = 0; j < commentsResults.length; j++) {
+                    const commenterDoc = doc(db, "users", commentsResults[j].commenterID);
+                    const commenterData = await getDoc(commenterDoc);
+                    const commenterResult = commenterData.data();
+                    commentsResults[j] = {...commentsResults[j], commenterAvatar: commenterResult.avatar};
+                }
 
                 const likesCollection = collection(db, "users", publisherID, "posts", postID, "likes");
                 const likesData = await getDocs(likesCollection);
@@ -88,6 +94,7 @@ function App() {
                 });
             }
         }
+        deActiveLoader();
     }
 
     const hidePostModal = (e) => {

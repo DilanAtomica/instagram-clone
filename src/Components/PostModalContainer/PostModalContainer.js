@@ -112,9 +112,9 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                     </div>
 
                     {comments.map(comment => (
-                        <PostModalComment key={comment.id} commenterAvatar={comment.commenterAvatar} commenterName={comment.commenterName}
-                                          commentID={comment.id} commenterID={comment.commenterID} comment={comment.comment}
-                                          publisherID={publisherID} postID={postID} replyToComment={replyToComment} timestamp={comment.timestamp}
+                        <PostModalComment key={comment?.id} commenterAvatar={comment?.commenterAvatar} commenterName={comment?.commenterName}
+                                          commentID={comment.id} commenterID={comment?.commenterID} comment={comment?.comment}
+                                          publisherID={publisherID} postID={postID} replyToComment={replyToComment} timestamp={comment?.timestamp}
                                           getDaysSince={getDaysSince} visitProfilePage={visitProfilePage}
 
                         />

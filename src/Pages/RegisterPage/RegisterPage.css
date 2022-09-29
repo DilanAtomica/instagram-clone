@@ -50,6 +50,12 @@
     border-radius: 5px;
     color: white;
     font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.registerContainer > form > button:hover {
+    opacity: 0.8;
 }
 
 .registerPage > p {

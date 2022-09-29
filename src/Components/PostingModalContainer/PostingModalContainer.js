@@ -42,8 +42,9 @@ function PostingModalContainer(props) {
             });
             setImageInput("");
             setTextInput("");
-            navigate("/profile/" + userInfo.userID);
             setShowPostingModal(false);
+            navigate("/profile/" + userInfo.userID);
+            navigate(0);
         } catch {
             navigate("/error");
         }

@@ -140,6 +140,7 @@ function InboxPage(props) {
             await showChosenChat(currentChat.userID, currentChat.username, currentChat.avatar);
         } catch {
             navigate("/error");
+            console.log("oops")
         }
 
     };

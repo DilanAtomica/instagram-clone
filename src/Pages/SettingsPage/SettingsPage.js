@@ -57,6 +57,8 @@ function SettingsPage(props) {
             const userDoc = await doc(db, "users", userInfo.userID);
             await updateDoc(userDoc, {username: inputValues.inputUsername, avatar: inputValues.inputAvatar,
                 email: inputValues.inputEmail, description: inputValues.inputDescription});
+            navigate("/profile/" + userInfo.userID);
+            navigate(0);
         } catch {
             navigate("/error");
         }

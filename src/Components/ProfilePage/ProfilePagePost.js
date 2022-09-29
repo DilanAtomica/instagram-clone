@@ -4,9 +4,10 @@ import {AppContext} from "../../App";
 
 function ProfilePagePost({image, text, timestamp, postID, publisherID}) {
 
-    const {showPostModal} = useContext(AppContext);
+    const {showPostModal, activateLoader} = useContext(AppContext);
 
     const handleOnClick = () => {
+        activateLoader();
         showPostModal(image, text, timestamp, postID, publisherID);
     }
 

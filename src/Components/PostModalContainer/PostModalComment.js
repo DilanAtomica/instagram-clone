@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./PostModalComment.css";
 import {VscSmiley} from "react-icons/vsc";
 import PostModalReply from "./PostModalReply";
-import {collection, getDocs} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import Avatar from "../Avatar/Avatar";
 import Username from "../Username/Username";
@@ -43,6 +43,14 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
             const repliesCollection = collection(db, "users", publisherID, "posts", postID, "comments", commentID, "replies");
             const repliesData = await getDocs(repliesCollection);
             const repliesResults = repliesData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+
+            for(let i = 0; i < repliesResults.length; i++) {
+                const commenterDoc = doc(db, "users", repliesResults[i].replierID);
+                const commenterData = await getDoc(commenterDoc);
+                const commenterResult = commenterData.data();
+                repliesResults[i] = {...repliesResults[i], replierAvatar: commenterResult.avatar};
+            }
+
             setReplies(repliesResults);
         } catch {
             navigate("/error");
@@ -65,8 +73,8 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
                     <button type="submit">Publish</button>
                 </form>
                 {replies?.map(reply => (
-                    <PostModalReply key={reply.id} replyID={reply.id} replierName={reply.replierName} replierAvatar={reply.replierAvatar}
-                                    replierID={reply.replierID} timestamp={reply.timestamp} reply={reply.reply} visitUser={visitUser}
+                    <PostModalReply key={reply?.id} replyID={reply?.id} replierName={reply?.replierName} replierAvatar={reply?.replierAvatar}
+                                    replierID={reply?.replierID} timestamp={reply?.timestamp} reply={reply?.reply} visitUser={visitUser}
                                     getDaysSince={getDaysSince} visitProfilePage={visitProfilePage}
                     />
                 ))}
