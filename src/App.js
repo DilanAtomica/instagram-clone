@@ -15,6 +15,7 @@ import ExplorePage from "./Pages/ExplorePage/ExplorePage";
 import InboxPage from "./Pages/InboxPage/InboxPage";
 import LoadingSpinner from "./Components/LoadingSpinner/LoadingSpinner";
 import SearchResultPage from "./Pages/SearchResultPage/SearchResultPage";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 
 export const AppContext = createContext();
 
@@ -262,6 +263,7 @@ function App() {
               <Route path="/explore" element={<> <NavBar /> <ExplorePage /> </>} />
               <Route path="/inbox" element={<> <NavBar /> <InboxPage /> </>} />
               <Route path="/result/:search" element={<> <NavBar /> <SearchResultPage /> </>} />
+              <Route path="/error" element={<> <NavBar /> <ErrorPage /> </>} />
             </Routes>
           </BrowserRouter>
         </div>
