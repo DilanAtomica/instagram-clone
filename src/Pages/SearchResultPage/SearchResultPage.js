@@ -42,14 +42,16 @@ function SearchResultPage(props) {
     }
 
     return (
-        <div className="searchResultPage">
-            <div className="searchResultContainer">
+        <main className="searchResultPage">
+            <section>
+            <ul className="searchResultContainer">
                 {searchedUsers?.map(user => (
                     <SearchResultProfile key={user?.id} visitProfilePage={visitProfilePage} username={user?.username} avatar={user?.avatar} userID={user?.id} />
                 ))}
                 {searchedUsers?.length === 0 && <h1>We couldn't find any user matching your search...</h1>}
-            </div>
-        </div>
+            </ul>
+            </section>
+        </main>
     );
 }
 
