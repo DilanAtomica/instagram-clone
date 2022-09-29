@@ -9,10 +9,12 @@ function ChatUser({userID, username, avatar, showChosenChat}) {
     }
 
     return (
-        <div onClick={handleOnClick} className="chatUser">
-            <Avatar altText={username} image={avatar} size="4rem" margin="0 0.75rem 0 1.25rem" />
-            <h2>{username}</h2>
-        </div>
+        <li onClick={handleOnClick} className="chatUser">
+            <button type="button">
+                <Avatar altText={username} image={avatar} size="4rem" margin="0 0.75rem 0 1.25rem" />
+                <h2>{username}</h2>
+            </button>
+        </li>
     );
 }
 

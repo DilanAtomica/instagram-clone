@@ -1,11 +1,17 @@
-
 .messageModalSuggestion {
+
+}
+
+.messageModalSuggestion > button {
+    background: none;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 0.5rem;
     padding: 0.5rem 0;
     cursor: pointer;
+    width: 100%;
 }
 
 .messageModalSuggestion-left {
@@ -13,7 +19,7 @@
     align-items: center;
 }
 
-.messageModalSuggestion:hover {
+.messageModalSuggestion > button:hover {
     background-color: #FAFAFA;
 }
 
@@ -23,7 +29,7 @@
     color: #262626;
 }
 
-.messageModalSuggestion > #checkIcon {
+.messageModalSuggestion > button > #checkIcon {
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 999px;

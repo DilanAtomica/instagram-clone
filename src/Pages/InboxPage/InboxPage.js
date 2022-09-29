@@ -134,8 +134,7 @@ function InboxPage(props) {
     }
 
     return (
-        <div className="inboxPage">
-
+        <main className="inboxPage">
             <div className="inboxContainer">
                 <CurrentUserChatsContainer visitProfilePage={visitProfilePage} userInfo={userInfo} currentChat={currentChat}
                                            setShowMessageModal={setShowMessageModal} chatUsers={chatUsers} showChosenChat={showChosenChat}/>
@@ -145,7 +144,7 @@ function InboxPage(props) {
             </div>
 
             {showMessageModal && <MessageModalContainer userSuggestions={userSuggestions} hideMessageModal={hideMessageModal}/>}
-        </div>
+        </main>
     );
 }
 

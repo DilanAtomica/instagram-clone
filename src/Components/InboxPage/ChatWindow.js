@@ -11,25 +11,25 @@ function ChatWindow({visitProfilePage, currentChat, inputMessage, userInfo, setI
     }
 
     return (
-        <div className="chatWindow">
-            <div className="chatWindowHeader">
+        <section className="chatWindow">
+            <header className="chatWindowHeader">
                 <Avatar action={visitProfilePage} userID={currentChat?.userID} image={currentChat?.avatar}
                         altText={currentChat?.username} size="1.5rem" margin="0 0.5rem 0 2rem" />
                 <Username visitProfilePage={visitProfilePage} username={currentChat?.username}
                           userID={currentChat?.userID} fontSize={14} />
-            </div>
+            </header>
             <div className="chatWindowFooter">
-                <div className="chatWindowMessages">
+                <ul className="chatWindowMessages">
                     {currentChat?.messages?.map(message => (
                         <Message key={message?.id} text={message?.text} sentByUserID={message?.sentByUserID} userID={userInfo?.userID} />
                     ))}
-                </div>
+                </ul>
                 <form onSubmit={handleOnSubmit}>
                     <input value={inputMessage} onChange={(e) => setInputMessage(e.target.value)}
                            type="text" placeholder="Send a message..."/>
                 </form>
             </div>
-        </div>
+        </section>
     );
 }
 

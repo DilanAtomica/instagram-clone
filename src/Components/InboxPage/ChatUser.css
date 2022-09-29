@@ -1,17 +1,19 @@
-
-.chatUser {
+.chatUser > button {
+    background: none;
+    border: none;
     display: flex;
     align-items: center;
     margin-top: 0.5rem;
     padding: 0.5rem 0;
     cursor: pointer;
+    width: 100%;
 }
 
-.chatUser:hover {
+.chatUser > button:hover {
     background-color: #FAFAFA;
 }
 
-.chatUser > h2 {
+.chatUser > button > h2 {
     font-size: 0.9rem;
     font-weight: 400;
 }

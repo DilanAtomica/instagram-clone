@@ -10,7 +10,8 @@ function MessageModalSuggestion({username, userID, avatar, chooseUser, chosenUse
     };
 
     return (
-        <div onClick={handleOnClick} className="messageModalSuggestion">
+        <li onClick={handleOnClick} className="messageModalSuggestion">
+            <button type="button">
             <div className="messageModalSuggestion-left">
                 <Avatar altText={username} image={avatar} size="2.5rem" margin="0 0.75rem 0 1.25rem" />
                 <h3>{username}</h3>
@@ -18,7 +19,8 @@ function MessageModalSuggestion({username, userID, avatar, chooseUser, chosenUse
             <div id="checkIcon" style={{backgroundColor: chosenUser === userID && "#0095F6", border: chosenUser === userID && "none"}}>
                 {chosenUser === userID && <HiCheck id="checkMarkIcon" />}
             </div>
-        </div>
+            </button>
+        </li>
     );
 }
 

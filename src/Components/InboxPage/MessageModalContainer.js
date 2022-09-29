@@ -36,22 +36,22 @@ function MessageModalContainer({userSuggestions, hideMessageModal}) {
 
 
     return (
-        <div onClick={handleOnClick} className="messageModalContainer" id="messageModalContainer">
+        <section onClick={handleOnClick} className="messageModalContainer" id="messageModalContainer">
             <div className="messageModal">
-                <div className="messageModalTop">
+                <header className="messageModalTop">
                     <h1>New Message</h1>
                     <Button action={createChat} type="button" text="Next" fontSize="14" margin="0 1.5rem 0 0" />
-                </div>
-                <div className="messageModalSuggestions">
+                </header>
+                <ul className="messageModalSuggestions">
                     <h2>Suggestions</h2>
                     {userSuggestions?.map(user => (
                         <MessageModalSuggestion key={user?.id} username={user?.username} userID={user?.id} avatar={user?.avatar}
                                                 chooseUser={chooseUser} chosenUser={chosenUser}
                         />
                     ))}
-                </div>
+                </ul>
             </div>
-        </div>
+        </section>
     );
 }
 
