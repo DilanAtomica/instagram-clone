@@ -13,7 +13,7 @@
 }
 
 .postModal {
-    width: max-content;
+    width: 100vw;
     height: 90vh;
     margin: auto;
     position: absolute;
@@ -114,5 +114,17 @@
     outline: none;
     flex: 1;
 }
+
+@media only screen and (max-width: 1150px) {
+    .postModal {
+        flex-direction: column;
+        height: 100%;
+    }
+    .postModalRight {
+        width: 100%;
+    }
+}
+
+
 
 

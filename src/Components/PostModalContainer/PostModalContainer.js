@@ -84,7 +84,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
         <div onClick={handleOnClick} className="postModalContainer" id="postModalContainer">
         <div className="postModal">
             <div className="postModalLeft">
-                <img src={image} />
+                <img alt={text} src={image} />
             </div>
             <div className="postModalRight">
                 <div className="postModalRightHeader">
