@@ -1,6 +1,6 @@
 import React, {useContext, useRef, useState} from 'react';
 import "./PostModalContainer.css";
-import {HiOutlineHeart, HiHeart} from "react-icons/hi";
+import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
 import {AppContext} from "../../App";
@@ -37,24 +37,40 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        commentPost(publisherID, postID, inputValue);
-        showPostModal(image, text, timestamp, postID, publisherID);
+        try {
+            commentPost(publisherID, postID, inputValue);
+            showPostModal(image, text, timestamp, postID, publisherID);
+        } catch {
+            navigate("/error");
+        }
     };
 
     const handleHeartClick = () => {
         if(userInfo?.userID === publisherID) return;
-        setIsHeartFilled(!isHeartFilled);
-        likePost(publisherID, postID);
+        try {
+            setIsHeartFilled(!isHeartFilled);
+            likePost(publisherID, postID);
+        } catch {
+            navigate("/error");
+        }
     };
 
     const handleFollowClick = () => {
-        followUser(publisherID);
-        showPostModal(image, text, timestamp, postID, publisherID);
+        try {
+            followUser(publisherID);
+            showPostModal(image, text, timestamp, postID, publisherID);
+        } catch {
+            navigate("/error");
+        }
     }
 
     const handleUnFollowClick = () => {
-        unFollowUser(publisherID);
-        showPostModal(image, text, timestamp, postID, publisherID);
+        try {
+            unFollowUser(publisherID);
+            showPostModal(image, text, timestamp, postID, publisherID);
+        } catch {
+            navigate("/error");
+        }
     }
 
     const visitProfilePage = (userID) => {

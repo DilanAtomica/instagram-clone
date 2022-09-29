@@ -3,12 +3,19 @@ import "./Suggestion.css";
 import Button from "../Buttons/Button";
 import Avatar from "../Avatar/Avatar";
 import Username from "../Username/Username";
+import {useNavigate} from "react-router-dom";
 
 function Suggestion({username, userID, avatar, followUser, action}) {
 
+    const navigate = useNavigate();
+
     const handleOnClick = () => {
-        followUser(userID);
-        action(userID);
+        try {
+            followUser(userID);
+            action(userID);
+        } catch {
+            navigate("/error");
+        }
     }
 
     return (

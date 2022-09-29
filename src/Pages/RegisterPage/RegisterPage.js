@@ -1,12 +1,12 @@
 import React, {useContext, useEffect} from 'react';
 import "./RegisterPage.css";
 import Logo from "../../Images/logo.png";
-import { yupResolver } from '@hookform/resolvers/yup';
+import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useForm} from "react-hook-form";
-import {collection, addDoc} from "firebase/firestore";
+import {addDoc, collection} from "firebase/firestore";
 import {createUserWithEmailAndPassword} from "firebase/auth";
-import {db, auth} from "../../utils/firebase";
+import {auth, db} from "../../utils/firebase";
 import {useNavigate} from "react-router-dom";
 import {AppContext} from "../../App";
 

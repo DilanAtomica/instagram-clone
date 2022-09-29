@@ -1,13 +1,11 @@
 import React, {useContext, useState} from 'react';
 import "./NavBar.css";
 import Logo from "../../Images/logo.png";
-import {FiSearch} from "react-icons/fi";
+import {FiSearch, FiSend, FiSettings} from "react-icons/fi";
 import {TiDelete} from "react-icons/ti";
-import {AiOutlineHome, AiOutlineCamera} from "react-icons/ai";
+import {AiOutlineCamera, AiOutlineHome} from "react-icons/ai";
 import {MdOutlineExplore} from "react-icons/md";
-import {FiSend} from "react-icons/fi";
 import {BiUserCircle} from "react-icons/bi";
-import {FiSettings} from "react-icons/fi";
 import {AppContext} from "../../App";
 import {signOut} from "firebase/auth";
 import {auth} from "../../utils/firebase";

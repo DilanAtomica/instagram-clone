@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./SettingsPage.css";
-import {useContext} from "react";
 import {AppContext} from "../../App";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {db, storage} from "../../utils/firebase";
@@ -9,10 +8,13 @@ import Setting from "../../Components/SettingsPage/Setting";
 import {doc, updateDoc} from "firebase/firestore";
 import Avatar from "../../Components/Avatar/Avatar";
 import Username from "../../Components/Username/Username";
+import {useNavigate} from "react-router-dom";
 
 function SettingsPage(props) {
 
     const {userInfo} = useContext(AppContext);
+
+    const navigate = useNavigate();
 
     const [inputValues, setInputValues] = useState({
         inputAvatar: "",
@@ -33,10 +35,14 @@ function SettingsPage(props) {
     }, [userInfo]);
 
     const handleAvatarChange = async(e) => {
-        const imageRef = ref(storage, `images/${e.target.files[0].name + v4()}`);
-        await uploadBytes(imageRef, e.target.files[0]);
-        const url = await getDownloadURL(imageRef);
-        setInputValues({...inputValues, inputAvatar: url});
+        try {
+            const imageRef = ref(storage, `images/${e.target.files[0].name + v4()}`);
+            await uploadBytes(imageRef, e.target.files[0]);
+            const url = await getDownloadURL(imageRef);
+            setInputValues({...inputValues, inputAvatar: url});
+        } catch {
+            navigate("/error");
+        }
     }
 
     const handleInputOnChange = (labelName, event) => {
@@ -47,9 +53,13 @@ function SettingsPage(props) {
 
     const handleOnSubmit = async(e) => {
         e.preventDefault();
-        const userDoc = await doc(db, "users", userInfo.userID);
-        await updateDoc(userDoc, {username: inputValues.inputUsername, avatar: inputValues.inputAvatar,
-            email: inputValues.inputEmail, description: inputValues.inputDescription});
+        try {
+            const userDoc = await doc(db, "users", userInfo.userID);
+            await updateDoc(userDoc, {username: inputValues.inputUsername, avatar: inputValues.inputAvatar,
+                email: inputValues.inputEmail, description: inputValues.inputDescription});
+        } catch {
+            navigate("/error");
+        }
 
     }
 

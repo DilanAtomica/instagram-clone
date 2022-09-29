@@ -1,11 +1,14 @@
-import React, {useEffect, useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./ExplorePage.css";
 import ProfilePagePost from "../../Components/ProfilePage/ProfilePagePost";
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import {AppContext} from "../../App";
+import {useNavigate} from "react-router-dom";
 
 function ExplorePage(props) {
+
+    const navigate = useNavigate();
 
     const {userInfo, activateLoader, deActiveLoader} = useContext(AppContext);
 
@@ -19,25 +22,30 @@ function ExplorePage(props) {
     }, [userInfo]);
 
     const getExplorePosts = async(userID) => {
-        const usersCollection = collection(db, "users");
-        const usersData = await getDocs(usersCollection);
-        const usersResult = usersData.docs.map((doc) => ({...doc.data(), id: doc.id}));
-        let posts = [];
+        try {
+            const usersCollection = collection(db, "users");
+            const usersData = await getDocs(usersCollection);
+            const usersResult = usersData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+            let posts = [];
 
-        for(let i = 0; i < usersResult.length; i++) {
-            if(usersResult[i].id !== userID) {
-                const postsCollection = collection(db, "users", usersResult[i].id, "posts");
-                const postsData = await getDocs(postsCollection);
-                const postsResult = postsData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+            for(let i = 0; i < usersResult.length; i++) {
+                if(usersResult[i].id !== userID) {
+                    const postsCollection = collection(db, "users", usersResult[i].id, "posts");
+                    const postsData = await getDocs(postsCollection);
+                    const postsResult = postsData.docs.map((doc) => ({...doc.data(), id: doc.id}));
 
-                for(let j = 0; j < postsResult.length; j++) {
-                    posts.push(postsResult[j]);
+                    for(let j = 0; j < postsResult.length; j++) {
+                        posts.push(postsResult[j]);
+                    }
                 }
             }
+            setExplorePosts(posts);
+            deActiveLoader();
+        } catch {
+            deActiveLoader();
+            navigate("/error");
         }
 
-        setExplorePosts(posts);
-        deActiveLoader();
 
     }
 

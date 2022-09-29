@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import "./PostingModalContainer.css";
-import {useContext, useState} from "react";
 import {AppContext} from "../../App";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {db, storage} from "../../utils/firebase";
@@ -21,25 +20,33 @@ function PostingModalContainer(props) {
     const [textInput, setTextInput] = useState(null);
 
     const uploadImage = async(e) => {
-        const imageRef = ref(storage, `images/${e.target.files[0].name + v4()}`);
-        await uploadBytes(imageRef, e.target.files[0]);
-        const url = await getDownloadURL(imageRef);
-        setImageInput(url);
+        try {
+            const imageRef = ref(storage, `images/${e.target.files[0].name + v4()}`);
+            await uploadBytes(imageRef, e.target.files[0]);
+            const url = await getDownloadURL(imageRef);
+            setImageInput(url);
+        } catch {
+            navigate("/error");
+        }
     }
 
     const createPost = async(e) => {
         e.preventDefault()
-        const postsCollection = collection(db, "users", userInfo.userID, "posts");
-        await addDoc(postsCollection, {
-            text: textInput,
-            image: imageInput,
-            timestamp: serverTimestamp(),
-            publisherID: userInfo.userID,
-        });
-        setImageInput("");
-        setTextInput("");
-        navigate("/profile/" + userInfo.userID);
-        setShowPostingModal(false);
+        try {
+            const postsCollection = collection(db, "users", userInfo.userID, "posts");
+            await addDoc(postsCollection, {
+                text: textInput,
+                image: imageInput,
+                timestamp: serverTimestamp(),
+                publisherID: userInfo.userID,
+            });
+            setImageInput("");
+            setTextInput("");
+            navigate("/profile/" + userInfo.userID);
+            setShowPostingModal(false);
+        } catch {
+            navigate("/error");
+        }
 
     }
 

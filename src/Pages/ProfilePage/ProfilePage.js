@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./ProfilePage.css";
 import {collection, doc, getDoc, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
@@ -40,52 +40,73 @@ function ProfilePage(props) {
 
 
    const getProfileInfo = async () => {
-       const userDoc = doc(db, "users", userID);
-       const userData = await getDoc(userDoc);
-       const userResult = userData.data();
-       setProfileInfo(userResult);
+       try {
+           const userDoc = doc(db, "users", userID);
+           const userData = await getDoc(userDoc);
+           const userResult = userData.data();
+           setProfileInfo(userResult);
+       } catch {
+           navigate("/error");
+       }
    }
 
     const getPosts = async (userID) => {
-        const postsCollection = collection(db, "users", userID, "posts");
-        const data = await getDocs(postsCollection);
-        let posts = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
-        posts.sort(function(a, b) {
-            if(a.timestamp?.seconds < b.timestamp?.seconds) return 1;
-            else return -1;
-                });
-        setPosts(posts);
-        deActiveLoader();
+       try {
+           const postsCollection = collection(db, "users", userID, "posts");
+           const data = await getDocs(postsCollection);
+           let posts = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
+           posts.sort(function(a, b) {
+               if(a.timestamp?.seconds < b.timestamp?.seconds) return 1;
+               else return -1;
+           });
+           setPosts(posts);
+           deActiveLoader();
+       } catch {
+           deActiveLoader();
+           navigate("/error");
+       }
+
     };
 
     const getFavoritedPosts = async (userID) => {
-        const favoritedPostsCollection = collection(db, "users", userID, "favorited");
-        const data = await getDocs(favoritedPostsCollection);
-        let posts = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
-        posts.sort(function(a, b) {
-            if(a.timestamp?.seconds < b.timestamp?.seconds) return 1;
-            else return -1;
-        });
+        try {
+            const favoritedPostsCollection = collection(db, "users", userID, "favorited");
+            const data = await getDocs(favoritedPostsCollection);
+            let posts = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
+            posts.sort(function(a, b) {
+                if(a.timestamp?.seconds < b.timestamp?.seconds) return 1;
+                else return -1;
+            });
 
-        let favoritedPosts = [];
+            let favoritedPosts = [];
 
-        for(let i = 0; i < posts.length; i++) {
-            const postDoc = doc(db, "users", posts[i].publisherID, "posts", posts[i].postID);
-            const docData = await getDoc(postDoc);
-            let docResult = docData.data();
-            docResult = {...docResult, id: docData.id};
-            favoritedPosts.push(docResult);
-            console.log(docResult);
+            for(let i = 0; i < posts.length; i++) {
+                const postDoc = doc(db, "users", posts[i].publisherID, "posts", posts[i].postID);
+                const docData = await getDoc(postDoc);
+                let docResult = docData.data();
+                docResult = {...docResult, id: docData.id};
+                favoritedPosts.push(docResult);
+                console.log(docResult);
+            }
+
+            setPosts(favoritedPosts);
+            deActiveLoader();
+        } catch {
+            deActiveLoader();
+            navigate("/errro");
         }
 
-        setPosts(favoritedPosts);
-        deActiveLoader();
     };
 
     const getFollowingCount = async(userID) => {
-        const followingCountCollection = collection(db, "users", userID, "following");
-        const data = await getDocs(followingCountCollection);
-        setFollowingCount(data.docs.map((doc) => ({...doc.data(), id: doc.id})).length);
+        try {
+            const followingCountCollection = collection(db, "users", userID, "following");
+            const data = await getDocs(followingCountCollection);
+            setFollowingCount(data.docs.map((doc) => ({...doc.data(), id: doc.id})).length);
+        } catch {
+            navigate("/error");
+        }
+
     }
 
     const handleFollowClick = () => {

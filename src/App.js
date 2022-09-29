@@ -4,8 +4,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
-import {addDoc, collection, updateDoc, getDocs, serverTimestamp, doc, getDoc, deleteDoc} from "firebase/firestore";
-import {db, auth} from "./utils/firebase";
+import {addDoc, collection, deleteDoc, doc, getDoc, getDocs, serverTimestamp, updateDoc} from "firebase/firestore";
+import {auth, db} from "./utils/firebase";
 import NavBar from "./Components/NavBar/NavBar";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import PostingModalContainer from "./Components/PostingModalContainer/PostingModalContainer";
@@ -88,8 +88,6 @@ function App() {
                 });
             }
         }
-
-
     }
 
     const hidePostModal = (e) => {

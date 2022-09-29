@@ -6,39 +6,48 @@ import {collection, getDocs} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import Avatar from "../Avatar/Avatar";
 import Username from "../Username/Username";
+import {useNavigate} from "react-router-dom";
 
 function PostModalComment({comment, commenterName, commenterAvatar, commenterID, commentID, publisherID, postID, replyToComment, timestamp,
                               visitUser, getDaysSince,visitProfilePage}) {
 
+    const navigate = useNavigate();
+
     const [showInputReply, setShowInputReply] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [replies, setReplies] = useState(null);
-
-    const handleOnClick = (e) => {
-        setShowInputReply(!showInputReply);
-    }
-
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
-        replyToComment(publisherID, postID, commentID, inputValue);
-        getReplies();
-        setInputValue("");
-        setShowInputReply(false);
-    };
-
-    const getReplies = async() => {
-        const repliesCollection = collection(db, "users", publisherID, "posts", postID, "comments", commentID, "replies");
-        const repliesData = await getDocs(repliesCollection);
-        const repliesResults = repliesData.docs.map((doc) => ({...doc.data(), id: doc.id}));
-        setReplies(repliesResults);
-    }
 
     useEffect(() => {
         getReplies();
         console.log("hey");
     }, []);
 
+    const handleOnClick = () => {
+        setShowInputReply(!showInputReply);
+    }
 
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        try {
+            replyToComment(publisherID, postID, commentID, inputValue);
+            getReplies();
+            setInputValue("");
+            setShowInputReply(false);
+        } catch {
+            navigate("/error");
+        }
+    };
+
+    const getReplies = async() => {
+        try {
+            const repliesCollection = collection(db, "users", publisherID, "posts", postID, "comments", commentID, "replies");
+            const repliesData = await getDocs(repliesCollection);
+            const repliesResults = repliesData.docs.map((doc) => ({...doc.data(), id: doc.id}));
+            setReplies(repliesResults);
+        } catch {
+            navigate("/error");
+        }
+    }
 
     return (
         <div key={commentID} className="postModalComment">

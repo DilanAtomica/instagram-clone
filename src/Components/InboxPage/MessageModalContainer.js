@@ -1,12 +1,15 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import "./MessageModalContainer.css";
 import MessageModalSuggestion from "./MessageModalSuggestion";
 import {addDoc, collection} from "firebase/firestore";
 import {db} from "../../utils/firebase";
 import {AppContext} from "../../App";
 import Button from "../Buttons/Button";
+import {useNavigate} from "react-router-dom";
 
 function MessageModalContainer({userSuggestions, hideMessageModal}) {
+
+    const navigate = useNavigate();
 
     const {userInfo} = useContext(AppContext);
 
@@ -21,17 +24,22 @@ function MessageModalContainer({userSuggestions, hideMessageModal}) {
     }
 
     const createChat = async() => {
-        const userChatCollection = collection(db, "users", userInfo.userID, "chats");
-        await addDoc(userChatCollection, {
-            participantID: chosenUser,
-        });
+        try {
+            const userChatCollection = collection(db, "users", userInfo.userID, "chats");
+            await addDoc(userChatCollection, {
+                participantID: chosenUser,
+            });
 
-        const participantChatCollection = collection(db, "users", chosenUser, "chats");
-        await addDoc(participantChatCollection, {
-            participantID: userInfo.userID,
-        });
+            const participantChatCollection = collection(db, "users", chosenUser, "chats");
+            await addDoc(participantChatCollection, {
+                participantID: userInfo.userID,
+            });
 
-        hideMessageModal();
+            hideMessageModal();
+        } catch {
+            navigate("/error");
+        }
+
     }
 
 

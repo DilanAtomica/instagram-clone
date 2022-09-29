@@ -1,13 +1,12 @@
-import React, {useState, useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import "./HomePagePost.css";
-import {FiMoreHorizontal} from "react-icons/fi";
-import {HiOutlineHeart, HiHeart} from "react-icons/hi";
+import {HiHeart, HiOutlineHeart} from "react-icons/hi";
 import {FaRegComment} from "react-icons/fa";
 import {VscSmiley} from "react-icons/vsc";
-import {useNavigate} from "react-router-dom";
 import Button from "../Buttons/Button";
 import Avatar from "../Avatar/Avatar";
 import Username from "../Username/Username";
+import {useNavigate} from "react-router-dom";
 
 function HomePagePost({image, text, username, avatar, publisherID, timestamp, postID, showPostModal, likePost, likes, isLiked,
                           randomUserLikeName, randomUserLikeAvatar, randomUserID, commentPost, visitProfilePage}) {
@@ -27,15 +26,23 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
     };
 
     const handleHeartClick = () => {
-        setIsHeartFilled(!isHeartFilled);
-        likePost(publisherID, postID);
+        try {
+            setIsHeartFilled(!isHeartFilled);
+            likePost(publisherID, postID);
+        } catch {
+            navigate("/error");
+        }
     };
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        commentPost(publisherID, postID, inputComment);
-        setInputComment("");
-        showPostModal(image, text, timestamp, postID, publisherID);
+        try {
+            commentPost(publisherID, postID, inputComment);
+            setInputComment("");
+            showPostModal(image, text, timestamp, postID, publisherID);
+        } catch {
+            navigate("/error");
+        }
     };
 
     const focusInput = () => {

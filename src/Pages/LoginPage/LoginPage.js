@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import "./LoginPage.css";
 import Logo from "../../Images/logo.png";
-import { yupResolver } from '@hookform/resolvers/yup';
+import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
