@@ -17,10 +17,12 @@ const schema = yup.object().shape( {
 function LoginPage(props) {
 
     const navigate = useNavigate();
-    const {user} = useContext(AppContext);
+    const {user, activateLoader, deActiveLoader} = useContext(AppContext);
 
     useEffect(() => {
-        user !== null && navigate("/home");
+        activateLoader();
+        if(user !== null) navigate("/home");
+        else deActiveLoader();
     });
 
     const {register, handleSubmit, formState: {errors}} = useForm({

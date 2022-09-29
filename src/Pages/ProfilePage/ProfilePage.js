@@ -98,7 +98,7 @@ function ProfilePage(props) {
         setAlreadyFollowing(false);
     };
 
-    const visitProfileSettings = (userID) => {
+    const visitProfileSettings = () => {
         navigate("/profile/" + userInfo?.userID + "/settings");
     }
 

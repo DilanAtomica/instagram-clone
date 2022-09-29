@@ -4,7 +4,7 @@ import HomePagePost from "./HomePagePost";
 
 function HomePagePostsContainer({followingPosts, visitProfilePage, likePost, commentPost, showPostModal}) {
     return (
-        <div className="homePagePostsContainer">
+        <ul className="homePagePostsContainer">
             {followingPosts?.map(post => (
                 <HomePagePost key={post.data.id} image={post.data.image} text={post.data.text}
                               username={post.username} avatar={post.avatar} publisherID={post.data.publisherID}
@@ -13,7 +13,7 @@ function HomePagePostsContainer({followingPosts, visitProfilePage, likePost, com
                               randomUserLikeName={post.randomUserLikeName} randomUserLikeAvatar={post.randomUserLikeAvatar}
                               randomUserID={post.randomUserID} commentPost={commentPost} visitProfilePage={visitProfilePage}/>
             ))}
-        </div>
+        </ul>
     );
 }
 

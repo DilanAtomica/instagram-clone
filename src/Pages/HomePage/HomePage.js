@@ -110,7 +110,7 @@ function HomePage(props) {
     }
 
     return (
-        <div className="homePage">
+        <main className="homePage">
             <div className="homePageContainer">
                  <HomePagePostsContainer followingPosts={followingPosts} visitProfilePage={visitProfilePage} showPostModal={showPostModal}
                                             likePost={likePost} commentPost={commentPost}/>
@@ -118,7 +118,7 @@ function HomePage(props) {
                 <HomePageSuggestionsContainer followUser={followUser} userSuggestions={userSuggestions} userInfo={userInfo}
                                               visitProfilePage={visitProfilePage} />
             </div>
-        </div>
+        </main>
     );
 }
 

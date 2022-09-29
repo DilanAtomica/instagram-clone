@@ -12,7 +12,7 @@ function Suggestion({username, userID, avatar, followUser, action}) {
     }
 
     return (
-        <div className="suggestion">
+        <li className="suggestion">
             <div className="suggestion-right">
                 <Avatar action={action} altText={username} image={avatar} size="2rem" />
                 <Username visitProfilePage={action} username={username} userID={userID}
@@ -20,7 +20,7 @@ function Suggestion({username, userID, avatar, followUser, action}) {
                 />
             </div>
             <Button action={handleOnClick} fontSize={"12"} text="Follow" type="button" margin="0 0 0 0.5rem" />
-        </div>
+        </li>
     );
 }
 

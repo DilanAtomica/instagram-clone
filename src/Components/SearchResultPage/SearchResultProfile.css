@@ -13,3 +13,17 @@
     border-radius: 10px;
 }
 
+.searchResultProfile > button {
+    background-color: #0095f6;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    width: max-content;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.2s;
+    opacity: 1;
+}
+

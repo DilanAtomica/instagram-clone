@@ -43,27 +43,25 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
     };
 
     return (
-        <div className="homePagePost">
-            <div className="homePagePostHeader">
-                <div className="homePagePostHeader-left">
+        <li className="homePagePost">
+            <header className="homePagePostHeader">
                     <Avatar action={visitProfilePage} userID={publisherID} image={avatar} altText={username} size="2.25rem" />
                     <Username visitProfilePage={visitProfilePage} username={username} userID={publisherID}
-                              fontSize={13} margin="0 0 0 0.5rem"
-                    />
-                </div>
-                <div className="homePagePostHeader-right">
-                    <FiMoreHorizontal />
-                </div>
-            </div>
-            <img src={image}/>
+                              fontSize={13} margin="0 0 0 0.5rem"/>
+            </header>
+            <img alt={text} src={image}/>
 
             <div className="homePagePostFooter">
                 <div className="homePagePostActionButtons">
+                    <button type="button">
                     {isHeartFilled
                         ? <HiHeart onClick={handleHeartClick} style={{color: "red"}} id="heartIcon" />
                         : <HiOutlineHeart onClick={handleHeartClick} style={{color: "black"}}  id="heartIcon" />
                     }
-                    <FaRegComment onClick={focusInput} id="commentIcon" style={{fontSize: "1.5rem", marginLeft: "1rem"}} />
+                    </button>
+                    <button type="button">
+                    <FaRegComment onClick={focusInput} id="commentIcon" style={{fontSize: "1.5rem", marginLeft: "0.5rem"}} />
+                    </button>
                 </div>
                 <div className="homePagePostLikes">
                     {randomUserLikeName && <Avatar action={visitProfilePage} userID={randomUserID} image={randomUserLikeAvatar} altText={randomUserLikeName} size="1.5rem" />}
@@ -81,7 +79,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                     <span> {text}</span>
 
                 </p>
-                <button className="homePagePostComments" onClick={handleOnClick}>Show all comments</button>
+                <button type="button" className="homePagePostComments" onClick={handleOnClick}>Show all comments</button>
                 <p className="homePagePostDate">
                     {months[new Date(timestamp.seconds*1000).getMonth()]} {new Date(timestamp.seconds*1000).getDate()}
                 </p>
@@ -93,7 +91,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
                 <Button padding="0.75rem 0.5rem 0.5rem" fontSize="14" text="Publish" type="submit" />
             </form>
 
-        </div>
+        </li>
     );
 }
 
