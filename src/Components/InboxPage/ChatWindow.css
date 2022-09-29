@@ -15,7 +15,9 @@
 
 .chatWindowFooter {
     display: flex;
+    flex: 1;
     flex-direction: column;
+    justify-content: space-between;
     min-height: 3rem;
     margin-bottom: 0.5rem;
 }

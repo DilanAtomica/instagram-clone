@@ -2,6 +2,10 @@
     width: 28rem;
 }
 
+.homePagePostsContainer > h1 {
+    margin-top: 10rem;
+}
+
 @media only screen and (max-width: 700px) {
     .homePagePostsContainer {
         width: 95%;

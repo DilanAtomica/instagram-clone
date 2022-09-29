@@ -14,6 +14,7 @@ function HomePagePostsContainer({followingPosts, visitProfilePage, likePost, com
                               randomUserLikeName={post.randomUserLikeName} randomUserLikeAvatar={post.randomUserLikeAvatar}
                               randomUserID={post.randomUserID} commentPost={commentPost} visitProfilePage={visitProfilePage}/>
             ))}
+            {followingPosts?.length === 0 && <h1>Doesn't seem to be anything here...<br /><br />Try following someone who has posted!</h1>}
         </ul>
         </section>
     );
