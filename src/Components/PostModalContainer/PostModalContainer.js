@@ -39,6 +39,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
         e.preventDefault();
         try {
             commentPost(publisherID, postID, inputValue);
+            setInputValue("");
             showPostModal(image, text, timestamp, postID, publisherID);
         } catch {
             navigate("/error");
@@ -133,7 +134,7 @@ function PostModalContainer({image, text, timestamp, postID, publisherID, publis
                 <p id="postDate">{months[new Date(timestamp.seconds*1000).getMonth()]} {new Date(timestamp.seconds*1000).getDate()}</p>
                 <form onSubmit={handleOnSubmit} className="postModalInputContainer">
                     <VscSmiley id="smileyIcon" />
-                    <input ref={commentInput} onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Write a comment..." />
+                    <input value={inputValue} ref={commentInput} onChange={(e) => setInputValue(e.target.value)} type="text" placeholder="Write a comment..." />
                     <Button text="Publish" type="submit" margin="0 1rem 0 0" fontSize="14" />
                 </form>
             </div>

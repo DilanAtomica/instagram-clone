@@ -81,7 +81,7 @@ function HomePagePost({image, text, username, avatar, publisherID, timestamp, po
 
                 </div>
                 <p className="homePagePostTitle">
-                    <Username visitProfilePage={visitProfilePage} username={randomUserLikeName}
+                    <Username visitProfilePage={visitProfilePage} username={username}
                               userID={randomUserID} fontSize={14} margin="0 0 0 0rem"/>
                     <span> {text}</span>
 
