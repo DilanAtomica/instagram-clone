@@ -48,7 +48,7 @@ function PostModalComment({comment, commenterName, commenterAvatar, commenterID,
                 const commenterDoc = doc(db, "users", repliesResults[i].replierID);
                 const commenterData = await getDoc(commenterDoc);
                 const commenterResult = commenterData.data();
-                repliesResults[i] = {...repliesResults[i], replierAvatar: commenterResult.avatar};
+                repliesResults[i] = {...repliesResults[i], replierAvatar: commenterResult.avatar, replierName: commenterResult.username};
             }
 
             setReplies(repliesResults);

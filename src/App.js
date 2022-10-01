@@ -68,7 +68,7 @@ function App() {
                     const commenterDoc = doc(db, "users", commentsResults[j].commenterID);
                     const commenterData = await getDoc(commenterDoc);
                     const commenterResult = commenterData.data();
-                    commentsResults[j] = {...commentsResults[j], commenterAvatar: commenterResult.avatar};
+                    commentsResults[j] = {...commentsResults[j], commenterAvatar: commenterResult.avatar, commenterName: commenterResult.username};
                 }
 
                 const likesCollection = collection(db, "users", publisherID, "posts", postID, "likes");
