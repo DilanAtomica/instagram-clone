@@ -4,7 +4,7 @@ import Logo from "../../Images/logo.png";
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../../utils/firebase";
 import {AppContext} from "../../App";
@@ -50,7 +50,7 @@ function LoginPage(props) {
                     <button type="submit">Log in</button>
                 </form>
             </section>
-                <p>Dont have an account? <a href="/register">Register now</a></p>
+                <p>Dont have an account? <Link to="/register">Register now</Link></p>
         </main>
     );
 }

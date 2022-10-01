@@ -7,7 +7,7 @@ import {useForm} from "react-hook-form";
 import {addDoc, collection} from "firebase/firestore";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import {auth, db} from "../../utils/firebase";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import {AppContext} from "../../App";
 
 const schema = yup.object().shape( {
@@ -64,7 +64,7 @@ function RegisterPage(props) {
                     <button type="submit">Register</button>
                 </form>
             </section>
-            <p>Already have an account? <a href="/">Log in now</a></p>
+            <p>Already have an account? <Link to="/">Log in now</Link></p>
         </main>
     );
 }
